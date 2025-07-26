@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "bot/1.0.0": {
         "dependencies": {
+          "AutoItX.Dotnet": "3.3.14.5",
           "System.Drawing.Common": "9.0.7",
           "Tesseract": "5.2.0"
         },
@@ -15,6 +16,7 @@
           "bot.dll": {}
         }
       },
+      "AutoItX.Dotnet/3.3.14.5": {},
       "Microsoft.Win32.SystemEvents/9.0.7": {
         "runtime": {
           "lib/net9.0/Microsoft.Win32.SystemEvents.dll": {
@@ -65,6 +67,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoItX.Dotnet/3.3.14.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pobGb0PovHfJLH6tC2wsmafuZSI3u9ThqyHBebipVm9I/eDjzXZ6E6O84vUpE48lwTxPmtPm2HN/1tq0aLbM0Q==",
+      "path": "autoitx.dotnet/3.3.14.5",
+      "hashPath": "autoitx.dotnet.3.3.14.5.nupkg.sha512"
     },
     "Microsoft.Win32.SystemEvents/9.0.7": {
       "type": "package",

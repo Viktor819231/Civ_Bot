@@ -2,5 +2,6 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)tesseract\5.2.0\build\Tesseract.targets" Condition="Exists('$(NuGetPackageRoot)tesseract\5.2.0\build\Tesseract.targets')" />
+    <Import Project="$(NuGetPackageRoot)autoitx.dotnet\3.3.14.5\build\AutoItX.Dotnet.targets" Condition="Exists('$(NuGetPackageRoot)autoitx.dotnet\3.3.14.5\build\AutoItX.Dotnet.targets')" />
   </ImportGroup>
 </Project>

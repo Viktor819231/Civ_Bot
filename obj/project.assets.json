@@ -2,6 +2,12 @@
   "version": 3,
   "targets": {
     "net9.0": {
+      "AutoItX.Dotnet/3.3.14.5": {
+        "type": "package",
+        "build": {
+          "build/AutoItX.Dotnet.targets": {}
+        }
+      },
       "Microsoft.Win32.SystemEvents/9.0.7": {
         "type": "package",
         "compile": {
@@ -80,6 +86,22 @@
     }
   },
   "libraries": {
+    "AutoItX.Dotnet/3.3.14.5": {
+      "sha512": "pobGb0PovHfJLH6tC2wsmafuZSI3u9ThqyHBebipVm9I/eDjzXZ6E6O84vUpE48lwTxPmtPm2HN/1tq0aLbM0Q==",
+      "type": "package",
+      "path": "autoitx.dotnet/3.3.14.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "autoitx.dotnet.3.3.14.5.nupkg.sha512",
+        "autoitx.dotnet.nuspec",
+        "build/AutoItX.Dotnet.targets",
+        "build/AutoItX3.dll",
+        "build/AutoItX3_x64.dll",
+        "lib/AutoItX3.Assembly.dll",
+        "lib/AutoItX3.Assembly.xml"
+      ]
+    },
     "Microsoft.Win32.SystemEvents/9.0.7": {
       "sha512": "lFGY2aGgmMREPJEfOmZcA6v0CLjWVpcfNHRgqYMoSQhy80+GxhYqdW5xe+DCLrVqE1M7/0RpOkIo49/KH/cd/A==",
       "type": "package",
@@ -231,6 +253,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "AutoItX.Dotnet >= 3.3.14.5",
       "System.Drawing.Common >= 9.0.7",
       "Tesseract >= 5.2.0"
     ]
@@ -278,6 +301,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "AutoItX.Dotnet": {
+            "target": "Package",
+            "version": "[3.3.14.5, )"
+          },
           "System.Drawing.Common": {
             "target": "Package",
             "version": "[9.0.7, )"
