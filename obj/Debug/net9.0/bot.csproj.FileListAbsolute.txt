@@ -23,3 +23,4 @@ C:\Users\Vikto\OneDrive\Desktop\bot\bot\bin\Debug\net9.0\System.Private.Windows.
 C:\Users\Vikto\OneDrive\Desktop\bot\bot\bin\Debug\net9.0\Tesseract.dll
 C:\Users\Vikto\OneDrive\Desktop\bot\bot\bin\Debug\net9.0\runtimes\win\lib\net9.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Vikto\OneDrive\Desktop\bot\bot\obj\Debug\net9.0\bot.csproj.Up2Date
+C:\Users\Vikto\OneDrive\Desktop\bot\bot\obj\Debug\net9.0\bot.sourcelink.json
