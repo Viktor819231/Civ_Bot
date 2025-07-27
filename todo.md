@@ -86,3 +86,67 @@ D.Extra ideas and requirments
 
 
 
+                bool currentTest = System.Object.ReferenceEquals(StartScreen, Goal);
+                System.Console.WriteLine("In loop, current equality: " + currentTest);
+                if (StartScreen == Screen.Screen_LoadGames)
+                {
+                    System.Console.WriteLine("loadgames ");
+                }
+                if (StartScreen == Screen.Screen_SetupMulti)
+                {
+                    System.Console.WriteLine("setup ");
+                }
+                if (StartScreen == Screen.Screen_StagingRoom)
+                {
+                    System.Console.WriteLine("staging ");
+                }
+                if (StartScreen == Screen.Screen_InternetLobbies)
+                {
+                    System.Console.WriteLine("lobbies ");
+                }
+                if (StartScreen == Screen.ScreenMenu_HotOrStandard)
+                {
+                    System.Console.WriteLine("hotorstandard ");
+                }
+                if (StartScreen == Screen.ScreenMenu_InternetOrLocal)
+                {
+                    System.Console.WriteLine("localorinternet ");
+                }
+                if (StartScreen == Screen.ScreenMenu_Main)
+                {
+                    System.Console.WriteLine("main ");
+                }
+
+                       System.Console.WriteLine("Getting path");
+            if (Goal == null)
+            {
+                System.Console.WriteLine("big himm");
+            }
+            if (Goal == Screen.Screen_LoadGames)
+            {
+                System.Console.WriteLine("loadgames gaol");
+            }
+            if (Goal == Screen.Screen_SetupMulti)
+            {
+                System.Console.WriteLine("setup gaol");
+            }
+            if (Goal == Screen.Screen_StagingRoom)
+            {
+                System.Console.WriteLine("staging gaol");
+            }
+            if (Goal == Screen.Screen_InternetLobbies)
+            {
+                System.Console.WriteLine("lobbies gaol");
+            }
+            if (Goal == Screen.ScreenMenu_HotOrStandard)
+            {
+                System.Console.WriteLine("hotorstandard goal");
+            }
+            if (Goal == Screen.ScreenMenu_InternetOrLocal)
+            {
+                System.Console.WriteLine("localorinternet goal");
+            }
+            if (Goal == Screen.ScreenMenu_Main)
+            {
+                System.Console.WriteLine("main goal");
+            }
