@@ -45,7 +45,12 @@ namespace OCR_logic
             x = x1;
             y = y1;
         }
-        public static Button Button_LobbyNameInputField = new Button(300, 195);
+        public static Button Button_AmericaLeaderChoice = new Button(350, 600);
+        public static Button Button_LeaderChoice = new Button(350, 265);
+        public static Button Button_LeaderChoiceScroll = new Button(430, 635);
+        public static Button Button_DifficultyBox = new Button(500, 215);
+        public static Button Button_DifficultyEmperor = new Button(500, 365);
+        public static Button Button_LobbyNameInputField = new Button(410, 195);
         public static Button button_Backtrack = new Button(0, 0);
         public static Button Button_Multiplayer = new Button(510, 340);
         public static Button Button_Internet = new Button(510, 280);

@@ -21,11 +21,30 @@ namespace Gamebot
             Sleep(2000);
             SetProcessDPIAware();
             NavigateTo(ScreenLocation.Screen_SetupMulti);
-            MoveAndClick(Button.Button_LobbyNameInputField);
-            Sleep(50);
-            EraseExistingText();
-            Sleep(50);
-            Inputtext("FFACIV.com");
+             MoveAndClick(Button.Button_LobbyNameInputField);
+             EraseExistingText();
+             Inputtext("FFACIV.com");
+             MoveAndClick(Button.Button_Loadgame);
+             MoveAndClick(Button.Button_GameConfigfile);
+             MoveAndClick(Button.Button_Loadgame_hostgame);
+             backtrack();
+             MoveAndClick(Button.Button_HostLobby);
+            MoveAndClick(Button.Button_DifficultyBox);
+            MoveAndClick(Button.Button_DifficultyEmperor);
+            MoveAndClick(Button.Button_LeaderChoice);
+            MoveAndClick(Button.Button_LeaderChoiceScroll);
+            MoveAndClick(Button.Button_AmericaLeaderChoice);
+             MoveAndClick(Button.Button_Chatinput);
+             Inputtext("PlaceHolder Placeholder! PlaceHolder [Color_Green] Placeholder. Placeholder");
+             Enter();
+             Sleep(3000);
+             Inputtext("PlaceHolder Placeholder! PlaceHolder [Color_Green] Placeholder. Placeholder");
+             Enter();
+             Sleep(3000);
+             Inputtext("PlaceHolder SomeThingSomething Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something ");
+             Enter();
+             Sleep(1000);
+
         }
 
         static void NavigateTo(ScreenLocation Goal)
@@ -58,7 +77,7 @@ namespace Gamebot
             List<Button> EmptyPathingList = new List<Button>();
             ScreenLocation startscreen = ReturnCurrentPage();
             List<Button> PathToGoal = GetPathFromTo(startscreen, goal, EmptyPathingList);
-            if (Button.IsEqual(PathToGoal[PathToGoal.Count - 1] ,Button.button_Backtrack))
+            if (Button.IsEqual(PathToGoal[PathToGoal.Count - 1], Button.button_Backtrack))
             {
                 System.Console.WriteLine("getting path GetPath backtrack");
                 List<Button> BacktrackingSteps = new List<Button>();
@@ -114,12 +133,12 @@ namespace Gamebot
 
         static List<Button> GoToMainMenu(ScreenLocation CurrentScreen, List<Button> BacktrackingList)
         {
-            if (!ScreenLocation.IsEqual(CurrentScreen , ScreenLocation.ScreenMenu_Main))
+            if (!ScreenLocation.IsEqual(CurrentScreen, ScreenLocation.ScreenMenu_Main))
             {
                 System.Console.WriteLine(BacktrackingList.Count);
                 BacktrackingList.Add(Button.button_Backtrack);
                 GoToMainMenu(CurrentScreen.PreviousScreen, BacktrackingList);
-                if (ScreenLocation.IsEqual(CurrentScreen ,ScreenLocation.ScreenMenu_Main))
+                if (ScreenLocation.IsEqual(CurrentScreen, ScreenLocation.ScreenMenu_Main))
                 {
                     BacktrackingList.Add(CurrentScreen.ButtonToPress);
                     return BacktrackingList;
@@ -140,12 +159,14 @@ namespace Gamebot
                 int size = path.Count;
                 Console.WriteLine("The list contains " + size + " items.");
                 path.Add(Goal.ButtonToPress);
-                if (ScreenLocation.IsEqual(Goal,ScreenLocation.ScreenMenu_Main))
+                if (ScreenLocation.IsEqual(Goal, ScreenLocation.ScreenMenu_Main))
                 {
                     System.Console.WriteLine("it hit main menu");
                     path.Add(Goal.ButtonToPress);
                     return path;
-                }else{
+                }
+                else
+                {
                     GetPathFromTo(StartScreen, Goal.PreviousScreen, path);
                 }
             }
@@ -153,24 +174,45 @@ namespace Gamebot
             //otherwise i need other function that gets path to main and go from main to the page
         }
 
-        static void EraseExistingText()
+
+        static void Sleep(int x)
+        {
+            Thread.Sleep(x);
+        }
+        static void backtrack()
         {
             string projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\.."));
-            string scriptPath = Path.Combine(projectRoot, "AHK scripts", "Backspace.exe");
-            for (int i = 0; i < 30; i++)
+            string scriptPath = Path.Combine(projectRoot, "AHK scripts", "Backtrack.exe");
+            Process.Start(scriptPath);
+            Sleep(300);
+        }
+        static void EraseExistingText(int CharactersToErase = 15)
+        {
+
+            string projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\.."));
+            string scriptPath = Path.Combine(projectRoot, "AHK scripts", "HitBackspace.exe");
+            for (int i = 0; i < CharactersToErase; i++)
             {
                 Process.Start(scriptPath);
-                Thread.Sleep(50);
+                Sleep(150);
             }
-
+            Sleep(200);
+        }
+        static void Enter()
+        {
+            string projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\.."));
+            string scriptPath = Path.Combine(projectRoot, "AHK scripts", "Enter.exe");
+            Process.Start(scriptPath);
+            Sleep(200);
         }
         static void Inputtext(string txt)
         {
 
             string projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\.."));
             string scriptPath = Path.Combine(projectRoot, "AHK scripts", "SendText.exe");
-            string arg = $"{txt}";
+            string arg = $"\"{txt}\"";
             Process.Start(scriptPath, arg);
+            Sleep(1000);
         }
 
         static void MoveMouseTo(LocationInGame cords)
@@ -181,29 +223,30 @@ namespace Gamebot
             string scriptPath = Path.Combine(projectRoot, "AHK scripts", "MoveMouseTo.exe");
             string args = $"{x} {y}";
             Process.Start(scriptPath, args);
-        
+            Sleep(200);
+
         }
         static void Click()
         {
             string projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\.."));
             string scriptPath = Path.Combine(projectRoot, "AHK scripts", "click.exe");
             Process.Start(scriptPath);
+            Sleep(200);
         }
         static void HitEscapeKey()
         {
             string projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\.."));
             string scriptPath = Path.Combine(projectRoot, "AHK scripts", "Backtrack.exe");
             Process.Start(scriptPath);
+            Sleep(100);
         }
-        static void Sleep(int x)
-        {
-            Thread.Sleep(x);
-        }
+
         static void MoveAndClick(LocationInGame cords)
         {
             MoveMouseTo(cords);
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(150);
             Click();
+            Sleep(500);
         }
 
     }

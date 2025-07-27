@@ -1,1 +1,2 @@
 ﻿Send("{Backspace}")
+Exit
