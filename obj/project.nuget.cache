@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "bDF6x3/t51I=",
+  "dgSpecHash": "E0dGMg55Ac4=",
   "success": true,
   "projectFilePath": "C:\\Users\\Vikto\\OneDrive\\Desktop\\bot\\bot\\bot.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Vikto\\.nuget\\packages\\autoitx.dotnet\\3.3.14.5\\autoitx.dotnet.3.3.14.5.nupkg.sha512",
     "C:\\Users\\Vikto\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.7\\microsoft.win32.systemevents.9.0.7.nupkg.sha512",
     "C:\\Users\\Vikto\\.nuget\\packages\\system.drawing.common\\9.0.7\\system.drawing.common.9.0.7.nupkg.sha512",
     "C:\\Users\\Vikto\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",

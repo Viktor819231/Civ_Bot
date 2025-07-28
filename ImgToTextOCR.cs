@@ -27,11 +27,19 @@ namespace OCR
         }
         public static void TakeScreenshotof(Rectangle box, string filepath)
         {
+            //HeaderText(390, 650, 110, 134, "Header.png");
+            System.Console.WriteLine("RecBox X= " + box.X);
+            System.Console.WriteLine("RecBox Y= " + box.Y);
+            System.Console.WriteLine("RecBox Width" + box.Width);
+            System.Console.WriteLine("RecBox Heigh" + box.Height);
             Point windowcords = GetWindowCords();
+
+            int width = Math.Abs(box.X - box.Width);
+            System.Console.WriteLine(width);
+            int height = Math.Abs(box.Y - box.Height);
+            System.Console.WriteLine(height);
             box.X += windowcords.X;
             box.Y += windowcords.Y;
-            int width = box.X - box.Width;
-            int height = box.Y - box.Height;
             using Bitmap bmp = new Bitmap(width, height);
             using Graphics g = Graphics.FromImage(bmp);
             g.CopyFromScreen(box.X, box.Y, 0, 0, bmp.Size);

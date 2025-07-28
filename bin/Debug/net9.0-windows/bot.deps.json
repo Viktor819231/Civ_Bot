@@ -15,35 +15,10 @@
           "bot.dll": {}
         }
       },
-      "Microsoft.Win32.SystemEvents/9.0.7": {
-        "runtime": {
-          "lib/net9.0/Microsoft.Win32.SystemEvents.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.725.31616"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/net9.0/Microsoft.Win32.SystemEvents.dll": {
-            "rid": "win",
-            "assetType": "runtime",
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.725.31616"
-          }
-        }
-      },
+      "Microsoft.Win32.SystemEvents/9.0.7": {},
       "System.Drawing.Common/9.0.7": {
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "9.0.7"
-        },
-        "runtime": {
-          "lib/net9.0/System.Drawing.Common.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.725.31604"
-          },
-          "lib/net9.0/System.Private.Windows.Core.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.725.31604"
-          }
         }
       },
       "System.Reflection.Emit/4.7.0": {},
