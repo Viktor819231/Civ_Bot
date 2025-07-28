@@ -16,31 +16,15 @@ A.BOT What is expected from user of bot:
 
 B.ToDo
 
-1. SS_Navigation (REFACTOR TO USE TEMPLATE MATCH NOT OCR)
-    11. Loading (if rest fail: wait)
-    12. Main_menu (if second slot sais "Multiplayer" LOCATION 1:Menu ) 
-    13. Multiplayer_menu 1 (if second slot  "Hot Seat" LOCATION 1:Menu) 
-    14. Multiplayer_menu 2 (if second slot  "Local Network" LOCATION 1:Menu) 
-    15. JoinLobbiesscreen (if header "INTERNET GAMES" LOCATION 2:Header)
-    16. Lobbysetupscreen (If header "SETUP MULTIPLAYER GAME" LOCATION 2:Header)
-    17. Loadgamesreen (if header "LOAD GAME" LOCATION 2:Header)
-    18. Staging (Header: "STAGING ROOM" LOCATION 2:Header)
-
-2. Actions : AutoHotkey scripts for every type of action
-    21. Starscreen-> Press multiplayer
-    22. Multiplayer screen -> Press standard
-    23. Standard Screen -> Press Internet (same as 22)
-    24. Lobby screen -> Press Host Game
-    25. Host Screen -> Press Load Game
-    26. LoadGame screen -> Press Game config lobby
-    27. LoadGame screen -> Press Load Game (after 26)
-    28. Lobby actions 1 : press chat input box
-    29. Lobby action 2: Post Msg basic info 1
-    30. Lobby action 3: Post Msg basic info 2
-    31. (Low Priority) Lobby action 4: Respond to msg
-3. Make premade msgs for AHK
-4. Make the main loop
-5. Extra: Adapt to screen/find and adjust pixles
+1. Bugfixes: Samescreen crash
+2. Bugfixes:try to crash it other ways
+3. Clean upcodebase, move classes, rename etc
+4. Specific actions scrips
+    41. Hostlobby
+    42. 
+5. Main loop
+6. Make premade msgs for AHK
+7. Make the main loop
 
 
 B.WEBSITE Functionalieties Goals:
@@ -83,70 +67,3 @@ D.Extra ideas and requirments
     include tessaract and AHK if someone in future want to continue and run it
 
 
-
-
-
-                bool currentTest = System.Object.ReferenceEquals(StartScreen, Goal);
-                System.Console.WriteLine("In loop, current equality: " + currentTest);
-                if (StartScreen == Screen.Screen_LoadGames)
-                {
-                    System.Console.WriteLine("loadgames ");
-                }
-                if (StartScreen == Screen.Screen_SetupMulti)
-                {
-                    System.Console.WriteLine("setup ");
-                }
-                if (StartScreen == Screen.Screen_StagingRoom)
-                {
-                    System.Console.WriteLine("staging ");
-                }
-                if (StartScreen == Screen.Screen_InternetLobbies)
-                {
-                    System.Console.WriteLine("lobbies ");
-                }
-                if (StartScreen == Screen.ScreenMenu_HotOrStandard)
-                {
-                    System.Console.WriteLine("hotorstandard ");
-                }
-                if (StartScreen == Screen.ScreenMenu_InternetOrLocal)
-                {
-                    System.Console.WriteLine("localorinternet ");
-                }
-                if (StartScreen == Screen.ScreenMenu_Main)
-                {
-                    System.Console.WriteLine("main ");
-                }
-
-                       System.Console.WriteLine("Getting path");
-            if (Goal == null)
-            {
-                System.Console.WriteLine("big himm");
-            }
-            if (Goal == Screen.Screen_LoadGames)
-            {
-                System.Console.WriteLine("loadgames gaol");
-            }
-            if (Goal == Screen.Screen_SetupMulti)
-            {
-                System.Console.WriteLine("setup gaol");
-            }
-            if (Goal == Screen.Screen_StagingRoom)
-            {
-                System.Console.WriteLine("staging gaol");
-            }
-            if (Goal == Screen.Screen_InternetLobbies)
-            {
-                System.Console.WriteLine("lobbies gaol");
-            }
-            if (Goal == Screen.ScreenMenu_HotOrStandard)
-            {
-                System.Console.WriteLine("hotorstandard goal");
-            }
-            if (Goal == Screen.ScreenMenu_InternetOrLocal)
-            {
-                System.Console.WriteLine("localorinternet goal");
-            }
-            if (Goal == Screen.ScreenMenu_Main)
-            {
-                System.Console.WriteLine("main goal");
-            }
