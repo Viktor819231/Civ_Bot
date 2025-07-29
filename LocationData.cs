@@ -41,7 +41,7 @@ namespace NavigationAndLocations
             filename = filenameArg;
 
         }
-        public Rectangle GetRectanglePictureBox()
+         public Rectangle GetRectanglePictureBox()
         {
             Rectangle picbox = new Rectangle(x: this.x_left, y: this.y_top, width: this.x_right, height: this.y_bottom);
             return picbox;

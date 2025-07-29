@@ -2,12 +2,8 @@
 using System.Drawing;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Reflection.Emit;
 using NavigationAndLocations;
-using OCR;
-using System.Windows.Forms;
-using winform;
+
 
 namespace Gamebot
 {
@@ -16,27 +12,22 @@ namespace Gamebot
 
         [DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
+        static bool stopRequested = false;
 
-        [STAThread]
         static void Main(string[] args)
         {
+
             SetProcessDPIAware();
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
-
-
-            /*
             CivBot.Sleep(2000);
-
             SetupNewLobby("FFACIV.com");
             int timedelay = 5000;
             string first = "PlaceHolder SomeThingSomething Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something ";
             string second = "PlaceHolder Placeholder! PlaceHolder [Color_Green] Placeholder. Placeholder";
             string third = "PlaceHolder Placeholder! PlaceHolder [Color_Green] Placeholder. Placeholder";
             string[] messages = { first, second, third };
-            Lobbyspam(messages, timedelay);*/
+            Lobbyspam(messages, timedelay); 
         }
+        
         public static void SetupNewLobby(string LobbyName)
         {
             System.Diagnostics.Debug.WriteLine("Reached here");

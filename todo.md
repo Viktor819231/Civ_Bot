@@ -15,16 +15,16 @@ A.BOT What is expected from user of bot:
 
 
 B.ToDo
+1. Jsonserilazation class
+        test the json class by initialize program
+        deserilize with code from txtfile
+            try code on again 
+            delete data from Localization data
+2. Refactor bot commands to be a interface with different functions so i can call an array of actions.
+3. include names of functions in 
 
-1. Bugfixes: Samescreen crash
-2. Bugfixes:try to crash it other ways
-3. Clean upcodebase, move classes, rename etc
-4. Specific actions scrips
-    41. Hostlobby
-    42. 
-5. Main loop
-6. Make premade msgs for AHK
-7. Make the main loop
+
+4.  
 
 
 B.WEBSITE Functionalieties Goals:

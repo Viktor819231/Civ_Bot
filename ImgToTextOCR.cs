@@ -2,6 +2,7 @@ using System.Drawing;
 using Tesseract;
 using System.Runtime.InteropServices;
 
+//Classes that handle the OCR, will take filepaths or coordinates and return picutres
 namespace OCR
 {
     class ImgToText
@@ -27,17 +28,9 @@ namespace OCR
         }
         public static void TakeScreenshotof(Rectangle box, string filepath)
         {
-            //HeaderText(390, 650, 110, 134, "Header.png");
-            System.Console.WriteLine("RecBox X= " + box.X);
-            System.Console.WriteLine("RecBox Y= " + box.Y);
-            System.Console.WriteLine("RecBox Width" + box.Width);
-            System.Console.WriteLine("RecBox Heigh" + box.Height);
             Point windowcords = GetWindowCords();
-
             int width = Math.Abs(box.X - box.Width);
-            System.Console.WriteLine(width);
             int height = Math.Abs(box.Y - box.Height);
-            System.Console.WriteLine(height);
             box.X += windowcords.X;
             box.Y += windowcords.Y;
             using Bitmap bmp = new Bitmap(width, height);
