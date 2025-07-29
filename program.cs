@@ -7,50 +7,71 @@ using NavigationAndLocations;
 
 namespace Gamebot
 {
+    public class Settings
+    {
+        public string[] Messages;
+        public string LobbyName;
+        public Settings(int Amountofmsgs)
+        {
+            Messages = new string[Amountofmsgs];
+        }
+
+    }
     class Program
     {
 
         [DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
         static bool stopRequested = false;
+        public static Settings settings = Filereader.Getsettings();
 
         static void Main(string[] args)
         {
-
-            SetProcessDPIAware();
             CivBot.Sleep(2000);
-            SetupNewLobby("FFACIV.com");
-            int timedelay = 5000;
-            string first = "PlaceHolder SomeThingSomething Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something Something ";
-            string second = "PlaceHolder Placeholder! PlaceHolder [Color_Green] Placeholder. Placeholder";
-            string third = "PlaceHolder Placeholder! PlaceHolder [Color_Green] Placeholder. Placeholder";
-            string[] messages = { first, second, third };
-            Lobbyspam(messages, timedelay); 
+            SetProcessDPIAware();
+            RunBareBonesBot();
+
         }
-        
+        static void RunBareBonesBot()
+        {
+            SetupNewLobby(settings.LobbyName);
+            int timedelay = 5000;
+            bool lobbycheck = Navigation.ConfirmLocation(Location.Screen_StagingRoom);
+            bool loopforever = true;
+            while (loopforever)
+            {
+                while (lobbycheck)
+                {
+                    Lobbyspam(settings.Messages, timedelay);
+                    lobbycheck = Navigation.ConfirmLocation(Location.Screen_StagingRoom);
+                }
+            }
+
+
+        }
+
         public static void SetupNewLobby(string LobbyName)
         {
-            System.Diagnostics.Debug.WriteLine("Reached here");
+
             CivBot.Sleep(1000);
-            CivBot.NavigateTo(CivScreenLocation.Screen_SetupMulti);
-            CivBot.MoveAndClick(CivButton.Button_LobbyNameInputField);
+            Navigation.NavigateTo(Location.Screen_SetupMulti);
+            CivBot.MoveAndClick(CivButton.LobbyNameInputField);
             CivBot.EraseExistingText();
             CivBot.Inputtext(LobbyName);
-            CivBot.MoveAndClick(CivButton.Button_Loadgame);
-            CivBot.MoveAndClick(CivButton.Button_GameConfigfile);
-            CivBot.MoveAndClick(CivButton.Button_Loadgame_hostgame);
+            CivBot.MoveAndClick(CivButton.Loadgame);
+            CivBot.MoveAndClick(CivButton.GameConfigfile);
+            CivBot.MoveAndClick(CivButton.Loadgame_hostgame);
             CivBot.backtrack();
-            CivBot.MoveAndClick(CivButton.Button_HostLobby);
-            CivBot.MoveAndClick(CivButton.Button_DifficultyBox);
-            CivBot.MoveAndClick(CivButton.Button_DifficultyEmperor);
-            CivBot.MoveAndClick(CivButton.Button_LeaderChoice);
-            CivBot.MoveAndClick(CivButton.Button_LeaderChoiceScroll);
-            CivBot.MoveAndClick(CivButton.Button_AmericaLeaderChoice);
+            CivBot.MoveAndClick(CivButton.HostLobby);
+            CivBot.MoveAndClick(CivButton.DifficultyBox);
+            CivBot.MoveAndClick(CivButton.DifficultyEmperor);
+            CivBot.MoveAndClick(CivButton.LeaderChoice);
+            CivBot.MoveAndClick(CivButton.LeaderChoiceScroll);
+            CivBot.MoveAndClick(CivButton.AmericaLeaderChoice);
         }
         public static void Lobbyspam(string[] text, int delay)
         {
-            CivBot.MoveAndClick(CivButton.Button_Chatinput);
-            CivBot.EraseExistingText(20);
+            CivBot.MoveAndClick(CivButton.Chatinput);
             CivBot.Enter();
             CivBot.Sleep(200);
             for (int i = 0; i < text.Length; i++)

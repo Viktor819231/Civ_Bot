@@ -57,31 +57,31 @@ namespace NavigationAndLocations
             x_left = x1;
             y_top = y1;
         }
-        public static CivButton Button_AmericaLeaderChoice = new CivButton(350, 600);
-        public static CivButton Button_LeaderChoice = new CivButton(350, 265);
-        public static CivButton Button_LeaderChoiceScroll = new CivButton(430, 635);
-        public static CivButton Button_DifficultyBox = new CivButton(500, 215);
-        public static CivButton Button_DifficultyEmperor = new CivButton(500, 365);
-        public static CivButton Button_LobbyNameInputField = new CivButton(410, 195);
-        public static CivButton button_Backtrack = new CivButton(0, 0);
-        public static CivButton Button_Multiplayer = new CivButton(510, 340);
-        public static CivButton Button_Internet = new CivButton(510, 280);
-        public static CivButton Button_Standard = new CivButton(510, 280);
-        public static CivButton Button_HostLobby = new CivButton(840, 785);
-        public static CivButton Button_Loadgame = new CivButton(430, 785);
-        public static CivButton Button_GameConfigfile = new CivButton(714, 278);
-        public static CivButton Button_Loadgame_hostgame = new CivButton(840, 720);
-        public static CivButton Button_Chatinput = new CivButton(200, 713);
+        public static CivButton AmericaLeaderChoice = new CivButton(350, 600);
+        public static CivButton LeaderChoice = new CivButton(350, 265);
+        public static CivButton LeaderChoiceScroll = new CivButton(430, 635);
+        public static CivButton DifficultyBox = new CivButton(500, 215);
+        public static CivButton DifficultyEmperor = new CivButton(500, 365);
+        public static CivButton LobbyNameInputField = new CivButton(410, 195);
+        public static CivButton Backtrack = new CivButton(0, 0);
+        public static CivButton Multiplayer = new CivButton(510, 340);
+        public static CivButton Internet = new CivButton(510, 280);
+        public static CivButton Standard = new CivButton(510, 280);
+        public static CivButton HostLobby = new CivButton(840, 785);
+        public static CivButton Loadgame = new CivButton(430, 785);
+        public static CivButton GameConfigfile = new CivButton(714, 278);
+        public static CivButton Loadgame_hostgame = new CivButton(840, 720);
+        public static CivButton Chatinput = new CivButton(200, 713);
         public static bool IsEqual(CivButton one, CivButton two)
         {
             return System.Object.ReferenceEquals(one, two);
         }
     }
-    public class CivScreenLocation : LocationInGame
+    public class Location : LocationInGame
     {
-        public CivScreenLocation PreviousScreen;
+        public Location PreviousScreen;
         public CivButton ButtonToPress;
-        public CivScreenLocation(int x1, int y1, CivScreenLocation previous, CivButton button)
+        public Location(int x1, int y1, Location previous, CivButton button)
         {
             x_left = x1;
             y_top = y1;
@@ -89,18 +89,18 @@ namespace NavigationAndLocations
             ButtonToPress = button;
 
         }
-        public static CivScreenLocation Screen_NullLobby = new CivScreenLocation(0, 0, null, CivButton.button_Backtrack);
-        public static CivScreenLocation ScreenLocation_error = new CivScreenLocation(0, 0, Screen_NullLobby, CivButton.button_Backtrack);
-        public static CivScreenLocation ScreenMenu_Main = new CivScreenLocation(0, 0, Screen_NullLobby, CivButton.button_Backtrack);
-        public static CivScreenLocation ScreenMenu_HotOrStandard = new CivScreenLocation(0, 0, CivScreenLocation.ScreenMenu_Main, CivButton.Button_Multiplayer);
-        public static CivScreenLocation ScreenMenu_InternetOrLocal = new CivScreenLocation(0, 0, CivScreenLocation.ScreenMenu_HotOrStandard, CivButton.Button_Standard);
-        public static CivScreenLocation Screen_InternetLobbies = new CivScreenLocation(0, 0, ScreenMenu_InternetOrLocal, CivButton.Button_Internet);
-        public static CivScreenLocation Screen_SetupMulti = new CivScreenLocation(0, 0, Screen_InternetLobbies, CivButton.Button_HostLobby);
-        public static CivScreenLocation Screen_LoadGames1 = new CivScreenLocation(0, 0, Screen_SetupMulti, CivButton.Button_Loadgame);
-        public static CivScreenLocation Screen_LoadGames2 = new CivScreenLocation(0, 0, Screen_LoadGames1, CivButton.Button_GameConfigfile);
-        public static CivScreenLocation Screen_StagingRoom = new CivScreenLocation(0, 0, Screen_LoadGames2, CivButton.Button_Loadgame_hostgame);
+        public static Location Screen_NullLobby = new Location(0, 0, null, CivButton.Backtrack);
+        public static Location ScreenLocation_error = new Location(0, 0, Screen_NullLobby, CivButton.Backtrack);
+        public static Location ScreenMenu_Main = new Location(0, 0, Screen_NullLobby, CivButton.Backtrack);
+        public static Location ScreenMenu_HotOrStandard = new Location(0, 0, Location.ScreenMenu_Main, CivButton.Multiplayer);
+        public static Location ScreenMenu_InternetOrLocal = new Location(0, 0, Location.ScreenMenu_HotOrStandard, CivButton.Standard);
+        public static Location Screen_InternetLobbies = new Location(0, 0, ScreenMenu_InternetOrLocal, CivButton.Internet);
+        public static Location Screen_SetupMulti = new Location(0, 0, Screen_InternetLobbies, CivButton.HostLobby);
+        public static Location Screen_LoadGames1 = new Location(0, 0, Screen_SetupMulti, CivButton.Loadgame);
+        public static Location Screen_LoadGames2 = new Location(0, 0, Screen_LoadGames1, CivButton.GameConfigfile);
+        public static Location Screen_StagingRoom = new Location(0, 0, Screen_LoadGames2, CivButton.Loadgame_hostgame);
 
-        public static bool IsEqual(CivScreenLocation one, CivScreenLocation two)
+        public static bool IsEqual(Location one, Location two)
         {
             return System.Object.ReferenceEquals(one, two);
         }

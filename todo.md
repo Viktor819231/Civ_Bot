@@ -14,17 +14,30 @@ A.BOT What is expected from user of bot:
 2. Start bot. dont touch screen when active 
 
 
-B.ToDo
+ToDO V1 ship: 
+Fixa simpel script för en loop, 
+lägg till event listner för escapekey
+kolla efter escape key på logiska ställen i koden
+    paketera den i bot scripts
+
+ToDO V1.5
+Simpel Winform Frontend: starta bot, display vad den gör
+Ändra olika Botactions till olika implemewntationer av en botaction interface så vi kan kalla dem i en array av bot actions 
+
+ToDo V2
 1. Jsonserilazation class
         test the json class by initialize program
         deserilize with code from txtfile
             try code on again 
             delete data from Localization data
 2. Refactor bot commands to be a interface with different functions so i can call an array of actions.
-3. include names of functions in 
+3. Fullfledge Winforms app
+4. Could easily add "new" actions 
 
 
-4.  
+Todo V3 and beyond:
+Why stop at civ. Could use a lot of this code/lessons to make something that act with bot scripts based on OCR reading text. Automatic script making by eventlistners, ocr checkpoints. Profiles etc. share scripts by json files easily with other people. add pixel color identification
+
 
 
 B.WEBSITE Functionalieties Goals:

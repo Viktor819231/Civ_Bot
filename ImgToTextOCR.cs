@@ -1,13 +1,33 @@
 using System.Drawing;
 using Tesseract;
 using System.Runtime.InteropServices;
+using System.IO;
 
 //Classes that handle the OCR, will take filepaths or coordinates and return picutres
 namespace OCR
 {
     class ImgToText
     {
-        private static TesseractEngine engine = new TesseractEngine(@"./tessdata", "eng", EngineMode.Default);
+        private static string FindTessDataPath()
+        {
+            // Try output directory first
+            string outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tessdata");
+            if (Directory.Exists(outputPath))
+                return outputPath;
+            
+            // Try project root
+            string projectPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "tessdata");
+            if (Directory.Exists(projectPath))
+                return Path.GetFullPath(projectPath);
+            
+            throw new DirectoryNotFoundException("Cannot find tessdata directory");
+        }
+
+        private static TesseractEngine engine = new TesseractEngine(
+            FindTessDataPath(), 
+            "eng", 
+            EngineMode.Default
+        );
 
 
         public static string TextReader(string imagePath)
