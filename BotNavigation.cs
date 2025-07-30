@@ -2,7 +2,7 @@ using NavigationAndLocations;
 using OCR;
 namespace Gamebot
 {
-    class Navigation
+    class CivBotNavigation
     {
         public static bool ConfirmLocation(Location location)
         {
@@ -34,13 +34,14 @@ namespace Gamebot
 
             }
         }
-        public static string takepic(CivTextBox box)
+        public static string GetTextAt(CivTextBox place)
         {
-            return TextAt(box).TrimEnd();
-        }
+            return ImgToText.TextAt(place.GetRectanglePictureBox(), place.filename).TrimEnd();
+            
+        } 
         public static Location GetMenuBasedLocations()
         {
-            string Menutxt = TextAt(CivTextBox.MenuText).TrimEnd();
+            string Menutxt = GetTextAt(CivTextBox.MenuText);
             switch (Menutxt)
             {
                 case "SINGLE PLAYER":
@@ -57,7 +58,7 @@ namespace Gamebot
         public static Location GetHeaderBasedLocations()
         {
 
-            string txt = TextAt(CivTextBox.HeaderText).TrimEnd();
+            string txt = GetTextAt(CivTextBox.HeaderText);
             switch (txt)
             {
                 case "INTERNET GAMES":
@@ -74,15 +75,9 @@ namespace Gamebot
 
 
         }
-        public static string TextAt(CivTextBox location)
-        {
-            ImgToText.TakeScreenshotof(location.GetRectanglePictureBox(), location.filename);
-            string results = ImgToText.TextReader(location.filename);
-            return results;
-        }
         public static void NavigateTo(Location Goal)
         {
-            Location startscreen = Navigation.GetCurrentScreen();
+            Location startscreen = GetCurrentScreen();
             if (!Location.IsEqual(Goal, startscreen))
             {
                 List<CivButton> path = GetPath(Goal, startscreen);

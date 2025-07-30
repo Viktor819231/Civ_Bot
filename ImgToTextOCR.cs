@@ -2,6 +2,7 @@ using System.Drawing;
 using Tesseract;
 using System.Runtime.InteropServices;
 using System.IO;
+using System; // Added to fix AppDomain reference
 
 //Classes that handle the OCR, will take filepaths or coordinates and return picutres
 namespace OCR
@@ -29,7 +30,12 @@ namespace OCR
             EngineMode.Default
         );
 
-
+        public static string TextAt(Rectangle location,string filename)
+        {
+            ImgToText.TakeScreenshotof(location, filename);
+            string results = ImgToText.TextReader(filename);
+            return results;
+        }
         public static string TextReader(string imagePath)
         {
             using var img = Pix.LoadFromFile(imagePath);

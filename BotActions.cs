@@ -1,19 +1,47 @@
 using System;
-using System.Drawing;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Reflection.Emit;
+using System.Text;
 using NavigationAndLocations;
-using OCR;
+
+
 
 namespace Gamebot
 {
-    class CivBot
+    public static class CivBot
+{
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetForegroundWindow();
+    
+    [DllImport("user32.dll")]
+    private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+    
+    public static bool IsCivActive()
     {
+        IntPtr foregroundWindow = GetForegroundWindow();
+        StringBuilder windowTitle = new StringBuilder(256);
+        GetWindowText(foregroundWindow, windowTitle, windowTitle.Capacity);
+        
+        string title = windowTitle.ToString();
+        return title.Contains("Civilization V") || title.Contains("Sid Meier");
+    }
+    
+    public static void EnsureCivActive()
+    {
+        if (!IsCivActive())
+        {
+            while (!IsCivActive())
+            {
+                CivBot.Sleep(2000);
+            }
+        }
+    }
+
         public static void Sleep(int x)
         {
-            Thread.Sleep(x);
+            int modifier = Program.settings.Botspeed;
+            Thread.Sleep(x/modifier);
+            EnsureCivActive();
         }
         public static void backtrack()
         {
@@ -51,6 +79,16 @@ namespace Gamebot
             Sleep(1000);
         }
 
+        public static void QuickInputtext(string txt)
+        {
+
+            string projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\.."));
+            string scriptPath = Path.Combine(projectRoot, "AHK scripts", "SendText.exe");
+            string arg = $"\"{txt}\"";
+            Process.Start(scriptPath, arg);
+            Sleep(100);
+        }
+
         public static void MoveMouseTo(LocationInGame cords)
         {
             int x = cords.x_left;
@@ -59,7 +97,7 @@ namespace Gamebot
             string scriptPath = Path.Combine(projectRoot, "AHK scripts", "MoveMouseTo.exe");
             string args = $"{x} {y}";
             Process.Start(scriptPath, args);
-            Sleep(200);
+            Sleep(250);
 
         }
         public static void Click()
@@ -67,7 +105,7 @@ namespace Gamebot
             string projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\.."));
             string scriptPath = Path.Combine(projectRoot, "AHK scripts", "click.exe");
             Process.Start(scriptPath);
-            Sleep(200);
+            Sleep(150);
         }
         public static void HitEscapeKey()
         {
@@ -80,9 +118,9 @@ namespace Gamebot
         public static void MoveAndClick(LocationInGame cords)
         {
             MoveMouseTo(cords);
-            System.Threading.Thread.Sleep(150);
+            Sleep(150);
             Click();
-            Sleep(500);
+            Sleep(300);
         }
 
 

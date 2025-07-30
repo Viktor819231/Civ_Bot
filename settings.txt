@@ -1,4 +1,46 @@
-msg:::"Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder PlaceholderPlaceholder Placeholder Placeholder Placeholder Placeholder Placeholder"
-msg:::"Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder PlaceholderPlaceholder Placeholder Placeholder Placeholder Placeholder Placeholder"
-msg:::"SomeThing Something Something Something SomethingSomeThing Something Something Something SomethingSomeThing Something Something Something SomethingSomeThing Something Something Something Something"
-LobbyName:::"testing"
+//some Ahk is slow for my old laptop to launch. changing this makes everything faster. inluding sleep between msgs and so on. Although it spends 99.99% time in lobby so does not really matter
+
+        Botspeed:::"1"
+
+//Bot only works for 1024x768 aspect ratio
+//if bot gets interupted and breaks, just wait a bit and it will sort itself out eventually
+//OCR sometimes have problems with exact letter recognition in the ingame lobby chat, Capital letters are recommended for bot name
+
+        BotSteamUserName:::"Placeholder"
+        LobbyName:::"LobbyName"
+
+
+//Can add as many msgs as you want, it will loop thru them, Do not linebreak on msg in txtfile
+//Responsemsgs will be checked once 2 sec between msg
+//DefaultSleep is milisec between msgs
+
+
+        msg:::"Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder PlaceholderPlaceholder Placeholder Placeholder Placeholder Placeholder Placeholder"
+        msg:::"To get more information of rules of server type RULES, To get more info on Kekmod type KEKMOD, to see upcoming games or how get details information on how to join a game type NEXT GAME or HOWTO"
+        msg:::"For More info go to website etc SomeThing Something Something Something SomethingSomeThing Something Something Something SomethingSomeThing Something Something Something SomethingSomeThing Something Something Something Something"
+        DefaultSleep:::"10000"
+
+        
+// Lower time between scans means less likley to miss a msg from user. 
+
+        ScanChatEvery:::"2000"
+
+
+
+//Connected msg can be missinturperated by OCR. it just fails reading like 5% of time. 
+
+        
+        AdverTiseOnConnected:::"true"
+        OnlyAdvertiseOnConnected:::"true"
+        WaitAfterConnected:::5000
+
+
+//Recommended all capital letters on recognition to make it easy for OCR
+//Also recommended is to have multiple letters
+//Will ignore botname 
+
+
+        RespondIf:::"RULES";"Votes for quit game etc etc etc"
+        RespondIf:::"KEKMOD";"Kekmod is etc etc etc"
+        RespondIf:::"NEXT GAME";"Next upcoming game on 3/6 BPlaceholder"
+        RespondIf:::"HOWTO";"instructions for how to join Something TEST"
