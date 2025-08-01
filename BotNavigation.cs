@@ -1,18 +1,47 @@
 using NavigationAndLocations;
 using OCR;
+using System.Runtime.InteropServices;
+using System.Text;
+
 namespace Gamebot
 {
-    class CivBotNavigation
+
+    class BotLocaliztation
     {
-        public static bool ConfirmLocation(Location location)
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+        public static bool IsCivActive()
         {
-            if (Location.IsEqual(location, GetCurrentScreen()))
+            IntPtr foregroundWindow = GetForegroundWindow();
+            StringBuilder windowTitle = new StringBuilder(256);
+            GetWindowText(foregroundWindow, windowTitle, windowTitle.Capacity);
+
+            string title = windowTitle.ToString();
+            return title.Contains("Civilization V") || title.Contains("Sid Meier");
+        }
+
+        public static void EnsureCivActive()
+        {
+
+                while (!IsCivActive())
+                {
+                    CivBot.Sleep(2000);
+                }
+
+        }
+        public static bool ConfirmLocation(ScreenLocation location)
+        {
+            if (ScreenLocation.IsEqual(location, GetCurrentScreen()))
             {
                 return true;
             }
             return false;
         }
-        public static Location GetCurrentScreen()
+        public static ScreenLocation GetCurrentScreen()
         {
             try
             {
@@ -26,9 +55,7 @@ namespace Gamebot
                 }
                 catch
                 {
-                    System.Console.WriteLine("Cant identify area, will sleep 5 seconds and try again");
-                    System.Console.WriteLine("Make sure you have Civ5 in focus on 1024x768");
-                    Thread.Sleep(5000);
+                    CivBot.Sleep(5000);
                     return GetCurrentScreen();
                 }
 
@@ -39,72 +66,51 @@ namespace Gamebot
             return ImgToText.TextAt(place.GetRectanglePictureBox(), place.filename).TrimEnd();
             
         } 
-        public static Location GetMenuBasedLocations()
+        public static ScreenLocation GetMenuBasedLocations()
         {
             string Menutxt = GetTextAt(CivTextBox.MenuText);
             switch (Menutxt)
             {
                 case "SINGLE PLAYER":
-                    return Location.ScreenMenu_Main;
+                    return ScreenLocation.Menu_Main;
                 case "STANDARD":
-                    return Location.ScreenMenu_HotOrStandard;
+                    return ScreenLocation.Menu_HotOrStandard;
                 case "INTERNET":
-                    System.Console.WriteLine("success now");
-                    return Location.ScreenMenu_InternetOrLocal;
+                    return ScreenLocation.Menu_InternetOrLocal;
                 default:
                     throw new Exception();
             }
         }
-        public static Location GetHeaderBasedLocations()
+        public static ScreenLocation GetHeaderBasedLocations()
         {
 
             string txt = GetTextAt(CivTextBox.HeaderText);
             switch (txt)
             {
                 case "INTERNET GAMES":
-                    return Location.Screen_InternetLobbies;
+                    return ScreenLocation.InternetLobbies;
                 case "SETUP MULTIPLAYER GAME":
-                    return Location.Screen_SetupMulti;
+                    return ScreenLocation.SetupMulti;
                 case "LOAD GAME":
-                    return Location.Screen_LoadGames1;
+                    return ScreenLocation.LoadGames1;
                 case "STAGING ROOM":
-                    return Location.Screen_StagingRoom;
+                    return ScreenLocation.StagingRoom;
                 default:
                     throw new Exception("No match on HeaderBasedLocations");
             }
 
 
         }
-        public static void NavigateTo(Location Goal)
-        {
-            Location startscreen = GetCurrentScreen();
-            if (!Location.IsEqual(Goal, startscreen))
-            {
-                List<CivButton> path = GetPath(Goal, startscreen);
-                ExcecuteNavigation(path);
-            }
 
-        }
+    }
 
-        static void ExcecuteNavigation(List<CivButton> ListofCommands)
-        {
 
-            for (int i = ListofCommands.Count - 1; i >= 0; i--)
-            {
-                CivButton command = ListofCommands[i];
-                switch (command)
-                {
-                    case var b when b == CivButton.Backtrack:
-                        CivBot.HitEscapeKey();
-                        break;
-                    default:
-                        CivBot.MoveAndClick(command);
-                        break;
-                }
-                Thread.Sleep(1000);
-            }
-        }
-        static List<CivButton> GetPath(Location goal, Location startscreen)
+
+    class Pathgetter
+    {
+
+        
+        public static List<CivButton> GetPath(ScreenLocation goal, ScreenLocation startscreen)
         {
             List<CivButton> EmptyPathingList = new List<CivButton>();
             List<CivButton> PathToGoal = GetPathFromTo(startscreen, goal, EmptyPathingList);
@@ -117,17 +123,15 @@ namespace Gamebot
             return PathToGoal;
         }
 
-
-
-        static List<CivButton> GoToMainMenu(Location CurrentScreen, List<CivButton> BacktrackingList)
+        static List<CivButton> GoToMainMenu(ScreenLocation CurrentScreen, List<CivButton> BacktrackingList)
         {
-            if (!Location.IsEqual(CurrentScreen, Location.ScreenMenu_Main))
+            if (!ScreenLocation.IsEqual(CurrentScreen, ScreenLocation.Menu_Main))
             {
                 BacktrackingList.Add(CivButton.Backtrack);
                 GoToMainMenu(CurrentScreen.PreviousScreen, BacktrackingList);
-                if (Location.IsEqual(CurrentScreen, Location.ScreenMenu_Main))
+                if (ScreenLocation.IsEqual(CurrentScreen, ScreenLocation.Menu_Main))
                 {
-                    BacktrackingList.Add(CurrentScreen.ButtonToPress);
+                    BacktrackingList.Add(CurrentScreen.ButtonToPress_PreviousScreen);
                     return BacktrackingList;
                 }
             }
@@ -135,15 +139,15 @@ namespace Gamebot
         }
 
 
-        static List<CivButton> GetPathFromTo(Location StartScreen, Location Goal, List<CivButton> path)
+        static List<CivButton> GetPathFromTo(ScreenLocation StartScreen, ScreenLocation Goal, List<CivButton> path)
         {
             bool test = System.Object.ReferenceEquals(StartScreen, Goal);
-            if (!Location.IsEqual(StartScreen, Goal))
+            if (!ScreenLocation.IsEqual(StartScreen, Goal))
             {
-                path.Add(Goal.ButtonToPress);
-                if (Location.IsEqual(Goal, Location.ScreenMenu_Main))
+                path.Add(Goal.ButtonToPress_PreviousScreen);
+                if (ScreenLocation.IsEqual(Goal, ScreenLocation.Menu_Main))
                 {
-                    path.Add(Goal.ButtonToPress);
+                    path.Add(Goal.ButtonToPress_PreviousScreen);
                     return path;
                 }
                 else

@@ -9,61 +9,58 @@ using OCR;
 
 namespace Gamebot
 {
-    public class Settings
-    {
-        public List<string> Messages = new List<string>();
-        public List<(string, string)> ConditionalAndResponse = new List<(string, string)>();
-        public string LobbyName = "LobbyNameNotSet";
-        public string Botname = "BotNameNotSet";
-        public bool OnlyAdvertiseOnConnected;
-        public bool AdverTiseOnConnected;
-        public int timeWaitAfterConnected;
-        public int SleepBetweenMsgs;
-        public int timebetweenscans;
-        public int ScanChatEvery;
-        public int Botspeed;
-
-    }
+    
     class Program
     {
 
         [DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
-        public static Settings settings = Filereader.Getsettings();
+        public static Settings settings = new Settings();
 
+        [STAThread]
         static void Main(string[] args)
         {
-            CivBot.Sleep(2000);
             SetProcessDPIAware();
-            RunBareBonesBot();
-
+            
+            // Launch the frontend instead of running bot directly
+            BotFrontendLauncher.StartFrontend();
         }
 
-        static void RunBareBonesBot()
+        public static void RunBareBonesBot(CancellationToken cancellationToken = default)
         {
+            Console.WriteLine("RunBareBonesBot starting...");
+            Console.WriteLine($"Lobby name: {settings.LobbyName}");
+            
+            Console.WriteLine("Calling SetupNewLobby...");
             SetupNewLobby(settings.LobbyName);
+            Console.WriteLine("SetupNewLobby completed.");
+            
             bool lobbycheck = true;
             bool loopforever = true;
-            while (loopforever)
+            while (loopforever && !cancellationToken.IsCancellationRequested)
             {
-
-                if (!(CivBotNavigation.ConfirmLocation(Location.Screen_StagingRoom)))
+                Console.WriteLine("Checking if in staging room...");
+                if (!(BotLocaliztation.ConfirmLocation(ScreenLocation.StagingRoom)))
                 {
-                    CivBotNavigation.NavigateTo(Location.Screen_SetupMulti);
+                    Console.WriteLine("Not in staging room, navigating to SetupMulti...");
+                    CivBotNavigation.NavigateTo(ScreenLocation.SetupMulti);
                     SetupNewLobby(settings.LobbyName);
                 }
-                if (CivBotNavigation.ConfirmLocation(Location.Screen_StagingRoom))
+                if (BotLocaliztation.ConfirmLocation(ScreenLocation.StagingRoom))
                 {
+                    Console.WriteLine("In staging room, starting lobby monitoring...");
                     lobbycheck = true;
                 }
-                while (lobbycheck)
+                while (lobbycheck && !cancellationToken.IsCancellationRequested)
                 {
+                    Console.WriteLine("Scanning chat and responding...");
                     CivBot.Sleep(200);
                     CivBotChatter.LoopMsgs_ScanAndRespond();
-                    lobbycheck = CivBotNavigation.ConfirmLocation(Location.Screen_StagingRoom);
+                    lobbycheck = BotLocaliztation.ConfirmLocation(ScreenLocation.StagingRoom);
                 }
 
             }
+            cancellationToken.ThrowIfCancellationRequested();
         }
         
         
@@ -76,8 +73,8 @@ namespace Gamebot
                 while (true)
                 {
                     CivBot.Sleep(1000);
-                    CivBotNavigation.NavigateTo(Location.Screen_SetupMulti);
-                    if (!(CivBotNavigation.ConfirmLocation(location: Location.Screen_SetupMulti))) { break; }
+                    CivBotNavigation.NavigateTo(ScreenLocation.SetupMulti);
+                    if (!(BotLocaliztation.ConfirmLocation(location: ScreenLocation.SetupMulti))) { break; }
                     CivBot.MoveAndClick(CivButton.LobbyNameInputField);
                     CivBot.EraseExistingText();
                     CivBot.Inputtext(LobbyName);
@@ -87,29 +84,31 @@ namespace Gamebot
                     CivBot.Sleep(100);
                     CivBot.backtrack();
                     CivBot.Sleep(100);
-                    if (!(CivBotNavigation.ConfirmLocation(location: Location.Screen_SetupMulti))) {
+                    if (!(BotLocaliztation.ConfirmLocation(location: ScreenLocation.SetupMulti))) {
                         CivBot.Sleep(3000);
-                        if (!(CivBotNavigation.ConfirmLocation(location: Location.Screen_SetupMulti))){
+                        if (!(BotLocaliztation.ConfirmLocation(location: ScreenLocation.SetupMulti))){
                            break; } 
                         }
                     CivBot.MoveAndClick(CivButton.HostLobby);
                     CivBot.Sleep(1000);
-                    if (!(CivBotNavigation.ConfirmLocation(location: Location.Screen_StagingRoom))) { break; }
+                    if (!(BotLocaliztation.ConfirmLocation(location: ScreenLocation.StagingRoom))) { break; }
                     CivBot.MoveAndClick(CivButton.DifficultyBox);
                     CivBot.MoveAndClick(CivButton.DifficultyEmperor);
                     CivBot.MoveAndClick(CivButton.LeaderChoice);
                     CivBot.MoveAndClick(CivButton.LeaderChoiceScroll);
                     CivBot.MoveAndClick(CivButton.AmericaLeaderChoice);
                     CivBot.MoveAndClick(CivButton.Chatinput);
-                    CivBot.Inputtext("Ocr only scans bottom row every two sec");
+                    CivBot.Inputtext("Ocr only scans bottom row");
                     CivBot.Enter();
                     CivBot.Inputtext("Long names and russians can be a problem for detection");
                     CivBot.Enter();
-                    CivBot.Inputtext("Change settings at settings.txt folder");
+                    CivBot.Inputtext("Change settings and text responses at settings.txt folder");
                     CivBot.Enter();
-                    CivBot.Inputtext("Starting chat spam will post every" +settings.SleepBetweenMsgs+"seconds");
+                    CivBot.Inputtext("Starting chat spam, can change it on loop in settings instead of on Connected");
                     CivBot.Enter();
-                    if ((CivBotNavigation.ConfirmLocation(location: Location.Screen_StagingRoom)))
+                    CivBot.Inputtext("Connected");
+                    CivBot.Enter();
+                    if ((BotLocaliztation.ConfirmLocation(location: ScreenLocation.StagingRoom)))
                     {
                         setupcomplete = true;
                         break;

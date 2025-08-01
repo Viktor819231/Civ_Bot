@@ -1,8 +1,5 @@
-using System.Drawing;
 using Tesseract;
 using System.Runtime.InteropServices;
-using System.IO;
-using System; // Added to fix AppDomain reference
 
 //Classes that handle the OCR, will take filepaths or coordinates and return picutres
 namespace OCR
@@ -11,13 +8,11 @@ namespace OCR
     {
         private static string FindTessDataPath()
         {
-            // Try output directory first
-            string outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tessdata");
+            string outputPath = Path.Combine(AppContext.BaseDirectory, "tessdata");
             if (Directory.Exists(outputPath))
                 return outputPath;
             
-            // Try project root
-            string projectPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "tessdata");
+            string projectPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "tessdata");
             if (Directory.Exists(projectPath))
                 return Path.GetFullPath(projectPath);
             
@@ -32,17 +27,19 @@ namespace OCR
 
         public static string TextAt(Rectangle location,string filename)
         {
-            ImgToText.TakeScreenshotof(location, filename);
-            string results = ImgToText.TextReader(filename);
+            // Create absolute path for screenshot
+            string absolutePath = Path.Combine(AppContext.BaseDirectory, filename);
+            ImgToText.TakeScreenshotof(location, absolutePath);
+            string results = ImgToText.TextReader(absolutePath);
             return results;
         }
+        
         public static string TextReader(string imagePath)
         {
             using var img = Pix.LoadFromFile(imagePath);
             using var page = engine.Process(img);
             string text = page.GetText();
             return text;
-
         }
 
         public static Point GetWindowCords()
@@ -54,15 +51,31 @@ namespace OCR
         }
         public static void TakeScreenshotof(Rectangle box, string filepath)
         {
-            Point windowcords = GetWindowCords();
-            int width = Math.Abs(box.X - box.Width);
-            int height = Math.Abs(box.Y - box.Height);
-            box.X += windowcords.X;
-            box.Y += windowcords.Y;
-            using Bitmap bmp = new Bitmap(width, height);
-            using Graphics g = Graphics.FromImage(bmp);
-            g.CopyFromScreen(box.X, box.Y, 0, 0, bmp.Size);
-            bmp.Save(filepath);
+            try
+            {
+                Point windowcords = GetWindowCords();
+                int width = Math.Abs(box.X - box.Width);
+                int height = Math.Abs(box.Y - box.Height);
+                box.X += windowcords.X;
+                box.Y += windowcords.Y;
+                
+                using Bitmap bmp = new Bitmap(width, height);
+                using Graphics g = Graphics.FromImage(bmp);
+                g.CopyFromScreen(box.X, box.Y, 0, 0, bmp.Size);
+                
+                // Ensure directory exists
+                string? directory = Path.GetDirectoryName(filepath);
+                if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+                
+                bmp.Save(filepath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Screenshot error: {ex.Message}");
+            }
         }
 
         public static class NativeMethods
