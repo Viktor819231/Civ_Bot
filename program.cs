@@ -47,6 +47,7 @@ namespace Gamebot
             {
                 SetForegroundWindow(CivWindowHandle);
                 CivBot.HitEscapeKey();
+                CivBot.Sleep(200);
             }
             TestOCR();
             TestAutoHokeyScripts();
@@ -90,22 +91,31 @@ namespace Gamebot
             {
                 while (true)
                 {
-                    CivBot.Sleep(1000);
+                    CivBot.Sleep(3000);
                     if (!(BotLocaliztation.ConfirmLocation(location: ScreenLocation.SetupMulti)))
                     {
                         Console.WriteLine("Not in staging room, navigating to SetupMulti...");
                         CivBotNavigation.NavigateTo(ScreenLocation.SetupMulti);
+                        if (!BotLocaliztation.ConfirmLocation(ScreenLocation.SetupMulti))
+                        {
+                            break;
+                        }
                     }
                     CivBot.MoveAndClick(CivButton.LobbyNameInputField);
                     CivBot.EraseExistingText();
                     CivBot.Inputtext(settings.LobbyName);
+                    CivBot.Sleep(2000);
+                    CivBot.Enter();
+                    Thread.Sleep(300);
                     System.Console.WriteLine("Loading game with template lobby");
                     CivBot.MoveAndClick(CivButton.Loadgame);
+                    Thread.Sleep(300);
                     CivBot.MoveAndClick(CivButton.GameConfigfile);
+                    Thread.Sleep(300);
                     CivBot.MoveAndClick(CivButton.Loadgame_hostgame);
-                    CivBot.Sleep(100);
+                    CivBot.Sleep(500);
                     CivBot.backtrack();
-                    CivBot.Sleep(100);
+                    CivBot.Sleep(500);
                     if (!(BotLocaliztation.ConfirmLocation(location: ScreenLocation.SetupMulti)))
                     {
                         CivBot.Sleep(3000);
@@ -166,23 +176,38 @@ namespace Gamebot
                 {
                     foreach (Process process in processes)
                     {
-                        if (!process.HasExited && process.Responding)
+                        if (!process.HasExited)
                         {
                             CivWindowHandle = process.MainWindowHandle;
+                            // Wait until the process is responding
+                            while (!process.Responding)
+                            {
+                                Console.WriteLine("CivilizationV found but not responding. Waiting...");
+                                Thread.Sleep(2000);
+                                // Refresh process info in case it exited or started responding
+                                process.Refresh();
+                                if (process.HasExited)
+                                {
+                                    CivWindowHandle = IntPtr.Zero;
+                                    Console.WriteLine("CivilizationV process exited while waiting for response.");
+                                    return false;
+                                }
+                            }
+                            // Process is running and responding
                             return true;
                         }
                     }
                 }
                 CivWindowHandle = IntPtr.Zero;
                 Console.WriteLine("CivilizationV process not found among processes");
-                return false;
             }
             catch (Exception ex)
             {
                 CivWindowHandle = IntPtr.Zero;
                 Console.WriteLine($"Error checking if game is running: {ex.Message}");
-                return false;
+                Thread.Sleep(2000);
             }
+            return false;
         }
         public static void startCivdx9()
         {
@@ -239,19 +264,20 @@ namespace Gamebot
                     try
                     {
                         SetForegroundWindow(CivWindowHandle);
-                        Thread.Sleep(5000);
                         CivBot.MoveMouseTo(CivButton.outoftheway);
                         CivBot.SimpleClick();
-                        if (BotLocaliztation.ConfirmLocation(ScreenLocation.Menu_Main,geterrorlocal:true))
+                        if (BotLocaliztation.ConfirmLocation(ScreenLocation.Menu_Main, geterrorlocal: true))
                         {
                             System.Console.WriteLine("Game sucessfully launched");
-                            Thread.Sleep(5000);
+                            Thread.Sleep(2000);
                             break;
                         }
                         else
                         {
                             System.Console.WriteLine("Continuing to wait for main menu to load");
                         }
+                            System.Console.WriteLine("Clicked screen, waiting 30 sec for main menu to load");
+
                     }
                     catch
                     {

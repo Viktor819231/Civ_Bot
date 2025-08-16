@@ -56,8 +56,8 @@ namespace NavigationAndLocations
             y_top = y1;
         }
         public static CivButton outoftheway = new CivButton(50, 50);
-        public static CivButton AmericaLeaderChoice = new CivButton(350, 560);
-        public static CivButton LeaderChoice = new CivButton(350, 225);
+        public static CivButton AmericaLeaderChoice = new CivButton(350, 580);
+        public static CivButton LeaderChoice = new CivButton(350, 215);
         public static CivButton LeaderChoiceScroll = new CivButton(430, 595);
         public static CivButton DifficultyBox = new CivButton(500, 175);
         public static CivButton DifficultyEmperor = new CivButton(500, 325);

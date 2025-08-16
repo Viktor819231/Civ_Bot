@@ -1,5 +1,6 @@
 using Tesseract;
 using System.Runtime.InteropServices;
+using Gamebot;
 
 //Classes that handle the OCR, will take filepaths or coordinates and return picutres
 namespace OCR
@@ -19,12 +20,6 @@ namespace OCR
             throw new DirectoryNotFoundException("Cannot find tessdata directory");
         }
 
-        private static TesseractEngine engine = new TesseractEngine(
-            FindTessDataPath(),
-            "eng",
-            EngineMode.Default
-        );
-
         public static string TextAt(Rectangle location,string filename)
         {
             string absolutePath = Path.Combine(AppContext.BaseDirectory, filename);
@@ -35,6 +30,7 @@ namespace OCR
 
         public static string TextReader(string imagePath)
         {
+            using var engine = new TesseractEngine(FindTessDataPath(), "eng", EngineMode.Default);
             using var img = Pix.LoadFromFile(imagePath);
             using var page = engine.Process(img);
             string text = page.GetText();
@@ -53,6 +49,7 @@ namespace OCR
             
             try
             {
+                Program.SetForegroundWindow(Program.CivWindowHandle);
                 Point windowcords = GetWindowCords();
                 int width = Math.Abs(box.X - box.Width);
                 int height = Math.Abs(box.Y - box.Height);

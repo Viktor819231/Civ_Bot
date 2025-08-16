@@ -13,18 +13,17 @@
 //if bot gets interupted and breaks, just wait a bit and it will sort itself out eventually
 //OCR sometimes have problems with exact letter recognition in the ingame lobby chat, Capital letters are recommended for bot name
 
-        BotSteamUserName:::"Placeholder"
-        LobbyName:::"LobbyName"
-
+        LobbyName:::"Join FFACIV.com"
 
 //Can add as many msgs as you want, it will loop thru them, Do not linebreak on msg in txtfile
 //Responsemsgs will be checked once 2 sec between msg
-//DefaultSleep is milisec between msgs
+//DefaultSleep is milisec between msg loops. connected will reset timer
 
 
         msg:::"[ICON_CAPITAL] Looking for vanilla bnw no quit civ 5 games? Improve the Civ5 experience, join Democraciv discord server by going to FFACIV.com or directly to [COLOR_GREEN] Discord.gg/ASSnBjyt [ICON_CAPITAL]"
         msg:::"[COLOR_WHITE]  Democraciv is a competitve Civ 5 vanilla community with enforced rules for gameplay with punishment with bans for quitters or other rulebreakers. Elo system to climb leaderboards. Join the server and easily schedual games and find other players, rehost games on crashes and improve civ 5 experience"
         msg:::"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"
+        
         
         //add more if needed in same format as above
         

@@ -5,6 +5,7 @@ C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK sc
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\click.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\Enter.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\HitBackspace.exe
+C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\MoveMouseTo.ahk
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\MoveMouseTo.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\SendText.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\tessdata\eng.traineddata

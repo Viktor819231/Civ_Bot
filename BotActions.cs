@@ -70,18 +70,19 @@ namespace Gamebot
         {
             int modifier = Program.settings.Botspeed;
             Thread.Sleep(x / modifier);
+
             if (Program.pausebot)
             {
                 System.Console.WriteLine("bot is paused");
                 while (Program.pausebot)
                 {
-
                     Thread.Sleep(3000);
                 }
                 System.Console.WriteLine("bot is unpaused");
             }
             while (!Program.IsCivGameRunning())
             {
+                System.Console.WriteLine("cant detect game running");
                 Thread.Sleep(5000);
                 if (Program.IsCivGameRunning())
                 {
@@ -92,20 +93,18 @@ namespace Gamebot
             }
             if (!BotLocaliztation.IsCivActive())
             {
-                System.Console.WriteLine("Civ not in focus, sleeping til game is in focus");
+                System.Console.WriteLine("Civ not in focus, will pull civ in focus in 5 sec");
+                Thread.Sleep(3000);
             }
             while (!BotLocaliztation.IsCivActive())
             {
-                CivBot.Sleep(2000);
+                Thread.Sleep(3000);
                 while (!Program.IsCivGameRunning())
                 {
-                    if (Program.IsCivGameRunning())
-                    {
-
                         System.Console.WriteLine("Game cant be detected. will try start game");
                         Program.startCivdx9();
                         Thread.Sleep(5000);
-                    }
+
                     if (Program.pausebot)
                     {
                         System.Console.WriteLine("bot is paused");
@@ -119,6 +118,8 @@ namespace Gamebot
 
                     break;
                 }
+                Program.SetForegroundWindow(Program.CivWindowHandle);
+
             }
 
 
@@ -132,7 +133,7 @@ namespace Gamebot
                 Sleep(50);
                 string scriptpath = GetScriptFolderPath("Backtrack.exe");
                 var process = Process.Start(scriptpath);
-                Sleep(300);
+                Sleep(400);
 
             }
             catch (Exception ex)
@@ -156,7 +157,7 @@ namespace Gamebot
             Sleep(50);
             string scriptpath = GetScriptFolderPath("Enter.exe");
             Process.Start(scriptpath);
-            Sleep(200);
+            Sleep(300);
         }
         public static void Inputtext(string txt)
         {
@@ -180,7 +181,7 @@ namespace Gamebot
         {
             int headerOffset = ImgToText.getheaderheight();
             int x = button.x_left;
-            int y = button.y_top + headerOffset;
+            int y = button.y_top;
             string scriptpath = GetScriptFolderPath("MoveMouseTo.exe");
             string args = $"{x} {y}";
             Process.Start(scriptpath, args);
@@ -210,7 +211,7 @@ namespace Gamebot
                 Sleep(50);
                 string scriptpath = GetScriptFolderPath("click.exe");
                 var process = Process.Start(scriptpath);
-                Sleep(150);
+                Sleep(400);
                 MoveMouseTo(CivButton.outoftheway);
             }
             catch (Exception ex)
@@ -220,9 +221,10 @@ namespace Gamebot
         }
         public static void HitEscapeKey()
         {
+            Sleep(50);
             string scriptpath = GetScriptFolderPath("Backtrack.exe");
             Process.Start(scriptpath);
-            Sleep(100);
+            Sleep(400);
         }
 
         public static void MoveAndClick(CivButton button)
@@ -231,7 +233,7 @@ namespace Gamebot
             {
                 Sleep(50);
                 MoveMouseTo(button);
-                Sleep(150);
+                Sleep(300);
                 Click();
                 Sleep(300);
             }
