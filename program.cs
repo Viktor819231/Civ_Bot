@@ -25,10 +25,7 @@ namespace Gamebot
         static void Main(string[] args)
         {
             SetProcessDPIAware();
-            IsCivGameRunning();
-            CivBot.indirectclicktest(CivButton.MenuMultiplayer);
-            //BotFrontendLauncher.StartFrontend();
-            //Front end just display pictures OCR and will call Initilizebot
+            BotFrontendLauncher.StartFrontend();
         }
 
         public static void Initilizebot(CancellationToken cancellationToken = default)
