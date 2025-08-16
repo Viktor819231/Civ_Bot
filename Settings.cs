@@ -17,8 +17,7 @@ namespace Gamebot
         public int ScanChatEvery;
         public int Botspeed;
         public bool AlwaysConfirmLocationBeforeInput;
-
-
+        public int TimewaitafterLaunchgame;
 
         public static string filepath_settings = SettingsPath();
         public Settings()
@@ -31,6 +30,10 @@ namespace Gamebot
                 if (name == "path")
                 {
                     Civfilepath = param;
+                }
+                if (name == "WaittimeafterLaunch")
+                {
+                    TimewaitafterLaunchgame = int.Parse(param);
                 }
                 if (name == "msg")
                 {

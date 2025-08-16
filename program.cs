@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using NavigationAndLocations;
 using OCR;
 using System.Net;
+using System.Transactions;
 
 
 namespace Gamebot
@@ -42,7 +43,8 @@ namespace Gamebot
             }
             SetForegroundWindow(CivWindowHandle);
             CivBot.Sleep(50);
-            while(!BotLocaliztation.ConfirmLocation(ScreenLocation.Menu_Main)){
+            while (!BotLocaliztation.ConfirmLocation(ScreenLocation.Menu_Main))
+            {
                 SetForegroundWindow(CivWindowHandle);
                 CivBot.HitEscapeKey();
             }
@@ -172,7 +174,7 @@ namespace Gamebot
                     }
                 }
                 CivWindowHandle = IntPtr.Zero;
-                Console.WriteLine("CivilizationV process not found");
+                Console.WriteLine("CivilizationV process not found among processes");
                 return false;
             }
             catch (Exception ex)
@@ -224,46 +226,48 @@ namespace Gamebot
         }
         public static void WaitForGameToCompleteLaunch()
         {
-            System.Console.WriteLine("Waiting for 60 sec for game to launch");
-            for (int i = 0; i < 6; i++)
+            int timetowait = settings.TimewaitafterLaunchgame;
+            System.Console.WriteLine("Waiting up to " + timetowait / 1000 + "sec for game to launch");
+            for (int i = 0; i < timetowait / 10000; i++)
             {
-                int tracker = i * 10;
-                System.Console.WriteLine(60 - tracker + "...");
-                Thread.Sleep(10000);
-            }
-            bool isCivUp = false;
-            while (!isCivUp)
-            {
-
+                int tracker = i * 30;
+                System.Console.WriteLine(timetowait / 1000 - tracker + "...");
+                Thread.Sleep(30000);
                 if (IsCivGameRunning())
                 {
+
                     try
                     {
                         SetForegroundWindow(CivWindowHandle);
-                        Thread.Sleep(2000);
-                        CivBot.HitEscapeKey();
-                        CivBot.HitEscapeKey();
-                        isCivUp = true;
-                        System.Console.WriteLine("Game sucessfully launched, waiting for main menu");
                         Thread.Sleep(5000);
+                        CivBot.MoveMouseTo(CivButton.outoftheway);
+                        CivBot.SimpleClick();
+                        if (BotLocaliztation.ConfirmLocation(ScreenLocation.Menu_Main,geterrorlocal:true))
+                        {
+                            System.Console.WriteLine("Game sucessfully launched");
+                            Thread.Sleep(5000);
+                            break;
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Continuing to wait for main menu to load");
+                        }
                     }
                     catch
                     {
-                        System.Console.WriteLine("Cant pull Civ to the forground");
-                        System.Console.WriteLine("Waiting 20seconds to try again");
-                        Thread.Sleep(20000);
+                        return;
                     }
 
                 }
-                else
-                {
-                    System.Console.WriteLine("Cant detect Civ 5, waiting another 20 sec for civ to launch");
-                }
-                Thread.Sleep(20000);
+
+
             }
-
-
         }
+
+
+
+
+
 
         public static void TestOCR()
         {

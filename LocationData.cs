@@ -97,13 +97,15 @@ namespace NavigationAndLocations
         public static ScreenLocation Location_error = new ScreenLocation(0, 0, NullLobby, CivButton.Backtrack,
                new List<CivButton>
             {
-                CivButton.Backtrack
+                CivButton.Backtrack,
+                CivButton.outoftheway
             }
         );
         public static ScreenLocation Menu_Main = new ScreenLocation(0, 0, NullLobby, CivButton.Backtrack,
                 new List<CivButton>
             {
                CivButton.Backtrack,
+               CivButton.outoftheway,
                CivButton.MenuMultiplayer,
                CivButton.Exitgame
             }
@@ -113,6 +115,7 @@ namespace NavigationAndLocations
                 new List<CivButton>
             {
                CivButton.Backtrack,
+               CivButton.outoftheway,
                CivButton.Confirmexitgame
             }
         );
@@ -120,21 +123,24 @@ namespace NavigationAndLocations
                 new List<CivButton>
             {
                 CivButton.Backtrack,
-                CivButton.MenuStandard
+                CivButton.MenuStandard,
+                CivButton.outoftheway
             }
         );
         public static ScreenLocation Menu_InternetOrLocal = new ScreenLocation(0, 0, Menu_HotOrStandard, CivButton.MenuStandard,
                 new List<CivButton>
             {
                 CivButton.Backtrack,
-                CivButton.MenuInternet
+                CivButton.MenuInternet,
+                CivButton.outoftheway
             }
         );
         public static ScreenLocation InternetLobbies = new ScreenLocation(0, 0, Menu_InternetOrLocal, CivButton.MenuInternet,
                 new List<CivButton>
             {
                 CivButton.Backtrack,
-                CivButton.HostLobby
+                CivButton.HostLobby,
+                CivButton.outoftheway
             }
         );
         public static ScreenLocation SetupMulti = new ScreenLocation(0, 0, InternetLobbies, CivButton.HostLobby,
@@ -143,7 +149,8 @@ namespace NavigationAndLocations
                 CivButton.Backtrack
                 ,CivButton.LobbyNameInputField,
                 CivButton.Loadgame,
-                CivButton.HostLobby
+                CivButton.HostLobby,
+                CivButton.outoftheway
             }
         );
         public static ScreenLocation LoadGames1 = new ScreenLocation(0, 0, SetupMulti, CivButton.Loadgame,
@@ -151,7 +158,8 @@ namespace NavigationAndLocations
             {
                CivButton.Backtrack,
                CivButton.GameConfigfile,
-               CivButton.Loadgame_hostgame
+               CivButton.Loadgame_hostgame,
+               CivButton.outoftheway
             }
         );
         public static ScreenLocation LoadGames2 = new ScreenLocation(0, 0, LoadGames1, CivButton.GameConfigfile,
@@ -159,7 +167,8 @@ namespace NavigationAndLocations
             {
                CivButton.Backtrack,
                CivButton.GameConfigfile,
-               CivButton.Loadgame_hostgame
+               CivButton.Loadgame_hostgame,
+               CivButton.outoftheway
             }
         );
         public static ScreenLocation StagingRoom = new ScreenLocation(0, 0, LoadGames2, CivButton.Loadgame_hostgame,
@@ -171,6 +180,7 @@ namespace NavigationAndLocations
                 CivButton.DifficultyBox,
                 CivButton.DifficultyEmperor,
                 CivButton.Chatinput,
+                CivButton.outoftheway
             }
         );
 

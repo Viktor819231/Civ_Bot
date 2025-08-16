@@ -24,15 +24,28 @@ namespace Gamebot
             return title.Contains("Civilization V") || title.Contains("Sid Meier");
         }
 
-        public static bool ConfirmLocation(ScreenLocation location)
+        public static bool ConfirmLocation(ScreenLocation location, bool geterrorlocal = false)
         {
-            if (ScreenLocation.IsEqual(location, GetCurrentScreen()))
+            if (!geterrorlocal)
             {
-                return true;
+                if (ScreenLocation.IsEqual(location, GetCurrentScreen()))
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            else
+            {
+                if (ScreenLocation.IsEqual(location, GetCurrentScreen(keepCheckingTilFind: false)))
+                {
+                    return true;
+                }
+                return false;
+            }
+
+
         }
-        public static ScreenLocation GetCurrentScreen()
+        public static ScreenLocation GetCurrentScreen(bool keepCheckingTilFind = true)
         {
             try
             {
@@ -53,9 +66,14 @@ namespace Gamebot
                     }
                     catch
                     {
-                        System.Console.WriteLine("Cant identify current screen");
-                        CivBot.Sleep(5000);
-                        return GetCurrentScreen();
+
+                        if (keepCheckingTilFind)
+                        {
+                            System.Console.WriteLine("Cant identify current screen");
+                            CivBot.Sleep(5000);
+                            return GetCurrentScreen();
+                        }
+                        return ScreenLocation.Location_error;
 
                     }
 

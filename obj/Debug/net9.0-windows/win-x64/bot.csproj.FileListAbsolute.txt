@@ -10,11 +10,8 @@ C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\AHK scripts\Back
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\AHK scripts\click.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\AHK scripts\Enter.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\AHK scripts\HitBackspace.exe
-C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\AHK scripts\indirectclicktest.ahk
-C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\AHK scripts\indirectclicktest.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\AHK scripts\MoveMouseTo.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\AHK scripts\SendText.exe
-C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\AHK scripts\test.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\tessdata\eng.traineddata
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\bot.deps.json
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Debug\net9.0-windows\win-x64\bot.runtimeconfig.json
