@@ -1,5 +1,10 @@
-//some Ahk is slow for my old laptop to launch. changing this makes everything faster. inluding sleep between msgs and so on. Although it spends 99.99% time in lobby so does not really matter
+//for dx9 version
 
+        path:::"C:\Program Files (x86)\Steam\steamapps\common\Sid Meier's Civilization V\LaunchPad\LaunchPad.exe"
+
+
+//some Ahk is slow for my old laptop to launch. changing this makes everything faster. inluding sleep between msgs and so on. Although it spends 99.99% time in lobby so does not really matter
+        
         Botspeed:::"1"
         AlwaysConfirmLocationBeforeInput:::"true"
 
@@ -48,4 +53,4 @@
         RespondIf:::"HOWTO";"instructions for how to join for discord link TYPE DISCORD"
         RespondIf:::"DISCORD";"discord link etc"
 
-         //add more if needed in same format as above
+//add more if needed in same format as above

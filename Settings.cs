@@ -1,3 +1,5 @@
+using System.CodeDom;
+
 namespace Gamebot
 {
 
@@ -5,8 +7,8 @@ namespace Gamebot
     {
         public List<string> Messages = new List<string>();
         public List<(string, string)> ConditionalAndResponse = new List<(string, string)>();
-        public string LobbyName = "LobbyNameNotSet";
-        public string Botname = "BotNameNotSet";
+        public string LobbyName;
+        public string Civfilepath;
         public bool OnlyAdvertiseOnConnected;
         public bool AdverTiseOnConnected;
         public int timeWaitAfterConnected;
@@ -16,7 +18,7 @@ namespace Gamebot
         public int Botspeed;
         public bool AlwaysConfirmLocationBeforeInput;
 
-    
+
 
         public static string filepath_settings = SettingsPath();
         public Settings()
@@ -26,6 +28,10 @@ namespace Gamebot
             for (int i = 0; i < settings_rows.Length; i++)
             {
                 (string name, string param) = ParseIntoNameAndParameter(settings_rows[i]);
+                if (name == "path")
+                {
+                    Civfilepath = param;
+                }
                 if (name == "msg")
                 {
                     Messages.Add(param);
@@ -34,13 +40,9 @@ namespace Gamebot
                 {
                     LobbyName = param;
                 }
-                else if (name == "BotSteamUserName")
+                else if (name == "RespondIf")
                 {
-                    Botname = param;
-                }
-                else if (name == "RespondIf" && param.Contains(";"))
-                {
-                    ConditionalAndResponse.Add(ConditionalAndResponse_Parse(param)); 
+                    ConditionalAndResponse.Add(ConditionalAndResponse_Parse(param));
                 }
                 else if (name == "DefaultSleep")
                 {
@@ -70,12 +72,12 @@ namespace Gamebot
                 }
                 else if (name == "AlwaysConfirmLocationBeforeInput")
                 {
-                   if (param.Contains("true")) { AlwaysConfirmLocationBeforeInput = true; } else { AlwaysConfirmLocationBeforeInput = false; }
+                    if (param.Contains("true")) { AlwaysConfirmLocationBeforeInput = true; } else { AlwaysConfirmLocationBeforeInput = false; }
                 }
             }
-        
+
         }
-     
+
         public static (string settingname, string param) ParseIntoNameAndParameter(string line)
         {
             if (line.Contains(":::"))
@@ -83,9 +85,48 @@ namespace Gamebot
                 int IndexOfBreaker = line.IndexOf(":::");
                 string settingsname = line.Substring(0, IndexOfBreaker);
                 string setting_param = line.Substring(IndexOfBreaker + 3).Trim('"');
-                return (settingsname.Trim(), setting_param.Trim()); 
+                return (settingsname.Trim(), setting_param.Trim());
             }
             return ("emptyline", "emptyline");
+
+        }
+
+        public void Validatesettings()
+        {
+            var errors = new List<string>();
+            if (string.IsNullOrWhiteSpace(LobbyName))
+            {
+                errors.Add("LobbyName not set in settings txt");
+            }
+            if (string.IsNullOrWhiteSpace(Civfilepath))
+            {
+                errors.Add("Filepath to civ launcher not set");
+            }
+            if (Botspeed <= 0)
+            {
+                errors.Add("Botspeed must be greater than 0.");
+            }
+
+            if (ScanChatEvery <= 0)
+            {
+                errors.Add("ScanChatEvery must be greater than 0.");
+            }
+
+            if (Messages == null || Messages.Count == 0)
+            {
+                errors.Add("Advertising messages loaded from settings.txt");
+            }
+            if (errors.Count > 0)
+            {
+                Console.WriteLine("Settings validation failed:");
+                foreach (var error in errors)
+                    Console.WriteLine(" - " + error);
+                throw new Exception("Settings validation failed. See errors above.");
+            }
+            else
+            {
+                Console.WriteLine("Settings successfully loaded from settings.txt.");
+            }
 
         }
         public static string SettingsPath()
@@ -93,11 +134,11 @@ namespace Gamebot
 
             if (File.Exists("settings.txt"))
                 return "settings.txt";
-                
+
             string appDirPath = Path.Combine(AppContext.BaseDirectory, "settings.txt");
             if (File.Exists(appDirPath))
                 return appDirPath;
-                
+
             string projectPath = Path.Combine("..", "..", "..", "settings.txt");
             if (File.Exists(projectPath))
                 return projectPath;

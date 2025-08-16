@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vikto\\OneDrive\\Desktop\\bot\\bot\\bot.csproj": {}
+    "C:\\Users\\Vikto\\Desktop\\Civ_Bot\\bot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vikto\\OneDrive\\Desktop\\bot\\bot\\bot.csproj": {
+    "C:\\Users\\Vikto\\Desktop\\Civ_Bot\\bot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vikto\\OneDrive\\Desktop\\bot\\bot\\bot.csproj",
+        "projectUniqueName": "C:\\Users\\Vikto\\Desktop\\Civ_Bot\\bot.csproj",
         "projectName": "bot",
-        "projectPath": "C:\\Users\\Vikto\\OneDrive\\Desktop\\bot\\bot\\bot.csproj",
+        "projectPath": "C:\\Users\\Vikto\\Desktop\\Civ_Bot\\bot.csproj",
         "packagesPath": "C:\\Users\\Vikto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vikto\\OneDrive\\Desktop\\bot\\bot\\obj\\",
+        "outputPath": "C:\\Users\\Vikto\\Desktop\\Civ_Bot\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vikto\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -67,15 +67,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[9.0.7, 9.0.7]"
+              "version": "[9.0.8, 9.0.8]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[9.0.7, 9.0.7]"
+              "version": "[9.0.8, 9.0.8]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[9.0.7, 9.0.7]"
+              "version": "[9.0.8, 9.0.8]"
             }
           ],
           "frameworkReferences": {
@@ -86,7 +86,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

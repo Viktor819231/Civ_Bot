@@ -3,14 +3,18 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using NavigationAndLocations;
+using OCR;
 
 
 
 namespace Gamebot
 {
 
+
     class CivBotNavigation
     {
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
         public static ScreenLocation goal;
         public static List<CivButton> Path = new List<CivButton>();
 
@@ -49,28 +53,87 @@ namespace Gamebot
             {
                 return true;
             }
+            if (CivButton.IsEqual(button, CivButton.Confirmexitgame))
+            {
+                System.Console.WriteLine("its true");
+                return true;
+            }
             return false;
         }
+
+
 
     }
     public static class CivBot
     {
-
-
         public static void Sleep(int x)
         {
             int modifier = Program.settings.Botspeed;
             Thread.Sleep(x / modifier);
-            BotLocaliztation.EnsureCivActive();
+            if (Program.pausebot)
+            {
+                System.Console.WriteLine("bot is paused");
+                while (Program.pausebot)
+                {
+
+                    Thread.Sleep(3000);
+                }
+                System.Console.WriteLine("bot is unpaused");
+            }
+            while (!Program.IsCivGameRunning())
+            {
+                Thread.Sleep(5000);
+                if (Program.IsCivGameRunning())
+                {
+                    break;
+                }
+                System.Console.WriteLine("Game cant be detected. will try start game");
+                Program.startCivdx9();
+            }
+            if (!BotLocaliztation.IsCivActive())
+            {
+                System.Console.WriteLine("Civ not in focus, sleeping til game is in focus");
+            }
+            while (!BotLocaliztation.IsCivActive())
+            {
+                CivBot.Sleep(2000);
+                while (!Program.IsCivGameRunning())
+                {
+                    if (Program.IsCivGameRunning())
+                    {
+
+                        System.Console.WriteLine("Game cant be detected. will try start game");
+                        Program.startCivdx9();
+                        Thread.Sleep(5000);
+                    }
+                    if (Program.pausebot)
+                    {
+                        System.Console.WriteLine("bot is paused");
+                        while (Program.pausebot)
+                        {
+
+                            Thread.Sleep(3000);
+                        }
+                        System.Console.WriteLine("bot is unpaused");
+                    }
+
+                    break;
+                }
+            }
+
+
+
+
         }
         public static void backtrack()
         {
             try
             {
+                Sleep(50);
                 string scriptpath = GetScriptFolderPath("Backtrack.exe");
                 var process = Process.Start(scriptpath);
                 Sleep(300);
-                Console.WriteLine($"Executed: {scriptpath}");
+
             }
             catch (Exception ex)
             {
@@ -79,6 +142,7 @@ namespace Gamebot
         }
         public static void EraseExistingText(int CharactersToErase = 15)
         {
+            System.Console.WriteLine("Erasingtext");
             string scriptpath = GetScriptFolderPath("HitBackspace.exe");
             for (int i = 0; i < CharactersToErase; i++)
             {
@@ -89,12 +153,14 @@ namespace Gamebot
         }
         public static void Enter()
         {
+            Sleep(50);
             string scriptpath = GetScriptFolderPath("Enter.exe");
             Process.Start(scriptpath);
             Sleep(200);
         }
         public static void Inputtext(string txt)
         {
+            Sleep(50);
             string scriptpath = GetScriptFolderPath("SendText.exe");
             string arg = $"\"{txt}\"";
             Process.Start(scriptpath, arg);
@@ -103,31 +169,49 @@ namespace Gamebot
 
         public static void QuickInputtext(string txt)
         {
+            Sleep(50);
             string scriptpath = GetScriptFolderPath("SendText.exe");
             string arg = $"\"{txt}\"";
             Process.Start(scriptpath, arg);
             Sleep(100);
         }
 
-        public static void MoveMouseTo(LocationInGame cords)
+        public static void MoveMouseTo(CivButton button)
         {
-            int x = cords.x_left;
-            int y = cords.y_top;
+            int headerOffset = ImgToText.getheaderheight();
+            int x = button.x_left;
+            int y = button.y_top + headerOffset;
             string scriptpath = GetScriptFolderPath("MoveMouseTo.exe");
             string args = $"{x} {y}";
             Process.Start(scriptpath, args);
             Sleep(250);
 
         }
-        public static void Click()
+
+        public static void SimpleClick()
         {
+            //Normal click expects civ to be in focus or will sleep
             try
             {
                 string scriptpath = GetScriptFolderPath("click.exe");
                 var process = Process.Start(scriptpath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error executing click.exe: {ex.Message}");
+            }
+        }
+
+
+        public static void Click()
+        {
+            try
+            {
+                Sleep(50);
+                string scriptpath = GetScriptFolderPath("click.exe");
+                var process = Process.Start(scriptpath);
                 Sleep(150);
                 MoveMouseTo(CivButton.outoftheway);
-                Console.WriteLine($"Executed: {scriptpath}");
             }
             catch (Exception ex)
             {
@@ -145,6 +229,7 @@ namespace Gamebot
         {
             if (!Program.settings.AlwaysConfirmLocationBeforeInput)
             {
+                Sleep(50);
                 MoveMouseTo(button);
                 Sleep(150);
                 Click();
@@ -152,6 +237,7 @@ namespace Gamebot
             }
             else
             {
+
                 ConfirmLocation_ThenMoveAndClick(button);
 
 
@@ -159,9 +245,21 @@ namespace Gamebot
 
         }
 
+        public static void indirectclicktest(CivButton button)
+        {
+            int headerOffset = ImgToText.getheaderheight();
+            int x = button.x_left;
+            int y = button.y_top + headerOffset;
+            string args = $"{Program.CivWindowHandle} {x} {y}";
+            string scriptpath = GetScriptFolderPath("indirectclicktest.exe");
+            var process = Process.Start(scriptpath, args);
+
+        }
+
         public static void ConfirmLocation_ThenMoveAndClick(CivButton button)
         {
-            if (!CivBotNavigation.isButtonOnScreen(button))
+            bool isButtonOnScreen = CivBotNavigation.isButtonOnScreen(button);
+            if (!isButtonOnScreen)
             {
                 int waittimesbefore = 5;
                 for (int i = 0; i < waittimesbefore; i++)
@@ -172,15 +270,19 @@ namespace Gamebot
                         break;
                     }
                 }
-            }//Bit sphaggetti but should work to backtrack if it fails confirmation after a while
-            if (!CivBotNavigation.isButtonOnScreen(button))
-            {
-                HitEscapeKey();
-                HitEscapeKey();
+                if (!CivBotNavigation.isButtonOnScreen(button))
+                {
+                    Sleep(50);
+                    HitEscapeKey();
+                    System.Console.WriteLine("Bot is lost, going back to main screen");
+                    CivBotNavigation.NavigateTo(ScreenLocation.Menu_Main);
 
+                }
             }
-            if (CivBotNavigation.isButtonOnScreen(button))
+
+            if (isButtonOnScreen)
             {
+                Sleep(50);
                 MoveMouseTo(button);
                 Sleep(150);
                 Click();
@@ -190,29 +292,21 @@ namespace Gamebot
 
         public static string GetScriptFolderPath(string scriptName)
         {
-            // Try current directory first (for exe distribution)
+
             string localPath = Path.Combine(AppContext.BaseDirectory, "AHK scripts", scriptName);
-            if (File.Exists(localPath)) 
+            if (File.Exists(localPath))
             {
-                Console.WriteLine($"Found script at: {localPath}");
                 return localPath;
             }
 
-            // Fallback to development path
+
             string devPath = Path.Combine(AppContext.BaseDirectory, @"..\..\..", "AHK scripts", scriptName);
             if (File.Exists(devPath))
             {
-                Console.WriteLine($"Found script at: {devPath}");
                 return Path.GetFullPath(devPath);
             }
-            
-            // Log error if script not found
-            Console.WriteLine($"ERROR: Script not found: {scriptName}");
-            Console.WriteLine($"Tried: {localPath}");
-            Console.WriteLine($"Tried: {Path.GetFullPath(devPath)}");
-            Console.WriteLine($"Base directory: {AppContext.BaseDirectory}");
-            
-            return localPath; // Return local path anyway (will fail but we'll see the error)
+
+            return localPath;
         }
 
     }

@@ -24,15 +24,6 @@ namespace Gamebot
             return title.Contains("Civilization V") || title.Contains("Sid Meier");
         }
 
-        public static void EnsureCivActive()
-        {
-
-                while (!IsCivActive())
-                {
-                    CivBot.Sleep(2000);
-                }
-
-        }
         public static bool ConfirmLocation(ScreenLocation location)
         {
             if (ScreenLocation.IsEqual(location, GetCurrentScreen()))
@@ -55,8 +46,19 @@ namespace Gamebot
                 }
                 catch
                 {
-                    CivBot.Sleep(5000);
-                    return GetCurrentScreen();
+                    try
+                    {
+                        return GetQuitgameconfirmation();
+
+                    }
+                    catch
+                    {
+                        System.Console.WriteLine("Cant identify current screen");
+                        CivBot.Sleep(5000);
+                        return GetCurrentScreen();
+
+                    }
+
                 }
 
             }
@@ -64,18 +66,24 @@ namespace Gamebot
         public static string GetTextAt(CivTextBox place)
         {
             return ImgToText.TextAt(place.GetRectanglePictureBox(), place.filename).TrimEnd();
-            
-        } 
+
+        }
         public static ScreenLocation GetMenuBasedLocations()
         {
             string Menutxt = GetTextAt(CivTextBox.MenuText);
             switch (Menutxt)
             {
                 case "SINGLE PLAYER":
+                    System.Console.WriteLine("Identified currentscreen Main menu");
                     return ScreenLocation.Menu_Main;
                 case "STANDARD":
+                    System.Console.WriteLine("Identified currentscreen Hot Or standard");
                     return ScreenLocation.Menu_HotOrStandard;
                 case "INTERNET":
+                    System.Console.WriteLine("Identified currentscreen Internet menu");
+                    return ScreenLocation.Menu_InternetOrLocal;
+                case "[Nl":
+                    System.Console.WriteLine("Identified currentscreen Internet menu");
                     return ScreenLocation.Menu_InternetOrLocal;
                 default:
                     throw new Exception();
@@ -88,15 +96,33 @@ namespace Gamebot
             switch (txt)
             {
                 case "INTERNET GAMES":
+                    System.Console.WriteLine("Identified currentscreen Internet Lobbies");
                     return ScreenLocation.InternetLobbies;
                 case "SETUP MULTIPLAYER GAME":
+                    System.Console.WriteLine("Identified currentscreen Lobbysetup screen");
                     return ScreenLocation.SetupMulti;
                 case "LOAD GAME":
+                    System.Console.WriteLine("Identified currentscreen Load game screen");
                     return ScreenLocation.LoadGames1;
                 case "STAGING ROOM":
                     return ScreenLocation.StagingRoom;
+                case "KEK MOD V1.4":
+                    return ScreenLocation.StagingRoom;
                 default:
-                    throw new Exception("No match on HeaderBasedLocations");
+                    throw new Exception();
+            }
+
+
+        }
+
+        public static ScreenLocation GetQuitgameconfirmation()
+        {
+            string txt = GetTextAt(CivTextBox.ConfirmQuitgame);
+            switch (txt)
+            {
+                case "Yes":
+                    return ScreenLocation.Confirmquitscreen;
+                default: throw new Exception("No match on quitgame screen");
             }
 
 
@@ -109,7 +135,7 @@ namespace Gamebot
     class Pathgetter
     {
 
-        
+
         public static List<CivButton> GetPath(ScreenLocation goal, ScreenLocation startscreen)
         {
             List<CivButton> EmptyPathingList = new List<CivButton>();
