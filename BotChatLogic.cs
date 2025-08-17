@@ -49,22 +49,25 @@ namespace Gamebot
 
             if (!OnlyOnConnect)
             {
-                int ScantimesBetwenAds = Math.Max(1, (int)Math.Floor((double)defaultsleep / 1000 / msgcount));
-
-                    CivBot.MoveAndClick(CivButton.Chatinput);
-                    for (int j = 0; j < ScantimesBetwenAds; j++)
-                    {
+                bool postmsgs = true;
+                int Scantimes = defaultsleep / Howlongbetweenscans;
+                CivBot.MoveAndClick(CivButton.Chatinput);
+                for (int j = 0; j < Scantimes; j++)
+                {
                     if (ScanChat_AndRespond())
                     {
+                        postmsgs = false;
                         break;
-                        }
-                    
-                        CivBot.Sleep(Howlongbetweenscans);
-                        Debug.Write(j);
                     }
-                    CivBot.Enter();
-                    justloopthrubasicadds(sleepbetweenmsgs: 1500);
-                    CivBot.Enter();
+                    CivBot.Sleep(Howlongbetweenscans);
+                }
+                if (postmsgs)
+                {
+                CivBot.Enter();
+                justloopthrubasicadds(sleepbetweenmsgs: 1500);
+                CivBot.Enter();
+                }
+                System.Console.WriteLine("Will Post again in: " + defaultsleep/1000 + "seconds");
 
             }
             else
@@ -114,9 +117,10 @@ namespace Gamebot
 
                     }
                 }
-                else if (Program.settings.AdverTiseOnConnected && current_msgs.Last().msg == "Connected")
+
+                if (Program.settings.AdverTiseOnConnected && current_msgs.Last().msg == "Connected")
                 {
-                    System.Console.WriteLine("Connected Recognized, will post in:" + Program.settings.timeWaitAfterConnected/1000 + " seconds");
+                    System.Console.WriteLine("Connected Recognized, will post in:" + Program.settings.timeWaitAfterConnected / 1000 + " seconds");
                     CivBot.Sleep(Program.settings.timeWaitAfterConnected);
 
                     justloopthrubasicadds(sleepbetweenmsgs: 1500);
@@ -136,19 +140,19 @@ namespace Gamebot
 
         public static (bool containcheck, string response) GetResponseIfConditional(string usermsg)
         {
-            
+
             for (int i = 0; i < Program.settings.ConditionalAndResponse.Count; i++)
             {
-                
+
                 (string cond, string response) = Program.settings.ConditionalAndResponse[i];
                 if (usermsg == cond)
                 {
                     return (true, response);
                 }
-                    
-                
+
+
             }
-            
+
             return (false, "");
 
         }
@@ -157,10 +161,10 @@ namespace Gamebot
         {
             if (latest_msgs.Count == 0 || current_msgs.Count == 0)
                 return current_msgs.Count > latest_msgs.Count;
-            
+
             var latestLast = latest_msgs.Last();
             var currentLast = current_msgs.Last();
-            
+
             return !(latestLast.player == currentLast.player && latestLast.msg == currentLast.msg);
         }
 
@@ -204,7 +208,7 @@ namespace Gamebot
         {
             int indexofcolon = line.IndexOf(":");
             string player = line.Substring(0, indexofcolon).Trim();
-            string msgfromplayer = line.Substring(indexofcolon + 1).Trim(); 
+            string msgfromplayer = line.Substring(indexofcolon + 1).Trim();
             return new MsgAndUser { player = player, msg = msgfromplayer };
 
         }

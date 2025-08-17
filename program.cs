@@ -72,7 +72,7 @@ namespace Gamebot
                 }
                 if (BotLocaliztation.ConfirmLocation(ScreenLocation.StagingRoom))
                 {
-                    CivBotChatter.ScanChat_AndRespond();
+                    CivBotChatter.LoopMsgs_ScanAndRespond();
                 }
                 if (!BotLocaliztation.ConfirmLocation(ScreenLocation.StagingRoom) || Timekeeping.ShouldRehostLobby)
                 {
