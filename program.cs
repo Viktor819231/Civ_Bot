@@ -313,12 +313,13 @@ namespace Gamebot
                     }
 
                 }
-                System.Console.WriteLine("failed to launch");
-                QuitGame();
-                startCivdx9();
+
 
 
             }
+                System.Console.WriteLine("failed to launch");
+                QuitGame();
+                startCivdx9();
         }
 
 
