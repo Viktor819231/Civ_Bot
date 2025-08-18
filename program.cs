@@ -199,10 +199,16 @@ namespace Gamebot
                         {
                             CivWindowHandle = process.MainWindowHandle;
                             // Wait until the process is responding
+                            int maxwait = 0;
                             while (!process.Responding)
                             {
-                                Console.WriteLine("CivilizationV found but not responding. Waiting 10 sec before restart...");
-                                Thread.Sleep(10000);
+                                if (maxwait >= 24)
+                                {
+                                    return false;
+                                }
+                                Console.WriteLine("CivilizationV found but not responding. Waiting up" + (120-(maxwait*5))+" seconds before restart...");
+                                Thread.Sleep(5000);
+                                maxwait += 1;
                                 process.Refresh();
                                 if (process.HasExited)
                                 {
@@ -275,6 +281,13 @@ namespace Gamebot
             System.Console.WriteLine("Waiting up to " + timetowait / 1000 + "sec for game to launch");
             for (int i = 0; i < timetowait / 10000; i++)
             {
+                if (i >= (timetowait/10000)-1)
+                {
+                System.Console.WriteLine("failed to launch");
+                QuitGame();
+                startCivdx9();
+                }
+
                 int tracker = i * 10;
                 System.Console.WriteLine(timetowait / 1000 - tracker + "...");
                 Thread.Sleep(10000);
@@ -315,11 +328,8 @@ namespace Gamebot
                 }
 
 
-
             }
-                System.Console.WriteLine("failed to launch");
-                QuitGame();
-                startCivdx9();
+
         }
 
 
