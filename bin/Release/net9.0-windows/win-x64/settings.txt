@@ -13,7 +13,7 @@
 //if bot gets interupted and breaks, just wait a bit and it will sort itself out eventually
 //OCR sometimes have problems with exact letter recognition in the ingame lobby chat, Capital letters are recommended for bot name
 
-        LobbyName:::"Join FFACIV.com"
+        LobbyName:::"FFACIV.com"
 
 //Can add as many msgs as you want, it will loop thru them, Do not linebreak on msg in txtfile
 //Responsemsgs will be checked once 2 sec between msg

@@ -14,7 +14,7 @@ namespace Gamebot
         [DllImport("user32.dll")]
         private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
 
-        public static bool IsCivActive()
+        public static bool IsCivForeground()
         {
             IntPtr foregroundWindow = GetForegroundWindow();
             StringBuilder windowTitle = new StringBuilder(256);

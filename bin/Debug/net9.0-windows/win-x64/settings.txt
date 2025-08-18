@@ -7,13 +7,15 @@
         
         Botspeed:::"1"
         AlwaysConfirmLocationBeforeInput:::"true"
-        WaittimeafterLaunch:::"300000"
+        WaittimeafterLaunch:::300000
 
 //Bot only works for 1024x768 aspect ratio
 //if bot gets interupted and breaks, just wait a bit and it will sort itself out eventually
 //OCR sometimes have problems with exact letter recognition in the ingame lobby chat, Capital letters are recommended for bot name
 
-        LobbyName:::"Join FFACIV.com"
+        LobbyName:::"FFACIV.com"
+        TimeBetweenRelobby:::2
+        TimeBetweenGamerestart:::5
 
 //Can add as many msgs as you want, it will loop thru them, Do not linebreak on msg in txtfile
 //Responsemsgs will be checked once 2 sec between msg
@@ -27,12 +29,12 @@
         
         //add more if needed in same format as above
         
-        DefaultSleep:::"20000"
+        SleepBetweenMsgCycles:::20000
 
         
 // Lower time between scans means less likley to miss a msg from user. 
 
-        ScanChatEvery:::"500"
+        ScanChatEvery:::500
 
 //Connected msg can be missinturperated by OCR. it just fails reading like 5% of time. 
 

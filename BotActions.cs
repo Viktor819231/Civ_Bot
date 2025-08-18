@@ -88,24 +88,16 @@ namespace Gamebot
                 {
                     break;
                 }
-                System.Console.WriteLine("Game cant be detected. will try start game");
                 Program.startCivdx9();
             }
-            if (!BotLocaliztation.IsCivActive())
+            if (!BotLocaliztation.IsCivForeground())
             {
-                System.Console.WriteLine("Civ not in focus, will pull civ in focus in 5 sec");
-                Thread.Sleep(3000);
-            }
-            while (!BotLocaliztation.IsCivActive())
-            {
-                Thread.Sleep(3000);
-                while (!Program.IsCivGameRunning())
-                {
-                        System.Console.WriteLine("Game cant be detected. will try start game");
-                        Program.startCivdx9();
-                        Thread.Sleep(5000);
 
-                    if (Program.pausebot)
+            }
+            while (!BotLocaliztation.IsCivForeground())
+            {
+                Thread.Sleep(1000);
+                if (Program.pausebot)
                     {
                         System.Console.WriteLine("bot is paused");
                         while (Program.pausebot)
@@ -115,9 +107,18 @@ namespace Gamebot
                         }
                         System.Console.WriteLine("bot is unpaused");
                     }
+                while (!Program.IsCivGameRunning())
+                {
+                    System.Console.WriteLine("Game cant be detected. will try start game");
+                    Program.startCivdx9();
+                    Thread.Sleep(5000);
+
+                    
 
                     break;
                 }
+                System.Console.WriteLine("Civ not in focus, will pull civ in focus in 5 sec");
+                Thread.Sleep(3000);
                 Program.SetForegroundWindow(Program.CivWindowHandle);
 
             }

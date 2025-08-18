@@ -43,7 +43,7 @@ namespace Gamebot
         public static void LoopMsgs_ScanAndRespond()
         {
             int msgcount = Program.settings.Messages.Count();
-            int defaultsleep = Program.settings.SleepBetweenMsgs;
+            int defaultsleep = Program.settings.SleepBetweenMsgCycles;
             bool OnlyOnConnect = Program.settings.OnlyAdvertiseOnConnected;
             int Howlongbetweenscans = Program.settings.ScanChatEvery;
 
@@ -63,9 +63,7 @@ namespace Gamebot
                 }
                 if (postmsgs)
                 {
-                CivBot.Enter();
                 justloopthrubasicadds(sleepbetweenmsgs: 1500);
-                CivBot.Enter();
                 }
                 System.Console.WriteLine("Will Post again in: " + defaultsleep/1000 + "seconds");
 
@@ -76,9 +74,6 @@ namespace Gamebot
                 CivBot.Sleep(Howlongbetweenscans);
 
             }
-
-
-
         }
 
         public static void justloopthrubasicadds(int sleepbetweenmsgs)

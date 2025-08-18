@@ -7,6 +7,7 @@ using NavigationAndLocations;
 using OCR;
 using System.Net;
 using System.Transactions;
+using System.Net.WebSockets;
 
 
 namespace Gamebot
@@ -37,10 +38,12 @@ namespace Gamebot
             settings = new Settings();
             settings.Validatesettings();
 
+
             if (!IsCivGameRunning())
             {
                 startCivdx9();
             }
+            Timekeeping.Starttimers();
             SetForegroundWindow(CivWindowHandle);
             CivBot.Sleep(50);
             while (!BotLocaliztation.ConfirmLocation(ScreenLocation.Menu_Main))
@@ -52,8 +55,11 @@ namespace Gamebot
             TestOCR();
             TestAutoHokeyScripts();
 
+            settings.Printsettings();
+            CivBot.Sleep(1000);
             System.Console.WriteLine("Initilization complete and tests passed. Starting Bot");
             Console.WriteLine("Setting up lobby...");
+
             SetupNewLobby();
             RunMainBotLoop();
         }
@@ -66,13 +72,13 @@ namespace Gamebot
             System.Console.WriteLine("Starting Main bot loop");
             while (true)
             {
-                if (Timekeeping.ShouldRestartGame)
-                {
-                    RestartGameIfNeccesary();
-                }
+                System.Console.WriteLine("Restarting game in: " + Timekeeping.GetTimeToNextRestart() + " Minutes");
+                RestartGameIfNeccesary();
                 if (BotLocaliztation.ConfirmLocation(ScreenLocation.StagingRoom))
                 {
+                    System.Console.WriteLine(Timekeeping.GetTimeToNextRelobby() + "Minutes to next relobby");
                     CivBotChatter.LoopMsgs_ScanAndRespond();
+
                 }
                 if (!BotLocaliztation.ConfirmLocation(ScreenLocation.StagingRoom) || Timekeeping.ShouldRehostLobby)
                 {
@@ -91,6 +97,8 @@ namespace Gamebot
             {
                 while (true)
                 {
+
+                    Timekeeping.ResetLobbyTimer();
                     CivBot.Sleep(3000);
                     if (!(BotLocaliztation.ConfirmLocation(location: ScreenLocation.SetupMulti)))
                     {
@@ -129,9 +137,10 @@ namespace Gamebot
                     if (!(BotLocaliztation.ConfirmLocation(location: ScreenLocation.StagingRoom))) { break; }
                     ChooseLeaderInLobbyEtc();
                     //To get the text in right place we print some msgs to make bottom row be the one that shows on connect
-                    CivBotChatter.justloopthrubasicadds(sleepbetweenmsgs: 3000);
+                    CivBotChatter.justloopthrubasicadds(sleepbetweenmsgs: 1000);
                     if ((BotLocaliztation.ConfirmLocation(location: ScreenLocation.StagingRoom)))
                     {
+
                         setupcomplete = true;
                         System.Console.WriteLine("Lobby SetupComplete, can now start advertising");
                         break;
@@ -157,16 +166,26 @@ namespace Gamebot
         }
 
 
-        public static void quitgame()
+        public static void QuitGame()
         {
-            System.Console.WriteLine("exiting the game manually");
-            CivBotNavigation.NavigateTo(ScreenLocation.Menu_Main);
-            CivBot.MoveAndClick(CivButton.Exitgame);
-            CivBot.MoveMouseTo(CivButton.Confirmexitgame);
-            CivBot.SimpleClick();
-
+            try
+            {
+                var processes = Process.GetProcessesByName("CivilizationV");
+                foreach (var process in processes)
+                {
+                    if (!process.HasExited)
+                    {
+                        Console.WriteLine("Force killing CivilizationV process...");
+                        process.Kill();
+                        process.WaitForExit();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error force quitting CivilizationV: {ex.Message}");
+            }
         }
-
         public static bool IsCivGameRunning()
         {
             try
@@ -182,9 +201,8 @@ namespace Gamebot
                             // Wait until the process is responding
                             while (!process.Responding)
                             {
-                                Console.WriteLine("CivilizationV found but not responding. Waiting...");
-                                Thread.Sleep(2000);
-                                // Refresh process info in case it exited or started responding
+                                Console.WriteLine("CivilizationV found but not responding. Waiting 10 sec before restart...");
+                                Thread.Sleep(10000);
                                 process.Refresh();
                                 if (process.HasExited)
                                 {
@@ -199,7 +217,6 @@ namespace Gamebot
                     }
                 }
                 CivWindowHandle = IntPtr.Zero;
-                Console.WriteLine("CivilizationV process not found among processes");
             }
             catch (Exception ex)
             {
@@ -214,6 +231,8 @@ namespace Gamebot
             System.Console.WriteLine("Starting Civ");
             try
             {
+                Timekeeping.ResetGameRestartTimer();
+                Timekeeping.ResetLobbyTimer();
                 if (!File.Exists(settings.Civfilepath))
                 {
                     Console.WriteLine($"Error: File not found at {settings.Civfilepath}");
@@ -232,8 +251,9 @@ namespace Gamebot
                 {
                     Process.Start(startInfo);
                     Console.WriteLine("Game launch command sent");
-
                     WaitForGameToCompleteLaunch();
+                    Timekeeping.ResetGameRestartTimer();
+                    Timekeeping.ResetLobbyTimer();
                     return;
                 }
                 catch (Exception ex)
@@ -251,21 +271,20 @@ namespace Gamebot
         }
         public static void WaitForGameToCompleteLaunch()
         {
-            int timetowait = settings.TimewaitafterLaunchgame;
+            int timetowait = settings.WaittimeafterLaunch;
             System.Console.WriteLine("Waiting up to " + timetowait / 1000 + "sec for game to launch");
             for (int i = 0; i < timetowait / 10000; i++)
             {
-                int tracker = i * 30;
+                int tracker = i * 10;
                 System.Console.WriteLine(timetowait / 1000 - tracker + "...");
-                Thread.Sleep(30000);
+                Thread.Sleep(10000);
                 if (IsCivGameRunning())
                 {
 
                     try
                     {
                         SetForegroundWindow(CivWindowHandle);
-                        CivBot.MoveMouseTo(CivButton.outoftheway);
-                        CivBot.SimpleClick();
+
                         if (BotLocaliztation.ConfirmLocation(ScreenLocation.Menu_Main, geterrorlocal: true))
                         {
                             System.Console.WriteLine("Game sucessfully launched");
@@ -274,9 +293,18 @@ namespace Gamebot
                         }
                         else
                         {
+
                             System.Console.WriteLine("Continuing to wait for main menu to load");
+                            if (i % 3 == 1)
+                            {
+                                CivBot.MoveMouseTo(CivButton.outoftheway);
+                                CivBot.SimpleClick();
+                                System.Console.WriteLine("Clicked screen, waiting 30 sec for main menu to load");
+                            }
+
+
                         }
-                            System.Console.WriteLine("Clicked screen, waiting 30 sec for main menu to load");
+
 
                     }
                     catch
@@ -285,13 +313,13 @@ namespace Gamebot
                     }
 
                 }
+                System.Console.WriteLine("failed to launch");
+                QuitGame();
+                startCivdx9();
 
 
             }
         }
-
-
-
 
 
 
@@ -335,6 +363,7 @@ namespace Gamebot
         {
             if (Timekeeping.ShouldRestartGame)
             {
+                System.Console.WriteLine("Game been active more then: " + settings.TimeBetweenGamerestart + " Restarting Game");
                 Restartgame();
             }
 
@@ -344,8 +373,8 @@ namespace Gamebot
             System.Console.WriteLine("Restarting The Game");
             while (IsCivGameRunning())
             {
-                quitgame();
-                Thread.Sleep(2000);
+                Program.QuitGame();
+                Thread.Sleep(10000);
             }
             startCivdx9();
             Timekeeping.ShouldRestartGame = false;

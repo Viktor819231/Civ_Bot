@@ -5,19 +5,27 @@ namespace Gamebot
 
     public class Settings
     {
-        public List<string> Messages = new List<string>();
+
         public List<(string, string)> ConditionalAndResponse = new List<(string, string)>();
-        public string LobbyName;
         public string Civfilepath;
-        public bool OnlyAdvertiseOnConnected;
-        public bool AdverTiseOnConnected;
-        public int timeWaitAfterConnected;
-        public int SleepBetweenMsgs;
-        public int timebetweenscans;
-        public int ScanChatEvery;
         public int Botspeed;
         public bool AlwaysConfirmLocationBeforeInput;
-        public int TimewaitafterLaunchgame;
+        public int WaittimeafterLaunch;
+        public string LobbyName;
+        public int TimeBetweenRelobby;
+        public int TimeBetweenGamerestart;
+        public List<string> Messages = new List<string>();
+        public int SleepBetweenMsgCycles;
+        public int ScanChatEvery;
+        public bool AdverTiseOnConnected;
+        public bool OnlyAdvertiseOnConnected;
+        public int timeWaitAfterConnected;
+
+
+
+
+
+
 
         public static string filepath_settings = SettingsPath();
         public Settings()
@@ -31,52 +39,70 @@ namespace Gamebot
                 {
                     Civfilepath = param;
                 }
-                if (name == "WaittimeafterLaunch")
+                else if (name == "Botspeed")
                 {
-                    TimewaitafterLaunchgame = int.Parse(param);
+                    Botspeed = int.Parse(param);
                 }
-                if (name == "msg")
+                else if (name == "AlwaysConfirmLocationBeforeInput")
                 {
-                    Messages.Add(param);
+                    if (param.Contains("true")) { AlwaysConfirmLocationBeforeInput = true; } else { AlwaysConfirmLocationBeforeInput = false; }
+                }
+                else if (name == "WaittimeafterLaunch")
+                {
+                    WaittimeafterLaunch = int.Parse(param);
                 }
                 else if (name == "LobbyName")
                 {
                     LobbyName = param;
                 }
-                else if (name == "RespondIf")
+                else if (name == "TimeBetweenRelobby")
                 {
-                    ConditionalAndResponse.Add(ConditionalAndResponse_Parse(param));
-                }
-                else if (name == "DefaultSleep")
-                {
-                    SleepBetweenMsgs = int.Parse(param);
-                }
-                else if (name == "WaitAfterConnected")
-                {
-                    timeWaitAfterConnected = int.Parse(param);
-                }
-                else if (name == "OnlyAdvertiseOnConnected")
-                {
-                    if (param.Contains("true")) { OnlyAdvertiseOnConnected = true; } else { OnlyAdvertiseOnConnected = false; }
+                    TimeBetweenRelobby = int.Parse(param);
 
                 }
-                else if (name == "AdverTiseOnConnected")
+                else if (name == "TimeBetweenGamerestart")
                 {
-                    if (param.Contains("true")) { AdverTiseOnConnected = true; } else { AdverTiseOnConnected = false; }
+                    TimeBetweenGamerestart = int.Parse(param);
                 }
-                else if (name == "Botspeed")
+                else if (name == "msg")
                 {
-                    Botspeed = int.Parse(param);
+                    Messages.Add(param);
+                }
+                else if (name == "SleepBetweenMsgCycles")
+                {
+                    SleepBetweenMsgCycles = int.Parse(param);
                 }
                 else if (name == "ScanChatEvery")
                 {
                     ScanChatEvery = int.Parse(param);
 
                 }
-                else if (name == "AlwaysConfirmLocationBeforeInput")
+                else if (name == "AdverTiseOnConnected")
                 {
-                    if (param.Contains("true")) { AlwaysConfirmLocationBeforeInput = true; } else { AlwaysConfirmLocationBeforeInput = false; }
+                    if (param.Contains("true")) { AdverTiseOnConnected = true; } else { AdverTiseOnConnected = false; }
                 }
+                else if (name == "OnlyAdvertiseOnConnected")
+                {
+                    if (param.Contains("true")) { OnlyAdvertiseOnConnected = true; } else { OnlyAdvertiseOnConnected = false; }
+
+                }
+                else if (name == "WaitAfterConnected")
+                {
+                    timeWaitAfterConnected = int.Parse(param);
+                }
+
+
+                else if (name == "RespondIf")
+                {
+                    ConditionalAndResponse.Add(ConditionalAndResponse_Parse(param));
+                }
+
+
+
+
+
+
+
             }
 
         }
@@ -123,13 +149,37 @@ namespace Gamebot
             {
                 Console.WriteLine("Settings validation failed:");
                 foreach (var error in errors)
-                    Console.WriteLine(" - " + error);
+                Console.WriteLine(" - " + error);
                 throw new Exception("Settings validation failed. See errors above.");
             }
             else
             {
                 Console.WriteLine("Settings successfully loaded from settings.txt.");
             }
+
+        }
+
+        public void Printsettings()
+        {
+            System.Console.WriteLine(Civfilepath + " Filepath");
+            System.Console.WriteLine(Botspeed + " Botspeed");
+            System.Console.WriteLine(AlwaysConfirmLocationBeforeInput + " AlwaysConfirmLocationBeforeInput");
+            System.Console.WriteLine(WaittimeafterLaunch + " WaittimeafterLaunch");
+            System.Console.WriteLine(LobbyName + " lobbyname");
+            System.Console.WriteLine(TimeBetweenRelobby + " TimeBetweenRelobby");
+            System.Console.WriteLine(TimeBetweenGamerestart + " TimeBetweenGamerestart");
+            System.Console.WriteLine(OnlyAdvertiseOnConnected + " Only on connect bool");
+            System.Console.WriteLine(SleepBetweenMsgCycles + " SleepBetweenMsgCycles");
+            System.Console.WriteLine(ScanChatEvery + " ScanChatEvery");
+            System.Console.WriteLine(AdverTiseOnConnected +  " AdvertiseOnConnected");
+            System.Console.WriteLine(timeWaitAfterConnected + " timeWaitafterConnected");
+
+
+
+
+
+
+
 
         }
         public static string SettingsPath()
