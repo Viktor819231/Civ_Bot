@@ -293,4 +293,3 @@ C:\Users\Vikto\Desktop\Civ_Bot\obj\Release\net9.0-windows\win-x64\refint\bot.dll
 C:\Users\Vikto\Desktop\Civ_Bot\obj\Release\net9.0-windows\win-x64\bot.pdb
 C:\Users\Vikto\Desktop\Civ_Bot\obj\Release\net9.0-windows\win-x64\bot.genruntimeconfig.cache
 C:\Users\Vikto\Desktop\Civ_Bot\obj\Release\net9.0-windows\win-x64\ref\bot.dll
-C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\AHK scripts\Enter.ahk
