@@ -97,24 +97,11 @@ namespace Gamebot
             while (!BotLocaliztation.IsCivForeground())
             {
                 Thread.Sleep(1000);
-                if (Program.pausebot)
-                    {
-                        System.Console.WriteLine("bot is paused");
-                        while (Program.pausebot)
-                        {
-
-                            Thread.Sleep(3000);
-                        }
-                        System.Console.WriteLine("bot is unpaused");
-                    }
                 while (!Program.IsCivGameRunning())
                 {
                     System.Console.WriteLine("Game cant be detected. will try start game");
                     Program.startCivdx9();
                     Thread.Sleep(5000);
-
-                    
-
                     break;
                 }
                 System.Console.WriteLine("Civ not in focus, will pull civ in focus in 5 sec");

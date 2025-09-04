@@ -1,0 +1,58 @@
+//for dx9 version
+
+        path:::"C:\Program Files (x86)\Steam\steamapps\common\Sid Meier's Civilization V\LaunchPad\LaunchPad.exe"
+
+
+//some Ahk is slow for my old laptop to launch. changing this makes everything faster. inluding sleep between msgs and so on. Although it spends 99.99% time in lobby so does not really matter
+        
+        Botspeed:::"1"
+        AlwaysConfirmLocationBeforeInput:::"true"
+        WaittimeafterLaunch:::300000
+
+//Bot only works for 1024x768 aspect ratio
+//if bot gets interupted and breaks, just wait a bit and it will sort itself out eventually
+//OCR sometimes have problems with exact letter recognition in the ingame lobby chat, Capital letters are recommended for bot name
+
+        LobbyName:::"FFACIV.com"
+        TimeBetweenRelobby:::2
+        TimeBetweenGamerestart:::5
+
+//Can add as many msgs as you want, it will loop thru them, Do not linebreak on msg in txtfile
+//Responsemsgs will be checked once 2 sec between msg
+//DefaultSleep is milisec between msg loops. connected will reset timer
+
+
+        msg:::"[ICON_CAPITAL] Looking for vanilla bnw no quit civ 5 games? Improve the Civ5 experience, join Democraciv discord server by going to FFACIV.com or directly to [COLOR_GREEN] Discord.gg/ASSnBjyt [ICON_CAPITAL]"
+        msg:::"[COLOR_WHITE]  Democraciv is a competitve Civ 5 vanilla community with enforced rules for gameplay with punishment with bans for quitters or other rulebreakers. Elo system to climb leaderboards. Join the server and easily schedual games and find other players, rehost games on crashes and improve civ 5 experience"
+        msg:::"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"
+        
+        
+        //add more if needed in same format as above
+        
+        SleepBetweenMsgCycles:::20000
+
+        
+// Lower time between scans means less likley to miss a msg from user. 
+
+        ScanChatEvery:::500
+
+//Connected msg can be missinturperated by OCR. it just fails reading like 5% of time. 
+
+        
+        AdverTiseOnConnected:::"true"
+        OnlyAdvertiseOnConnected:::"false"
+        WaitAfterConnected:::5000
+
+
+//Recommended all capital letters on recognition to make it easy for OCR
+//Also recommended is to have multiple letters
+//Will ignore botname 
+
+
+        RespondIf:::"RULES";"Votes for quit game etc etc etc"
+        RespondIf:::"KEKMOD";"Kekmod is etc etc etc"
+        RespondIf:::"NEXT GAME";"Next upcoming game on 3/6 BPlaceholder"
+        RespondIf:::"HOWTO";"instructions for how to join for discord link TYPE DISCORD"
+        RespondIf:::"DISCORD";"discord link etc"
+
+//add more if needed in same format as above

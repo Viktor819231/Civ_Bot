@@ -15,6 +15,8 @@ namespace Gamebot
 
     class Program
     {
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
 
         [DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
@@ -168,24 +170,29 @@ namespace Gamebot
 
         public static void QuitGame()
         {
-            try
+            while (IsCivGameRunning())
             {
-                var processes = Process.GetProcessesByName("CivilizationV");
-                foreach (var process in processes)
+                try
                 {
-                    if (!process.HasExited)
+                    var processes = Process.GetProcessesByName("CivilizationV");
+                    foreach (var process in processes)
                     {
-                        Console.WriteLine("Force killing CivilizationV process...");
-                        process.Kill();
-                        process.WaitForExit();
+                        if (!process.HasExited)
+                        {
+                            Console.WriteLine("Force killing CivilizationV process...");
+                            process.Kill();
+                            process.WaitForExit();
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error force quitting CivilizationV: {ex.Message}");
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error force quitting CivilizationV: {ex.Message}");
+                }
+                Thread.Sleep(5000);
             }
         }
+
         public static bool IsCivGameRunning()
         {
             try
@@ -202,12 +209,12 @@ namespace Gamebot
                             int maxwait = 0;
                             while (!process.Responding)
                             {
-                                if (maxwait >= 24)
+                                if (maxwait >= 12)
                                 {
                                     return false;
                                 }
-                                Console.WriteLine("CivilizationV found but not responding. Waiting up" + (120-(maxwait*5))+" seconds before restart...");
-                                Thread.Sleep(5000);
+                                Console.WriteLine("CivilizationV found but not responding. Waiting up" + (120 - (maxwait * 5)) + " seconds before restart...");
+                                Thread.Sleep(10000);
                                 maxwait += 1;
                                 process.Refresh();
                                 if (process.HasExited)
@@ -230,6 +237,7 @@ namespace Gamebot
                 Console.WriteLine($"Error checking if game is running: {ex.Message}");
                 Thread.Sleep(2000);
             }
+            System.Console.WriteLine("Civ Not Found among processes");
             return false;
         }
         public static void startCivdx9()
@@ -277,15 +285,19 @@ namespace Gamebot
         }
         public static void WaitForGameToCompleteLaunch()
         {
+
             int timetowait = settings.WaittimeafterLaunch;
+            System.Console.WriteLine("Waiting 45 sec");
+            Thread.Sleep(45000);
+            CivBot.SimpleClick();
             System.Console.WriteLine("Waiting up to " + timetowait / 1000 + "sec for game to launch");
             for (int i = 0; i < timetowait / 10000; i++)
             {
-                if (i >= (timetowait/10000)-1)
+                if (i >= (timetowait / 10000) - 1)
                 {
-                System.Console.WriteLine("failed to launch");
-                QuitGame();
-                startCivdx9();
+                    System.Console.WriteLine("failed to launch");
+                    QuitGame();
+                    startCivdx9();
                 }
 
                 int tracker = i * 10;
@@ -297,31 +309,40 @@ namespace Gamebot
                     try
                     {
                         SetForegroundWindow(CivWindowHandle);
-
-                        if (BotLocaliztation.ConfirmLocation(ScreenLocation.Menu_Main, geterrorlocal: true))
+                        Thread.Sleep(2000);
+                        if (GetForegroundWindow() == CivWindowHandle)
                         {
-                            System.Console.WriteLine("Game sucessfully launched");
-                            Thread.Sleep(2000);
-                            break;
+                            if (BotLocaliztation.ConfirmLocation(ScreenLocation.Menu_Main, geterrorlocal: true))
+                            {
+                                System.Console.WriteLine("Game sucessfully launched");
+                                Thread.Sleep(2000);
+                                break;
+                            }
+                            else
+                            {
+
+                                System.Console.WriteLine("Continuing to wait for main menu to load");
+                                if (i % 3 == 1)
+                                {
+                                    CivBot.MoveMouseTo(CivButton.outoftheway);
+                                    CivBot.SimpleClick();
+                                    System.Console.WriteLine("Clicked screen, waiting 30 sec for main menu to load");
+                                }
+                            }
                         }
                         else
                         {
-
-                            System.Console.WriteLine("Continuing to wait for main menu to load");
-                            if (i % 3 == 1)
-                            {
-                                CivBot.MoveMouseTo(CivButton.outoftheway);
-                                CivBot.SimpleClick();
-                                System.Console.WriteLine("Clicked screen, waiting 30 sec for main menu to load");
-                            }
-
-
+                            System.Console.WriteLine("Failed to pull Civ into focus");
+                            CivBot.SimpleClick();
                         }
+
+
 
 
                     }
                     catch
                     {
+                        System.Console.WriteLine("Something failed with setting Civ as focus");
                         return;
                     }
 
@@ -350,9 +371,33 @@ namespace Gamebot
                     Console.WriteLine($"Inner exception: {e.InnerException.Message}");
                 Console.WriteLine($"Stack trace: {e.StackTrace}");
             }
+        }
 
 
+        public static void EnsureCivForegroundWindow()
+        {
+            
+            while (true)
+            {
+                if (IsCivGameRunning())
+                {
+                    SetForegroundWindow(CivWindowHandle);
+                    Thread.Sleep(1000);
+                    if (GetForegroundWindow() == CivWindowHandle)
+                    {
+                        break;
+                    }
+                    System.Console.WriteLine("Civ is running but failed pulling into focus");
+                    Thread.Sleep(5000);
+                }
+                else
+                {
+                    System.Console.WriteLine("cant detect Civ");
+                    break;
+                }
+                
 
+            }
         }
         public static void TestAutoHokeyScripts()
         {

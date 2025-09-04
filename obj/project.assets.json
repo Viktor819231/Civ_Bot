@@ -312,11 +312,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vikto\\Desktop\\Civ_Bot\\bot.csproj",
+      "projectUniqueName": "C:\\Users\\Vikto\\Documents\\code repos\\Civ_Bot\\bot.csproj",
       "projectName": "bot",
-      "projectPath": "C:\\Users\\Vikto\\Desktop\\Civ_Bot\\bot.csproj",
+      "projectPath": "C:\\Users\\Vikto\\Documents\\code repos\\Civ_Bot\\bot.csproj",
       "packagesPath": "C:\\Users\\Vikto\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vikto\\Desktop\\Civ_Bot\\obj\\",
+      "outputPath": "C:\\Users\\Vikto\\Documents\\code repos\\Civ_Bot\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Vikto\\AppData\\Roaming\\NuGet\\NuGet.Config"

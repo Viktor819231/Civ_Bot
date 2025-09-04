@@ -83,8 +83,8 @@ namespace Gamebot
         }
         public static string GetTextAt(CivTextBox place)
         {
+            Program.EnsureCivForegroundWindow();
             return ImgToText.TextAt(place.GetRectanglePictureBox(), place.filename).TrimEnd();
-
         }
         public static ScreenLocation GetMenuBasedLocations()
         {
@@ -109,7 +109,7 @@ namespace Gamebot
         }
         public static ScreenLocation GetHeaderBasedLocations()
         {
-
+ 
             string txt = GetTextAt(CivTextBox.HeaderText);
             switch (txt)
             {

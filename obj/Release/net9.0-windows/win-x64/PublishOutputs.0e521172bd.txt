@@ -3,6 +3,7 @@ C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK sc
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\BackspaceUp.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\Backtrack.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\click.exe
+C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\Enter.ahk
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\Enter.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\HitBackspace.exe
 C:\Users\Vikto\Desktop\Civ_Bot\bin\Release\net9.0-windows\win-x64\publish\AHK scripts\MoveMouseTo.exe
