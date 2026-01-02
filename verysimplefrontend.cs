@@ -7,24 +7,31 @@ namespace Gamebot
 {
     public partial class BotFrontend : Form
     {
-    private Button? startButton;
-    private Button? pauseButton;
         private Label? statusLabel;
         private TextBox? debugTextBox;
-        private CancellationTokenSource? cancellationTokenSource;
-    private bool botRunning = false;
-    private bool botPaused = false;
+        private CheckBox? debugModeCheckBox;
+        
+        // Stats labels
+        private Label? statsConnectionsLabel;
+        private Label? statsRestartsLabel;
+        private Label? statsRelobbiesLabel;
+        
+        // Mouse coordinates tracking
+        private Label? mouseCoordinatesLabel;
+        private System.Windows.Forms.Timer? mouseTrackingTimer;
         
         // Image display controls
         private PictureBox? headerPictureBox;
         private PictureBox? menuPictureBox;
         private PictureBox? chatPictureBox;
+        private PictureBox? creditScreenPictureBox;
         private System.Windows.Forms.Timer? imageUpdateTimer;
         
         // OCR text labels
         private Label? headerOcrLabel;
         private Label? menuOcrLabel;
         private Label? chatOcrLabel;
+        private Label? creditScreenOcrLabel;
 
         public BotFrontend()
         {
@@ -36,62 +43,92 @@ namespace Gamebot
         {
             try
             {
-                Console.WriteLine("Bot systems ready.");
+                Console.WriteLine("Display frontend initialized.");
                 if (statusLabel != null)
-                    statusLabel.Text = "Bot Status: Ready";
+                    statusLabel.Text = "Status: Ready";
             }
             catch (Exception ex)
             {
                 if (statusLabel != null)
-                    statusLabel.Text = "Bot Status: Error - " + ex.Message;
-                if (startButton != null)
-                    startButton.Enabled = false;
+                    statusLabel.Text = "Status: Error - " + ex.Message;
             }
         }
 
         private void InitializeComponent()
         {
-            this.Text = "Civ Bot Controller";
+            this.Text = "Civ Bot - Info Display";
             this.Size = new Size(1000, 750);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
 
-            // Start Button
-            startButton = new Button();
-            startButton.Text = "Start Bot";
-            startButton.Size = new Size(100, 30);
-            startButton.Location = new Point(20, 20);
-            startButton.BackColor = Color.LightGreen;
-            startButton.Font = new Font("Arial", 12);
-            startButton.Click += StartButton_Click;
-
-            // Pause/Resume Button
-            pauseButton = new Button();
-            pauseButton.Text = "Pause Bot";
-            pauseButton.Size = new Size(100, 30);
-            pauseButton.Location = new Point(140, 20);
-            pauseButton.BackColor = Color.Gold;
-            pauseButton.Font = new Font("Arial", 12);
-            pauseButton.Enabled = false;
-            pauseButton.Click += PauseButton_Click;
+            // Debug Mode Checkbox
+            debugModeCheckBox = new CheckBox();
+            debugModeCheckBox.Text = "Debug Mode";
+            debugModeCheckBox.Size = new Size(150, 30);
+            debugModeCheckBox.Location = new Point(20, 20);
+            debugModeCheckBox.Font = new Font("Arial", 12);
+            debugModeCheckBox.CheckedChanged += DebugModeCheckBox_CheckedChanged;
 
             // Status Label
             statusLabel = new Label();
-            statusLabel.Text = "Bot Status: Stopped";
-            statusLabel.Size = new Size(250, 20);
-            statusLabel.Location = new Point(20, 70);
-            statusLabel.Font = new Font("Arial", 12);
+            statusLabel.Text = "Status: Monitoring";
+            statusLabel.Size = new Size(300, 20);
+            statusLabel.Location = new Point(20, 60);
+            statusLabel.Font = new Font("Arial", 12, FontStyle.Bold);
             statusLabel.TextAlign = ContentAlignment.MiddleLeft;
 
             // Debug TextBox
             debugTextBox = new TextBox();
             debugTextBox.Multiline = true;
             debugTextBox.ScrollBars = ScrollBars.Vertical;
-            debugTextBox.Size = new Size(450, 280);
-            debugTextBox.Location = new Point(20, 100);
+            debugTextBox.Size = new Size(450, 300);
+            debugTextBox.Location = new Point(20, 90);
             debugTextBox.ReadOnly = true;
-            debugTextBox.Font = new Font("Consolas", 12);
+            debugTextBox.Font = new Font("Consolas", 10);
+            debugTextBox.Visible = true; // Always visible
+
+            // Stats Labels
+            var statsHeaderLabel = new Label();
+            statsHeaderLabel.Text = "Bot Statistics";
+            statsHeaderLabel.Size = new Size(200, 25);
+            statsHeaderLabel.Location = new Point(20, 400);
+            statsHeaderLabel.Font = new Font("Arial", 14, FontStyle.Bold);
+
+            statsConnectionsLabel = new Label();
+            statsConnectionsLabel.Text = "Connections: 0";
+            statsConnectionsLabel.Size = new Size(200, 20);
+            statsConnectionsLabel.Location = new Point(20, 430);
+            statsConnectionsLabel.Font = new Font("Arial", 11);
+
+            statsRestartsLabel = new Label();
+            statsRestartsLabel.Text = "Restarts: 0";
+            statsRestartsLabel.Size = new Size(200, 20);
+            statsRestartsLabel.Location = new Point(20, 455);
+            statsRestartsLabel.Font = new Font("Arial", 11);
+
+            statsRelobbiesLabel = new Label();
+            statsRelobbiesLabel.Text = "Relobbies: 0";
+            statsRelobbiesLabel.Size = new Size(200, 20);
+            statsRelobbiesLabel.Location = new Point(20, 480);
+            statsRelobbiesLabel.Font = new Font("Arial", 11);
+
+            // Mouse Coordinates Display
+            mouseCoordinatesLabel = new Label();
+            mouseCoordinatesLabel.Text = "Mouse: Screen (0, 0) | Window (0, 0)";
+            mouseCoordinatesLabel.Size = new Size(450, 30);
+            mouseCoordinatesLabel.Location = new Point(20, 515);
+            mouseCoordinatesLabel.Font = new Font("Consolas", 11, FontStyle.Bold);
+            mouseCoordinatesLabel.ForeColor = Color.DarkBlue;
+            mouseCoordinatesLabel.BackColor = Color.LightCyan;
+            mouseCoordinatesLabel.BorderStyle = BorderStyle.FixedSingle;
+            mouseCoordinatesLabel.TextAlign = ContentAlignment.MiddleLeft;
+
+            // Mouse tracking timer - updates 20 times per second
+            mouseTrackingTimer = new System.Windows.Forms.Timer();
+            mouseTrackingTimer.Interval = 50;
+            mouseTrackingTimer.Tick += UpdateMouseCoordinates;
+            mouseTrackingTimer.Start();
 
             // === IMAGE BOXES SECTION ===
             // Header Image Box
@@ -172,6 +209,32 @@ namespace Gamebot
             chatOcrLabel.TextAlign = ContentAlignment.TopLeft;
             this.chatOcrLabel = chatOcrLabel;
 
+            // Credit Screen Image Box
+            var creditScreenLabel = new Label();
+            creditScreenLabel.Text = "Credit Screen";
+            creditScreenLabel.Size = new Size(400, 20);
+            creditScreenLabel.Location = new Point(500, 440);
+            creditScreenLabel.Font = new Font("Arial", 14, FontStyle.Bold);
+            creditScreenLabel.TextAlign = ContentAlignment.MiddleCenter;
+
+            var creditScreenPictureBox = new PictureBox();
+            creditScreenPictureBox.Size = new Size(400, 60);
+            creditScreenPictureBox.Location = new Point(500, 460);
+            creditScreenPictureBox.BorderStyle = BorderStyle.FixedSingle;
+            creditScreenPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            this.creditScreenPictureBox = creditScreenPictureBox;
+            LoadImageSafely(creditScreenPictureBox, "CreditScreenSS.png");
+
+            var creditScreenOcrLabel = new Label();
+            creditScreenOcrLabel.Text = "OCR: (waiting...)";
+            creditScreenOcrLabel.Size = new Size(400, 40);
+            creditScreenOcrLabel.Location = new Point(500, 525);
+            creditScreenOcrLabel.BackColor = Color.LightYellow;
+            creditScreenOcrLabel.BorderStyle = BorderStyle.FixedSingle;
+            creditScreenOcrLabel.Font = new Font("Arial", 14);
+            creditScreenOcrLabel.TextAlign = ContentAlignment.TopLeft;
+            this.creditScreenOcrLabel = creditScreenOcrLabel;
+
             // Setup image update timer
             imageUpdateTimer = new System.Windows.Forms.Timer();
             imageUpdateTimer.Interval = 2000; // Update every 2 seconds
@@ -179,10 +242,14 @@ namespace Gamebot
             imageUpdateTimer.Start();
 
             // Add controls to form
-            this.Controls.Add(startButton);
-            this.Controls.Add(pauseButton);
+            this.Controls.Add(debugModeCheckBox);
             this.Controls.Add(statusLabel);
             this.Controls.Add(debugTextBox);
+            this.Controls.Add(statsHeaderLabel);
+            this.Controls.Add(statsConnectionsLabel);
+            this.Controls.Add(statsRestartsLabel);
+            this.Controls.Add(statsRelobbiesLabel);
+            this.Controls.Add(mouseCoordinatesLabel);
             
             // Add image controls
             this.Controls.Add(headerLabel);
@@ -194,6 +261,9 @@ namespace Gamebot
             this.Controls.Add(chatLabel);
             this.Controls.Add(chatPictureBox);
             this.Controls.Add(chatOcrLabel);
+            this.Controls.Add(creditScreenLabel);
+            this.Controls.Add(creditScreenPictureBox);
+            this.Controls.Add(creditScreenOcrLabel);
 
             // Redirect console output to debug textbox
             Console.SetOut(new TextBoxWriter(debugTextBox));
@@ -237,6 +307,14 @@ namespace Gamebot
         {
             try
             {
+                // Update stats
+                if (statsConnectionsLabel != null)
+                    statsConnectionsLabel.Text = $"Connections: {BotStats.TotalConnections}";
+                if (statsRestartsLabel != null)
+                    statsRestartsLabel.Text = $"Restarts: {BotStats.TotalRestarts}";
+                if (statsRelobbiesLabel != null)
+                    statsRelobbiesLabel.Text = $"Relobbies: {BotStats.TotalRelobbies}";
+
                 // Only update if images exist (meaning OCR has run)
                 if (headerPictureBox != null && headerOcrLabel != null)
                 {
@@ -252,6 +330,11 @@ namespace Gamebot
                 {
                     RefreshPictureBox(chatPictureBox, "ChatSS.png");
                     UpdateOcrText(chatOcrLabel, CivTextBox.ChatText);
+                }
+                if (creditScreenPictureBox != null && creditScreenOcrLabel != null)
+                {
+                    RefreshPictureBox(creditScreenPictureBox, "CreditScreenSS.png");
+                    UpdateOcrText(creditScreenOcrLabel, CivTextBox.CreditScreen);
                 }
             }
             catch (Exception)
@@ -311,104 +394,60 @@ namespace Gamebot
 
 
 
-        private async void StartButton_Click(object? sender, EventArgs e)
+        private void UpdateMouseCoordinates(object? sender, EventArgs e)
         {
-            if (botRunning) return;
-
-            botRunning = true;
-            botPaused = false;
-            cancellationTokenSource = new CancellationTokenSource();
-
-            if (startButton != null) startButton.Enabled = false;
-            if (pauseButton != null)
+            if (mouseCoordinatesLabel != null)
             {
-                pauseButton.Enabled = true;
-                pauseButton.Text = "Pause Bot";
-                pauseButton.BackColor = Color.Gold;
-            }
-            if (statusLabel != null) statusLabel.Text = "Bot Status: Running";
-
-            try
-            {
-                await Task.Run(() => Program.Initilizebot(cancellationTokenSource.Token));
-            }
-            catch (OperationCanceledException)
-            {
-                // Bot was stopped normally
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Bot error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                BotStopped();
-            }
-        }
-
-
-        // Pause/Resume logic
-        private void PauseButton_Click(object? sender, EventArgs e)
-        {
-            if (!botRunning) return;
-
-            botPaused = !botPaused;
-            Program.pausebot = botPaused;
-
-            if (pauseButton != null)
-            {
-                if (botPaused)
+                try
                 {
-                    pauseButton.Text = "Resume Bot";
-                    pauseButton.BackColor = Color.LightGreen;
-                    if (statusLabel != null) statusLabel.Text = "Bot Status: Paused";
+                    var screenPos = MouseControl.GetMousePosition();
+                    
+                    // Get window coordinates if Civ window handle exists
+                    if (Program.CivWindowHandle != IntPtr.Zero)
+                    {
+                        var windowPos = MouseControl.GetMousePositionInWindow(Program.CivWindowHandle);
+                        mouseCoordinatesLabel.Text = $"Mouse: Screen ({screenPos.X}, {screenPos.Y}) | Window ({windowPos.X}, {windowPos.Y})";
+                    }
+                    else
+                    {
+                        mouseCoordinatesLabel.Text = $"Mouse: Screen ({screenPos.X}, {screenPos.Y}) | Window: N/A";
+                    }
                 }
-                else
+                catch
                 {
-                    pauseButton.Text = "Pause Bot";
-                    pauseButton.BackColor = Color.Gold;
-                    if (statusLabel != null) statusLabel.Text = "Bot Status: Running";
+                    mouseCoordinatesLabel.Text = "Mouse: Error reading coordinates";
                 }
             }
         }
 
-        private void BotStopped()
+        private void DebugModeCheckBox_CheckedChanged(object? sender, EventArgs e)
         {
-            botRunning = false;
-            botPaused = false;
-            Program.pausebot = false;
-            if (startButton != null) startButton.Enabled = true;
-            if (pauseButton != null)
+            if (debugTextBox != null && debugModeCheckBox != null)
             {
-                pauseButton.Enabled = false;
-                pauseButton.Text = "Pause Bot";
-                pauseButton.BackColor = Color.Gold;
+                debugTextBox.Visible = debugModeCheckBox.Checked;
+                if (statusLabel != null)
+                {
+                    statusLabel.Text = debugModeCheckBox.Checked ? 
+                        "Status: Monitoring (Debug ON)" : 
+                        "Status: Monitoring";
+                }
             }
-            if (statusLabel != null) statusLabel.Text = "Bot Status: Stopped";
         }
 
        
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (botRunning)
-            {
-                var result = MessageBox.Show("Bot is still running. Stop the bot and close?",
-                                           "Confirm Close",
-                                           MessageBoxButtons.YesNo,
-                                           MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    cancellationTokenSource?.Cancel();
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-                    e.Cancel = true; // Don't close the form
-                    return;
-                }
-            }
+            // Clean up resources
+            imageUpdateTimer?.Stop();
+            imageUpdateTimer?.Dispose();
+            
+            mouseTrackingTimer?.Stop();
+            mouseTrackingTimer?.Dispose();
+            
+            // Write final stats and close logger
+            Logger.Close();
+            
             base.OnFormClosing(e);
         }
     }
@@ -438,6 +477,8 @@ namespace Gamebot
                 textBox.AppendText(value.ToString());
                 textBox.ScrollToCaret();
             }
+            // Also log to file
+            Logger.LogToFile(value.ToString());
         }
 
         public override void Write(string? value)
@@ -455,6 +496,28 @@ namespace Gamebot
                 textBox.AppendText(value);
                 textBox.ScrollToCaret();
             }
+            // Also log to file
+            if (value != null)
+                Logger.LogToFile(value);
+        }
+
+        public override void WriteLine(string? value)
+        {
+            if (value != null && textBox != null && textBox.InvokeRequired)
+            {
+                textBox.Invoke(new Action(() =>
+                {
+                    textBox.AppendText(value + Environment.NewLine);
+                    textBox.ScrollToCaret();
+                }));
+            }
+            else if (value != null && textBox != null)
+            {
+                textBox.AppendText(value + Environment.NewLine);
+                textBox.ScrollToCaret();
+            }
+            // Also log to file
+            Logger.LogLineToFile(value);
         }
 
         public override Encoding Encoding => Encoding.UTF8;

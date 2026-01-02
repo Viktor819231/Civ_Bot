@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using Gamebot;
 using OCR;
 
 
@@ -44,9 +45,20 @@ namespace NavigationAndLocations
         }
         public static CivTextBox HeaderText = new CivTextBox(390, 650, 110, 134, "Header.png");
         public static CivTextBox MenuText = new CivTextBox(390, 640, 230, 278, "ManuSS.png");
-        public static CivTextBox SecondMenuText = new CivTextBox(390, 640, 280, 325, "secondManuSS.png");
         public static CivTextBox ChatText = new CivTextBox(50, 410, 663, 638, "ChatSS.png");
-        public static CivTextBox ConfirmQuitgame = new CivTextBox(470, 550 ,380,415, "Quitgameoption.png");
+        
+        public static CivTextBox CreditScreen 
+        {
+            get
+            {
+                return new CivTextBox(
+                    Program.settings.creditxleft, 
+                    Program.settings.creditxright, 
+                    Program.settings.creditytop, 
+                    Program.settings.creditybottom, 
+                    "CreditScreenSS.png");
+            }
+        }
     }
     public class CivButton : LocationInGame
     {
@@ -55,6 +67,15 @@ namespace NavigationAndLocations
             x_left = x1;
             y_top = y1;
         }
+        
+        public static CivButton CreditScreenbutton
+        {
+            get
+            {
+                return new CivButton(Program.settings.creditbuttonx , Program.settings.creditbuttony);
+            }
+        }
+        
         public static CivButton outoftheway = new CivButton(50, 50);
         public static CivButton AmericaLeaderChoice = new CivButton(350, 580);
         public static CivButton LeaderChoice = new CivButton(350, 215);
@@ -65,6 +86,7 @@ namespace NavigationAndLocations
         public static CivButton Backtrack = new CivButton(0, 0);
         public static CivButton MenuMultiplayer = new CivButton(x1: 600, 300);
         public static CivButton Exitgame = new CivButton(600, 600);
+
         public static CivButton Confirmexitgame = new CivButton(600, 375);
         public static CivButton MenuInternet = new CivButton(600, 240);
         public static CivButton MenuStandard = new CivButton(600, 240);
@@ -98,6 +120,15 @@ namespace NavigationAndLocations
                new List<CivButton>
             {
                 CivButton.Backtrack,
+                CivButton.outoftheway
+            }
+        );
+
+                public static ScreenLocation CreditScreen = new ScreenLocation(0, 0, NullLobby, CivButton.Backtrack,
+                new List<CivButton>
+            {
+                CivButton.Backtrack,
+                CivButton.CreditScreenbutton,    
                 CivButton.outoftheway
             }
         );
@@ -183,6 +214,8 @@ namespace NavigationAndLocations
                 CivButton.outoftheway
             }
         );
+
+
 
         public static bool IsEqual(ScreenLocation one, ScreenLocation two)
         {

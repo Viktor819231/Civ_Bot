@@ -54,7 +54,7 @@ namespace OCR
                 int width = Math.Abs(box.X - box.Width);
                 int height = Math.Abs(box.Y - box.Height);
                 box.X += windowcords.X;
-                box.Y += windowcords.Y;
+                box.Y += windowcords.Y + Program.settings.OcrOffset;
 
                 using Bitmap bmp = new Bitmap(width, height);
                 using Graphics g = Graphics.FromImage(bmp);

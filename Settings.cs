@@ -10,7 +10,7 @@ namespace Gamebot
         public string Civfilepath;
         public int Botspeed;
         public bool AlwaysConfirmLocationBeforeInput;
-        public int WaittimeafterLaunch;
+        public int WaittimeafterLaunch;     
         public string LobbyName;
         public int TimeBetweenRelobby;
         public int TimeBetweenGamerestart;
@@ -20,6 +20,18 @@ namespace Gamebot
         public bool AdverTiseOnConnected;
         public bool OnlyAdvertiseOnConnected;
         public int timeWaitAfterConnected;
+        public int OcrOffset;
+        public int creditxleft;
+        public int creditxright;
+        public int creditytop;
+        public int creditybottom;
+        public int creditbuttonx;
+        public int creditbuttony;
+
+        public bool debugmode;
+        
+        // Public property for debug mode
+        public bool DebugMode => debugmode;
 
 
 
@@ -90,19 +102,43 @@ namespace Gamebot
                 {
                     timeWaitAfterConnected = int.Parse(param);
                 }
-
-
                 else if (name == "RespondIf")
                 {
                     ConditionalAndResponse.Add(ConditionalAndResponse_Parse(param));
                 }
+                  else if (name == "OCRoffset")
+                {
+                    OcrOffset = int.Parse(param);
+                }
+                else if (name == "creditxleft")
+                {
+                    creditxleft = int.Parse(param);
+                }
+                else if (name == "creditxright")
+                {
+                    creditxright = int.Parse(param);
+                }
+                else if (name == "creditytop")
+                {
+                    creditytop = int.Parse(param);
+                }
+                else if (name == "creditybottom")
+                {
+                    creditybottom = int.Parse(param);
+                }
+                else if (name == "creditbuttonx")
+                {
+                    creditbuttonx = int.Parse(param);
+                }
+                else if (name == "creditbuttony")
+                {
+                    creditbuttony = int.Parse(param);
+                }
+                else if (name == "debugmode")
+                {
+                    if (param.Contains("true")) { debugmode = true; } else { debugmode = false; }
 
-
-
-
-
-
-
+                }
             }
 
         }
@@ -161,26 +197,18 @@ namespace Gamebot
 
         public void Printsettings()
         {
-            System.Console.WriteLine(Civfilepath + " Filepath");
-            System.Console.WriteLine(Botspeed + " Botspeed");
-            System.Console.WriteLine(AlwaysConfirmLocationBeforeInput + " AlwaysConfirmLocationBeforeInput");
-            System.Console.WriteLine(WaittimeafterLaunch + " WaittimeafterLaunch");
-            System.Console.WriteLine(LobbyName + " lobbyname");
-            System.Console.WriteLine(TimeBetweenRelobby + " TimeBetweenRelobby");
-            System.Console.WriteLine(TimeBetweenGamerestart + " TimeBetweenGamerestart");
-            System.Console.WriteLine(OnlyAdvertiseOnConnected + " Only on connect bool");
-            System.Console.WriteLine(SleepBetweenMsgCycles + " SleepBetweenMsgCycles");
-            System.Console.WriteLine(ScanChatEvery + " ScanChatEvery");
-            System.Console.WriteLine(AdverTiseOnConnected +  " AdvertiseOnConnected");
-            System.Console.WriteLine(timeWaitAfterConnected + " timeWaitafterConnected");
-
-
-
-
-
-
-
-
+            Console.WriteLine(Civfilepath + " Filepath");
+            Console.WriteLine(Botspeed + " Botspeed");
+            Console.WriteLine(AlwaysConfirmLocationBeforeInput + " AlwaysConfirmLocationBeforeInput");
+            Console.WriteLine(WaittimeafterLaunch + " WaittimeafterLaunch");
+            Console.WriteLine(LobbyName + " lobbyname");
+            Console.WriteLine(TimeBetweenRelobby + " TimeBetweenRelobby");
+            Console.WriteLine(TimeBetweenGamerestart + " TimeBetweenGamerestart");
+            Console.WriteLine(OnlyAdvertiseOnConnected + " Only on connect bool");
+            Console.WriteLine(SleepBetweenMsgCycles + " SleepBetweenMsgCycles");
+            Console.WriteLine(ScanChatEvery + " ScanChatEvery");
+            Console.WriteLine(AdverTiseOnConnected +  " AdvertiseOnConnected");
+            Console.WriteLine(timeWaitAfterConnected + " timeWaitafterConnected");
         }
         public static string SettingsPath()
         {

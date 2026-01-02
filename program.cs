@@ -26,43 +26,37 @@ namespace Gamebot
         public static Settings settings;
         public static bool pausebot = false;
         [STAThread]
+
+
         static void Main(string[] args)
         {
             SetProcessDPIAware();
+            settings = new Settings();
+            settings.Validatesettings();
+            Task.Run(() => Initilizebot());
+            if(settings.debugmode){
             BotFrontendLauncher.StartFrontend();
+            }
+
         }
 
         public static void Initilizebot(CancellationToken cancellationToken = default)
         {
-            //This will be the function that is called on start bot from frontend start button
-
+            Logger.Initialize();
             Console.WriteLine("Initilizebot...");
-            settings = new Settings();
-            settings.Validatesettings();
-
-
+            
             if (!IsCivGameRunning())
             {
                 startCivdx9();
             }
             Timekeeping.Starttimers();
             SetForegroundWindow(CivWindowHandle);
-            CivBot.Sleep(50);
-            while (!BotLocaliztation.ConfirmLocation(ScreenLocation.Menu_Main))
-            {
-                SetForegroundWindow(CivWindowHandle);
-                CivBot.HitEscapeKey();
-                CivBot.Sleep(200);
-            }
             TestOCR();
             TestAutoHokeyScripts();
-
-            settings.Printsettings();
+            //settings.Printsettings();
             CivBot.Sleep(1000);
-            System.Console.WriteLine("Initilization complete and tests passed. Starting Bot");
-            Console.WriteLine("Setting up lobby...");
-
-            SetupNewLobby();
+            //System.Console.WriteLine("Initilization complete and tests passed. Starting Bot");
+            //Console.WriteLine("Setting up lobby...");
             RunMainBotLoop();
         }
 
@@ -72,10 +66,12 @@ namespace Gamebot
         public static void RunMainBotLoop()
         {
             System.Console.WriteLine("Starting Main bot loop");
+            Console.WriteLine(DateTime.Now);
             while (true)
             {
                 System.Console.WriteLine("Restarting game in: " + Timekeeping.GetTimeToNextRestart() + " Minutes");
                 RestartGameIfNeccesary();
+
                 if (BotLocaliztation.ConfirmLocation(ScreenLocation.StagingRoom))
                 {
                     System.Console.WriteLine(Timekeeping.GetTimeToNextRelobby() + "Minutes to next relobby");
@@ -111,6 +107,8 @@ namespace Gamebot
                             break;
                         }
                     }
+
+
                     CivBot.MoveAndClick(CivButton.LobbyNameInputField);
                     CivBot.EraseExistingText();
                     CivBot.Inputtext(settings.LobbyName);
@@ -126,6 +124,7 @@ namespace Gamebot
                     CivBot.Sleep(500);
                     CivBot.backtrack();
                     CivBot.Sleep(500);
+
                     if (!(BotLocaliztation.ConfirmLocation(location: ScreenLocation.SetupMulti)))
                     {
                         CivBot.Sleep(3000);
@@ -134,6 +133,8 @@ namespace Gamebot
                             break;
                         }
                     }
+
+
                     CivBot.MoveAndClick(CivButton.HostLobby);
                     CivBot.Sleep(1000);
                     if (!(BotLocaliztation.ConfirmLocation(location: ScreenLocation.StagingRoom))) { break; }
@@ -142,9 +143,10 @@ namespace Gamebot
                     CivBotChatter.justloopthrubasicadds(sleepbetweenmsgs: 1000);
                     if ((BotLocaliztation.ConfirmLocation(location: ScreenLocation.StagingRoom)))
                     {
-
                         setupcomplete = true;
                         System.Console.WriteLine("Lobby SetupComplete, can now start advertising");
+                        Logger.LogStat("New lobby created");
+                        BotStats.IncrementRelobbies();
                         break;
                     }
 
@@ -285,7 +287,6 @@ namespace Gamebot
         }
         public static void WaitForGameToCompleteLaunch()
         {
-
             int timetowait = settings.WaittimeafterLaunch;
             System.Console.WriteLine("Waiting 45 sec");
             Thread.Sleep(45000);
@@ -299,13 +300,11 @@ namespace Gamebot
                     QuitGame();
                     startCivdx9();
                 }
-
                 int tracker = i * 10;
                 System.Console.WriteLine(timetowait / 1000 - tracker + "...");
                 Thread.Sleep(10000);
                 if (IsCivGameRunning())
                 {
-
                     try
                     {
                         SetForegroundWindow(CivWindowHandle);
@@ -320,7 +319,6 @@ namespace Gamebot
                             }
                             else
                             {
-
                                 System.Console.WriteLine("Continuing to wait for main menu to load");
                                 if (i % 3 == 1)
                                 {
@@ -335,10 +333,6 @@ namespace Gamebot
                             System.Console.WriteLine("Failed to pull Civ into focus");
                             CivBot.SimpleClick();
                         }
-
-
-
-
                     }
                     catch
                     {
@@ -381,12 +375,14 @@ namespace Gamebot
             {
                 if (IsCivGameRunning())
                 {
+                    Thread.Sleep(50);
                     SetForegroundWindow(CivWindowHandle);
-                    Thread.Sleep(1000);
+
                     if (GetForegroundWindow() == CivWindowHandle)
                     {
                         break;
                     }
+
                     System.Console.WriteLine("Civ is running but failed pulling into focus");
                     Thread.Sleep(5000);
                 }
@@ -402,12 +398,10 @@ namespace Gamebot
         public static void TestAutoHokeyScripts()
         {
 
-            Console.WriteLine("Testing AHK scripts...");
             CivBot.Sleep(500);
             try
             {
                 CivBot.MoveMouseTo(CivButton.outoftheway);
-                Console.WriteLine("AHK mouse movement successful");
             }
             catch (Exception e)
             {
@@ -427,6 +421,8 @@ namespace Gamebot
         public static void Restartgame()
         {
             System.Console.WriteLine("Restarting The Game");
+            Logger.LogStat("Game restarted");
+            BotStats.IncrementRestarts();
             while (IsCivGameRunning())
             {
                 Program.QuitGame();

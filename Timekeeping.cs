@@ -66,7 +66,7 @@ namespace Gamebot
                 }
             });
 
-            timer.IsBackground = true; // Dies when main program exits
+            timer.IsBackground = true;
             timer.Start();
         }
     }

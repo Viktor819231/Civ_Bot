@@ -20,11 +20,46 @@ namespace Gamebot
 
         public static void NavigateTo(ScreenLocation Goalarg)
         {
-            goal = Goalarg;
-            ScreenLocation startscreen = BotLocaliztation.GetCurrentScreen();
-            if (!ScreenLocation.IsEqual(goal, startscreen))
+
+            bool matchedwithknownscreen = false;
+            //tries 3 times find right screen then goes to that screen by path. if fails will go back to main menu
+            for (int i = 0; i < 3; i++)
             {
-                ExcecuteNavigation(Pathgetter.GetPath(goal: goal, startscreen: startscreen));
+
+                goal = Goalarg;
+                ScreenLocation startscreen = BotLocaliztation.GetCurrentScreen();
+                System.Console.WriteLine("Navigating to " + nameof(Goalarg) + " From: " + nameof(startscreen));
+                if (ScreenLocation.IsEqual(ScreenLocation.Location_error, startscreen))
+                {
+                    System.Console.WriteLine("Cant identify current screen");
+                }
+                else
+                {
+                     matchedwithknownscreen = true;
+                    if ((!ScreenLocation.IsEqual(goal, startscreen)))
+                    {
+
+                        ExcecuteNavigation(Pathgetter.GetPath(goal: goal, startscreen: startscreen));
+                        break;
+                    }else if(ScreenLocation.IsEqual(goal, startscreen)){
+                        System.Console.WriteLine("Already at Goal");
+                        break;
+                    }
+
+
+                }
+                Thread.Sleep(3000);
+            }
+            if (!matchedwithknownscreen)
+            {
+                System.Console.WriteLine("failed three times to match screen. Attempting backtrack");
+                CivBot.HitEscapeKey();
+                CivBot.HitEscapeKey();
+                CivBot.HitEscapeKey();
+                CivBot.HitEscapeKey();
+                CivBot.HitEscapeKey();
+                CivBot.HitEscapeKey();
+                CivBot.HitEscapeKey();
             }
 
         }
@@ -55,7 +90,6 @@ namespace Gamebot
             }
             if (CivButton.IsEqual(button, CivButton.Confirmexitgame))
             {
-                System.Console.WriteLine("its true");
                 return true;
             }
             return false;
@@ -68,6 +102,9 @@ namespace Gamebot
     {
         public static void Sleep(int x)
         {
+            Program.EnsureCivForegroundWindow();
+            //honestly dont know what i was thinking with this sleep function. but since thread.sleep is used everywhere i thought it was good idea to add extra stuff onto it
+            //Like checking for pause etc
             int modifier = Program.settings.Botspeed;
             Thread.Sleep(x / modifier);
 
@@ -90,10 +127,6 @@ namespace Gamebot
                 }
                 Program.startCivdx9();
             }
-            if (!BotLocaliztation.IsCivForeground())
-            {
-
-            }
             while (!BotLocaliztation.IsCivForeground())
             {
                 Thread.Sleep(1000);
@@ -109,8 +142,6 @@ namespace Gamebot
                 Program.SetForegroundWindow(Program.CivWindowHandle);
 
             }
-
-
 
 
         }
@@ -142,7 +173,9 @@ namespace Gamebot
         }
         public static void Enter()
         {
+            
             Sleep(50);
+            Program.EnsureCivForegroundWindow();
             string scriptpath = GetScriptFolderPath("Enter.exe");
             Process.Start(scriptpath);
             Sleep(300);
@@ -150,6 +183,7 @@ namespace Gamebot
         public static void Inputtext(string txt)
         {
             Sleep(50);
+            Program.EnsureCivForegroundWindow();
             string scriptpath = GetScriptFolderPath("SendText.exe");
             string arg = $"\"{txt}\"";
             Process.Start(scriptpath, arg);
@@ -159,6 +193,7 @@ namespace Gamebot
         public static void QuickInputtext(string txt)
         {
             Sleep(50);
+            Program.EnsureCivForegroundWindow();
             string scriptpath = GetScriptFolderPath("SendText.exe");
             string arg = $"\"{txt}\"";
             Process.Start(scriptpath, arg);
@@ -167,9 +202,9 @@ namespace Gamebot
 
         public static void MoveMouseTo(CivButton button)
         {
-            int headerOffset = ImgToText.getheaderheight();
             int x = button.x_left;
             int y = button.y_top;
+            Program.EnsureCivForegroundWindow();
             string scriptpath = GetScriptFolderPath("MoveMouseTo.exe");
             string args = $"{x} {y}";
             Process.Start(scriptpath, args);
@@ -179,7 +214,7 @@ namespace Gamebot
 
         public static void SimpleClick()
         {
-            //Normal click expects civ to be in focus or will sleep
+            //Normal click() expects civ to be in focus or will sleep
             try
             {
                 string scriptpath = GetScriptFolderPath("click.exe");
@@ -197,9 +232,14 @@ namespace Gamebot
             try
             {
                 Sleep(50);
+                ClickIndicator.CloseAllIndicators();
+                Program.EnsureCivForegroundWindow();
+                var mousePos = MouseControl.GetMousePosition();
                 string scriptpath = GetScriptFolderPath("click.exe");
                 var process = Process.Start(scriptpath);
-                Sleep(400);
+                Thread.Sleep(50);
+                ClickIndicator.ShowClickIndicator(mousePos.X, mousePos.Y);
+                Thread.Sleep(200);
                 MoveMouseTo(CivButton.outoftheway);
             }
             catch (Exception ex)
@@ -210,6 +250,7 @@ namespace Gamebot
         public static void HitEscapeKey()
         {
             Sleep(50);
+            Program.EnsureCivForegroundWindow();
             string scriptpath = GetScriptFolderPath("Backtrack.exe");
             Process.Start(scriptpath);
             Sleep(400);
@@ -227,47 +268,30 @@ namespace Gamebot
             }
             else
             {
-
                 ConfirmLocation_ThenMoveAndClick(button);
-
-
             }
 
         }
 
-        public static void indirectclicktest(CivButton button)
-        {
-            int headerOffset = ImgToText.getheaderheight();
-            int x = button.x_left;
-            int y = button.y_top + headerOffset;
-            string args = $"{Program.CivWindowHandle} {x} {y}";
-            string scriptpath = GetScriptFolderPath("indirectclicktest.exe");
-            var process = Process.Start(scriptpath, args);
-
-        }
 
         public static void ConfirmLocation_ThenMoveAndClick(CivButton button)
         {
             bool isButtonOnScreen = CivBotNavigation.isButtonOnScreen(button);
             if (!isButtonOnScreen)
             {
-                int waittimesbefore = 5;
-                for (int i = 0; i < waittimesbefore; i++)
-                {
-                    Sleep(1000);
-                    if (CivBotNavigation.isButtonOnScreen(button))
-                    {
-                        break;
-                    }
-                }
+               System.Console.WriteLine("Not on expected screen for click");
+               Thread.Sleep(1000);
                 if (!CivBotNavigation.isButtonOnScreen(button))
                 {
                     Sleep(50);
                     HitEscapeKey();
                     System.Console.WriteLine("Bot is lost, going back to main screen");
                     CivBotNavigation.NavigateTo(ScreenLocation.Menu_Main);
-
+                }else
+                {
+                    isButtonOnScreen = true;
                 }
+
             }
 
             if (isButtonOnScreen)

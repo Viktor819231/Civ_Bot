@@ -52,6 +52,7 @@ namespace Gamebot
                 bool postmsgs = true;
                 int Scantimes = defaultsleep / Howlongbetweenscans;
                 CivBot.MoveAndClick(CivButton.Chatinput);
+                System.Console.WriteLine("Will Post again in: " + defaultsleep/1000 + "seconds");
                 for (int j = 0; j < Scantimes; j++)
                 {
                     if (ScanChat_AndRespond())
@@ -65,7 +66,7 @@ namespace Gamebot
                 {
                 justloopthrubasicadds(sleepbetweenmsgs: 1500);
                 }
-                System.Console.WriteLine("Will Post again in: " + defaultsleep/1000 + "seconds");
+
 
             }
             else
@@ -116,6 +117,8 @@ namespace Gamebot
                 if (Program.settings.AdverTiseOnConnected && current_msgs.Last().msg == "Connected")
                 {
                     System.Console.WriteLine("Connected Recognized, will post in:" + Program.settings.timeWaitAfterConnected / 1000 + " seconds");
+                    Logger.LogStat($"Player connection detected: {current_msgs.Last().player}");
+                    BotStats.IncrementConnections();
                     CivBot.Sleep(Program.settings.timeWaitAfterConnected);
 
                     justloopthrubasicadds(sleepbetweenmsgs: 1500);

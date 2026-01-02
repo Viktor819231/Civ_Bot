@@ -28,7 +28,7 @@ namespace Gamebot
         {
             if (!geterrorlocal)
             {
-                if (ScreenLocation.IsEqual(location, GetCurrentScreen()))
+                if (ScreenLocation.IsEqual(location, GetCurrentScreen(keepCheckingTilFind: false)))
                 {
                     return true;
                 }
@@ -45,7 +45,7 @@ namespace Gamebot
 
 
         }
-        public static ScreenLocation GetCurrentScreen(bool keepCheckingTilFind = true)
+        public static ScreenLocation GetCurrentScreen(bool keepCheckingTilFind = false)
         {
             try
             {
@@ -61,20 +61,17 @@ namespace Gamebot
                 {
                     try
                     {
-                        return GetQuitgameconfirmation();
+                        return GetScreenLocationCreditScreen();
 
                     }
                     catch
                     {
-
                         if (keepCheckingTilFind)
                         {
-                            System.Console.WriteLine("Cant identify current screen");
                             CivBot.Sleep(5000);
                             return GetCurrentScreen();
                         }
                         return ScreenLocation.Location_error;
-
                     }
 
                 }
@@ -133,17 +130,30 @@ namespace Gamebot
 
         }
 
-        public static ScreenLocation GetQuitgameconfirmation()
+        public static ScreenLocation GetScreenLocationCreditScreen()
         {
-            string txt = GetTextAt(CivTextBox.ConfirmQuitgame);
-            switch (txt)
+            string txt = GetTextAt(CivTextBox.CreditScreen).ToLower();
+            System.Console.WriteLine($"Credit Screen OCR text: '{txt}'");
+            
+            // Check if text contains "click" or "continue" to handle OCR variations
+            if (txt.Contains("click") || txt.Contains("continue"))
             {
-                case "Yes":
-                    return ScreenLocation.Confirmquitscreen;
-                default: throw new Exception("No match on quitgame screen");
+                System.Console.WriteLine("Identified currentscreen Credit Screen - clicking to continue");
+                var button = CivButton.CreditScreenbutton;
+                System.Console.WriteLine($"Credit button coordinates: X={button.x_left}, Y={button.y_top}");
+                
+                // Don't use MoveAndClick - it checks location which causes infinite recursion!
+                CivBot.MoveMouseTo(button);
+                CivBot.Sleep(300);
+                CivBot.Click();
+                
+                System.Console.WriteLine("Clicked credit screen button, waiting for transition...");
+                CivBot.Sleep(2000);
+                
+                return ScreenLocation.CreditScreen;
             }
-
-
+            
+            throw new Exception($"Credit screen text didn't match. Got: '{txt}'");
         }
 
     }
