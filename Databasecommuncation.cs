@@ -15,7 +15,14 @@ public class Databasecommuncation
 {
     private static readonly HttpClient client = new HttpClient();
     private const string FIREBASE_URL = "https://civbot-954eb-default-rtdb.europe-west1.firebasedatabase.app";
+    private const string FIREBASE_SECRET = "KbQ1PdrAGP5AzHW5GIfvj34gP07L8ZsYIvNB3BO4";
     private static string? _botId = null;
+    
+    // Helper to add auth to URL
+    private static string AddAuth(string url)
+    {
+        return $"{url}?auth={FIREBASE_SECRET}";
+    }
     
     // Get or create a persistent bot ID
     public static async Task<string> GetOrCreateBotId(string region = "EU-West", string botName = "FFACIV Bot")
@@ -214,7 +221,7 @@ public class Databasecommuncation
     {
         try
         {
-            string url = $"{FIREBASE_URL}/{path}.json";
+            string url = AddAuth($"{FIREBASE_URL}/{path}.json");
             HttpResponseMessage response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
@@ -230,7 +237,7 @@ public class Databasecommuncation
     {
         try
         {
-            string url = $"{FIREBASE_URL}/{path}.json";
+            string url = AddAuth($"{FIREBASE_URL}/{path}.json");
             string jsonData = JsonSerializer.Serialize(data);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             
@@ -249,7 +256,7 @@ public class Databasecommuncation
     {
         try
         {
-            string url = $"{FIREBASE_URL}/{path}.json";
+            string url = AddAuth($"{FIREBASE_URL}/{path}.json");
             string jsonData = JsonSerializer.Serialize(data);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             
@@ -268,7 +275,7 @@ public class Databasecommuncation
     {
         try
         {
-            string url = $"{FIREBASE_URL}/{path}.json";
+            string url = AddAuth($"{FIREBASE_URL}/{path}.json");
             string jsonData = JsonSerializer.Serialize(data);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             
@@ -287,7 +294,7 @@ public class Databasecommuncation
     {
         try
         {
-            string url = $"{FIREBASE_URL}/{path}.json";
+            string url = AddAuth($"{FIREBASE_URL}/{path}.json");
             HttpResponseMessage response = await client.DeleteAsync(url);
             response.EnsureSuccessStatusCode();
             return true;

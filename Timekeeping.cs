@@ -78,11 +78,22 @@ namespace Gamebot
                 {
                     try
                     {
+                        // Store current lobby name before refresh
+                        string previousLobbyName = Program.settings.LobbyName;
+                        
                         // Ping Firebase to show bot is active
                         Task.Run(async () => await Databasecommuncation.PingBot()).Wait();
                         
                         // Refresh settings from Firebase (lobby name, messages)
                         Task.Run(async () => await Program.settings.RefreshFromFirebase()).Wait();
+                        
+                        // Check if lobby name changed - trigger relobby if different
+                        if (!string.IsNullOrEmpty(previousLobbyName) && 
+                            previousLobbyName != Program.settings.LobbyName)
+                        {
+                            Console.WriteLine($"Lobby name changed from '{previousLobbyName}' to '{Program.settings.LobbyName}' - triggering relobby");
+                            ShouldRehostLobby = true;
+                        }
                     }
                     catch (Exception ex)
                     {

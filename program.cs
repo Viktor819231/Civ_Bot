@@ -366,7 +366,7 @@ namespace Gamebot
                 Console.WriteLine($"✓ Bot ID: {botId}");
                 Console.WriteLine($"✓ Bot Name: {settings.BotName}");
                 Console.WriteLine($"✓ Bot Region: {settings.BotRegion}");
-                string lobbyNameJson = Task.Run(async () => await Databasecommuncation.GetData("bot-config/bot-config/lobbyName")).Result;
+                string lobbyNameJson = Task.Run(async () => await Databasecommuncation.GetData("bot-config/lobbyName")).Result;
                 if (lobbyNameJson != null && lobbyNameJson != "null")
                 {
                     Console.WriteLine($"✓ Firebase config accessible");
