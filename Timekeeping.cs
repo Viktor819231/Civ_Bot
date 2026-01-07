@@ -68,6 +68,34 @@ namespace Gamebot
 
             timer.IsBackground = true;
             timer.Start();
+            
+            // Start Firebase sync timer (ping + config update every 45 seconds)
+            Thread firebaseSync = new Thread(() =>
+            {
+                Thread.CurrentThread.Name = "FirebaseSyncThread";
+                
+                while (true)
+                {
+                    try
+                    {
+                        // Ping Firebase to show bot is active
+                        Task.Run(async () => await Databasecommuncation.PingBot()).Wait();
+                        
+                        // Refresh settings from Firebase (lobby name, messages)
+                        Task.Run(async () => await Program.settings.RefreshFromFirebase()).Wait();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Firebase sync error: {ex.Message}");
+                    }
+                    
+                    // Wait 45 seconds before next sync
+                    Thread.Sleep(45000);
+                }
+            });
+            
+            firebaseSync.IsBackground = true;
+            firebaseSync.Start();
         }
     }
 }

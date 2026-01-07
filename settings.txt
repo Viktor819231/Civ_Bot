@@ -1,15 +1,26 @@
         debugmode:::"true"
 
 //for dx9 version
+//Botname is the name that  will showcase statuspage on website, same  for region
 
-
-
+        BotName:::"Viklaptop-Stockholm"
+        Bot-Region:::"EU-Stockholm"
         path:::"C:\Program Files (x86)\Steam\steamapps\common\Sid Meier's Civilization V\LaunchPad\LaunchPad.exe"
+       
+       
+
+
+
+
+
+
+
+
+
+
+
+//some Ahk is slow for my old laptop to launch. changing this makes everything faster. inluding sleep between msgs and so on. Although it spends 99.99% time in lobby so does not really matter"      
         OCRoffset:::"0"
-
-
-//some Ahk is slow for my old laptop to launch. changing this makes everything faster. inluding sleep between msgs and so on. Although it spends 99.99% time in lobby so does not really matter
-        
         Botspeed:::"1"
         AlwaysConfirmLocationBeforeInput:::"true"
         WaittimeafterLaunch:::300000
@@ -17,7 +28,6 @@
 //Bot only works for 1024x768 aspect ratio
 //if bot gets interupted and breaks, just wait a bit and it will sort itself out eventually
 //OCR sometimes have problems with exact letter recognition in the ingame lobby chat, Capital letters are recommended for bot name
-
         LobbyName:::"FFACIV.com"
         TimeBetweenRelobby:::60
         TimeBetweenGamerestart:::180
@@ -27,7 +37,7 @@
 //DefaultSleep is milisec between msg loops. connected will reset timer
 
 
-        msg:::"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt "
+        msg:::"[ICON_CAPITAL] test test To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt "
         msg:::"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"
         
         

@@ -73,8 +73,6 @@ public static class Logger
         {
             var sessionEnd = DateTime.Now;
             var sessionLength = sessionEnd - sessionStartTime;
-            
-            // Write session summary to stats file
             if (statsWriter != null)
             {
                 lock (lockObj)

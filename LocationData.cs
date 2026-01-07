@@ -45,7 +45,7 @@ namespace NavigationAndLocations
         }
         public static CivTextBox HeaderText = new CivTextBox(390, 650, 110, 134, "Header.png");
         public static CivTextBox MenuText = new CivTextBox(390, 640, 230, 278, "ManuSS.png");
-        public static CivTextBox ChatText = new CivTextBox(50, 410, 663, 638, "ChatSS.png");
+        public static CivTextBox ChatText = new CivTextBox(20, 420, 661, 640, "ChatSS.png");
         
         public static CivTextBox CreditScreen 
         {
@@ -205,6 +205,7 @@ namespace NavigationAndLocations
         public static ScreenLocation StagingRoom = new ScreenLocation(0, 0, LoadGames2, CivButton.Loadgame_hostgame,
                 new List<CivButton>
             {
+                CivButton.Backtrack,
                 CivButton.AmericaLeaderChoice,
                 CivButton.LeaderChoice,
                 CivButton.LeaderChoiceScroll,

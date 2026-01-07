@@ -160,7 +160,7 @@ namespace Gamebot
                 Console.WriteLine($"Error executing Backtrack.exe: {ex.Message}");
             }
         }
-        public static void EraseExistingText(int CharactersToErase = 15)
+        public static void EraseExistingText(int CharactersToErase = 20)
         {
             System.Console.WriteLine("Erasingtext");
             string scriptpath = GetScriptFolderPath("HitBackspace.exe");

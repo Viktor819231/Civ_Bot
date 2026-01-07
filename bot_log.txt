@@ -561,3 +561,1383 @@ Connected Recognized, will post in:10 seconds
 [STATS] Total Connections: 1
 Restarting game in: 178 Minutes
 Civ is running but failed pulling into focus
+--- Log started at 2026-01-07 14:58:32 ---
+Initilizebot...
+Testing Firebase connection...
+Generated new bot ID: bot-b9dd3ef4fbe7
+Bot bot-b9dd3ef4fbe7 already exists in Firebase.
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+Display frontend initialized.
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Civ Not Found among processes
+Starting Civ
+Game found in files
+Game restart logged to Firebase
+Game launch command sent
+Waiting 45 sec
+Waiting up to 300sec for game to launch
+300...
+Failed to pull Civ into focus
+290...
+Credit Screen OCR text: ''
+Continuing to wait for main menu to load
+Clicked screen, waiting 30 sec for main menu to load
+280...
+Credit Screen OCR text: ''
+Continuing to wait for main menu to load
+270...
+Identified currentscreen Main menu
+Game sucessfully launched
+Testing Tesseract OCR...
+✓ OCR successful
+Attempting to load config from Firebase...
+Firebase config loaded successfully!
+Starting Main bot loop
+2026-01-07 15:00:26
+Restarting game in: 180 Minutes
+Identified currentscreen Main menu
+Identified currentscreen Main menu
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Already at Goal
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Load game screen
+Identified currentscreen Load game screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Setting up lobby
+Attempting to load config from Firebase...
+Firebase config loaded successfully!
+Lobby SetupComplete, can now start advertising
+[STATS] Total Relobbies: 1
+Restarting game in: 179 Minutes
+Relobby logged to Firebase
+59Minutes to next relobby
+Will Post again in: 60seconds
+--- Log started at 2026-01-07 15:04:08 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+Display frontend initialized.
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: null
+⚠ No lobby name in Firebase, using settings.txt
+DEBUG - Ads raw JSON: null
+⚠ No advertising texts in Firebase, using settings.txt
+Firebase config load attempt complete!
+✓ OCR successful
+Starting Main bot loop
+2026-01-07 15:04:11
+Restarting game in: 180 Minutes
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+--- Log started at 2026-01-07 15:06:45 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+⚠ Firebase config not found (will use settings.txt)
+Display frontend initialized.
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: null
+⚠ No lobby name in Firebase, using settings.txt
+DEBUG - Ads raw JSON: null
+⚠ No advertising texts in Firebase, using settings.txt
+Firebase config load attempt complete!
+✓ OCR successful
+Starting Main bot loop
+2026-01-07 15:06:48
+Restarting game in: 180 Minutes
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Navigating to Goalarg From: startscreen
+Civ not in focus, will pull civ in focus in 5 sec
+Civ not in focus, will pull civ in focus in 5 sec
+--- Log started at 2026-01-07 15:08:21 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+Display frontend initialized.
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+✓ OCR successful
+Starting Main bot loop
+2026-01-07 15:08:24
+Restarting game in: 180 Minutes
+Identified currentscreen Main menu
+Identified currentscreen Main menu
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Already at Goal
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Load game screen
+Identified currentscreen Load game screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Setting up lobby
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Civ is running but failed pulling into focus
+--- Log started at 2026-01-07 15:33:27 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+Display frontend initialized.
+✓ Updated bot info: Viklaptop-Stockholm (EU-Stockholm)
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+Attempting to load config from Firebase...
+✓ OCR successful
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+Civ is running but failed pulling into focus
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Civ is running but failed pulling into focus
+Civ is running but failed pulling into focus
+Starting Main bot loop
+2026-01-07 15:33:45
+Restarting game in: 180 Minutes
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Hot Or standard
+Not on expected screen for click
+Identified currentscreen Hot Or standard
+Bot is lost, going back to main screen
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Already at Goal
+Identified currentscreen Main menu
+Not on expected screen for click
+Identified currentscreen Main menu
+Bot is lost, going back to main screen
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Already at Goal
+Identified currentscreen Main menu
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Load game screen
+Identified currentscreen Load game screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Setting up lobby
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Lobby SetupComplete, can now start advertising
+[STATS] Total Relobbies: 1
+Restarting game in: 179 Minutes
+Relobby logged to Firebase
+59Minutes to next relobby
+Will Post again in: 60seconds
+Connected Recognized, will post in:10 seconds
+[STATS] Total Connections: 1
+Player connection logged: JEWRIS
+Restarting game in: 178 Minutes
+59Minutes to next relobby
+Will Post again in: 60seconds
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+--- Log started at 2026-01-07 15:59:15 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+Display frontend initialized.
+✓ Updated bot info: Viklaptop-Stockholm (EU-Stockholm)
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+✓ OCR successful
+Starting Main bot loop
+2026-01-07 15:59:18
+Restarting game in: 180 Minutes
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Setting up lobby
+Lobby SetupComplete, can now start advertising
+[STATS] Total Relobbies: 1
+Restarting game in: 179 Minutes
+Relobby logged to Firebase
+60Minutes to next relobby
+Will Post again in: 60seconds
+Civ is running but failed pulling into focus
+--- Log started at 2026-01-07 16:01:15 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+Display frontend initialized.
+✓ Updated bot info: Viklaptop-Stockholm (EU-Stockholm)
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+✓ OCR successful
+Starting Main bot loop
+2026-01-07 16:01:18
+Restarting game in: 180 Minutes
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Load game screen
+Identified currentscreen Load game screen
+Identified currentscreen Lobbysetup screen
+Attempting to load config from Firebase...
+Identified currentscreen Lobbysetup screen
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Lobby SetupComplete, can now start advertising
+[STATS] Total Relobbies: 1
+Restarting game in: 180 Minutes
+Relobby logged to Firebase
+60Minutes to next relobby
+Will Post again in: 60seconds
+--- Log started at 2026-01-07 16:03:36 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+Display frontend initialized.
+✓ Updated bot info: Viklaptop-Stockholm (EU-Stockholm)
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+✓ OCR successful
+Starting Main bot loop
+2026-01-07 16:03:39
+Restarting game in: 180 Minutes
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Load game screen
+Identified currentscreen Load game screen
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Lobby SetupComplete, can now start advertising
+[STATS] Total Relobbies: 1
+Restarting game in: 180 Minutes
+Relobby logged to Firebase
+60Minutes to next relobby
+Will Post again in: 60seconds
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Identified currentscreen Hot Or standard
+Identified currentscreen Hot Or standard
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "2/6@FFACIV.com"
+✓ Loaded lobby name from Firebase: 2/6@FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Civ is running but failed pulling into focus
+--- Log started at 2026-01-07 16:31:55 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+Display frontend initialized.
+✓ Updated bot info: Viklaptop-Stockholm (EU-Stockholm)
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "@FFACIV.com"
+✓ Loaded lobby name from Firebase: @FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+✓ OCR successful
+Starting Main bot loop
+2026-01-07 16:31:58
+Restarting game in: 180 Minutes
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Load game screen
+Identified currentscreen Load game screen
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "@FFACIV.com"
+✓ Loaded lobby name from Firebase: @FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Lobby SetupComplete, can now start advertising
+[STATS] Total Relobbies: 1
+Restarting game in: 180 Minutes
+Relobby logged to Firebase
+60Minutes to next relobby
+Will Post again in: 60seconds
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "@FFACIV.com"
+✓ Loaded lobby name from Firebase: @FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Civ not in focus, will pull civ in focus in 5 sec
+Civ not in focus, will pull civ in focus in 5 sec
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "@FFACIV.com"
+✓ Loaded lobby name from Firebase: @FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Civ not in focus, will pull civ in focus in 5 sec
+Civ not in focus, will pull civ in focus in 5 sec
+Civ not in focus, will pull civ in focus in 5 sec
+Civ not in focus, will pull civ in focus in 5 sec
+Attempting to load config from Firebase...
+DEBUG - Lobby name raw JSON: "@FFACIV.com"
+✓ Loaded lobby name from Firebase: @FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+--- Log started at 2026-01-07 16:38:43 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+Display frontend initialized.
+✓ Updated bot info: Viklaptop-Stockholm (EU-Stockholm)
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+✓ Loaded lobby name from Firebase: @FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+✓ OCR successful
+Civ is running but failed pulling into focus
+Civ is running but failed pulling into focus
+Starting Main bot loop
+2026-01-07 16:38:56
+Restarting game in: 180 Minutes
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Hot Or standard
+Not on expected screen for click
+Identified currentscreen Hot Or standard
+Bot is lost, going back to main screen
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Already at Goal
+Identified currentscreen Main menu
+Not on expected screen for click
+Identified currentscreen Main menu
+Bot is lost, going back to main screen
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Already at Goal
+Identified currentscreen Main menu
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+✓ Loaded lobby name from Firebase: @FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Internet Lobbies
+Navigating to Goalarg From: startscreen
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Load game screen
+Identified currentscreen Load game screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+✓ Loaded lobby name from Firebase: @FFACIV.com
+DEBUG - Ads raw JSON: {"msg1":"[ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt ","msg2":"go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games","msg3":"[ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]"}
+✓ Loaded 3 advertising messages from Firebase (object format):
+  - [ICON_CAPITAL] To find No quit vanilla games, join Democraciv discord server by going to FFACIV.com or directly to Discord.gg/ASSnBjyt 
+  - go to #Draft or #LFG to ind NQ Vanilla, KeKmod or  LEKMOD  games
+  - [ICON_CAPITAL] [COLOR_GREEN] FFACIV.com [COLOR_WHITE] [ICON_CAPITAL]
+Firebase config load attempt complete!
+Lobby SetupComplete, can now start advertising
+[STATS] Total Relobbies: 1
+Restarting game in: 179 Minutes
+60Minutes to next relobby
+Relobby logged to Firebase
+Will Post again in: 60seconds
+Civ is running but failed pulling into focus
+--- Log started at 2026-01-07 16:44:25 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+Display frontend initialized.
+✓ Updated bot info: Viklaptop-Stockholm (EU-Stockholm)
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+✓ OCR successful
+Civ is running but failed pulling into focus
+Starting Main bot loop
+2026-01-07 16:44:33
+Restarting game in: 180 Minutes
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Load game screen
+Identified currentscreen Load game screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Lobby SetupComplete, can now start advertising
+[STATS] Total Relobbies: 1
+Restarting game in: 179 Minutes
+Relobby logged to Firebase
+60Minutes to next relobby
+Will Post again in: 60seconds
+Connected Recognized, will post in:10 seconds
+[STATS] Total Connections: 1
+Player connection logged: Kasht
+Restarting game in: 178 Minutes
+59Minutes to next relobby
+Will Post again in: 60seconds
+Civ is running but failed pulling into focus
+Civ is running but failed pulling into focus
+Civ is running but failed pulling into focus
+--- Log started at 2026-01-07 16:49:49 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+Display frontend initialized.
+✓ Updated bot info: Viklaptop-Stockholm (EU-Stockholm)
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Civ Not Found among processes
+Starting Civ
+Game found in files
+Game launch command sent
+Waiting 45 sec
+Game restart logged to Firebase
+Waiting up to 300sec for game to launch
+300...
+Failed to pull Civ into focus
+290...
+Failed to pull Civ into focus
+280...
+Identified currentscreen Main menu
+Game sucessfully launched
+Testing Tesseract OCR...
+✓ OCR successful
+Starting Main bot loop
+2026-01-07 16:51:18
+Restarting game in: 180 Minutes
+Identified currentscreen Main menu
+Identified currentscreen Main menu
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Already at Goal
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Load game screen
+Identified currentscreen Load game screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Lobby SetupComplete, can now start advertising
+[STATS] Total Relobbies: 1
+Restarting game in: 180 Minutes
+Relobby logged to Firebase
+60Minutes to next relobby
+Will Post again in: 60seconds
+Connected Recognized, will post in:10 seconds
+[STATS] Total Connections: 1
+Player connection logged: aggressor
+Posting 3 messages from Firebase/settings...
+Finished posting messages after connection
+Restarting game in: 179 Minutes
+59Minutes to next relobby
+Will Post again in: 60seconds
+Civ not in focus, will pull civ in focus in 5 sec
+--- Log started at 2026-01-07 16:56:39 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+✓ Updated bot info: Viklaptop-Stockholm (EU-Stockholm)
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+Display frontend initialized.
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+✓ OCR successful
+Starting Main bot loop
+2026-01-07 16:56:42
+Restarting game in: 180 Minutes
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Identified currentscreen Internet Lobbies
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Load game screen
+Identified currentscreen Load game screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Lobby SetupComplete, can now start advertising
+[STATS] Total Relobbies: 1
+Restarting game in: 180 Minutes
+Relobby logged to Firebase
+60Minutes to next relobby
+Will Post again in: 60seconds
+True
+1
+Connected
+Connected Recognized, will post in:10 seconds
+[STATS] Total Connections: 1
+Player connection logged: FlipMo
+Posting 3 messages from Firebase/settings...
+Finished posting messages after connection
+Restarting game in: 179 Minutes
+59Minutes to next relobby
+Will Post again in: 60seconds
+True
+1
+W FFACIV.com Y
+True
+1
+8h nice
+True
+1
+8h nice
+True
+1
+vik
+True
+1
+vik
+True
+1
+vik
+True
+1
+vik
+True
+1
+vik
+True
+1
+vik
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+i read it
+True
+1
+Connected
+Connected Recognized, will post in:10 seconds
+[STATS] Total Connections: 2
+Player connection logged: Venator
+Posting 3 messages from Firebase/settings...
+Finished posting messages after connection
+Restarting game in: 178 Minutes
+58Minutes to next relobby
+Will Post again in: 60seconds
+True
+1
+W FFACIV.com Y
+True
+1
+W FFACIV.com Y
+True
+1
+W FFACIV.com Y
+True
+1
+W FFACIV.com Y
+True
+1
+Connected
+Connected Recognized, will post in:10 seconds
+[STATS] Total Connections: 3
+Player connection logged: atzennacken
+Posting 3 messages from Firebase/settings...
+Finished posting messages after connection
+Restarting game in: 177 Minutes
+57Minutes to next relobby
+Will Post again in: 60seconds
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+Disconnected
+True
+1
+Disconnected
+True
+1
+Disconnected
+True
+1
+Disconnected
+True
+1
+Disconnected
+True
+1
+Disconnected
+True
+1
+Disconnected
+True
+1
+Disconnected
+True
+1
+Disconnected
+True
+1
+Disconnected
+True
+1
+Disconnected
+True
+1
+so good idea
+True
+1
+so good idea
+True
+1
+so good idea
+True
+1
+so good idea
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+thx guys
+True
+1
+could you do me favor and rejoin this lobl
+True
+1
+could you do me favor and rejoin this lobl
+True
+1
+could you do me favor and rejoin this lobl
+True
+1
+could you do me favor and rejoin this lobl
+True
+1
+could you do me favor and rejoin this lobl
+True
+1
+could you do me favor and rejoin this lobl
+True
+1
+could you do me favor and rejoin this lobl
+True
+1
+years ago i had my own black and whitelist to
+True
+1
+years ago i had my own black and whitelist to
+True
+1
+years ago i had my own black and whitelist to
+True
+1
+years ago i had my own black and whitelist to
+True
+1
+years ago i had my own black and whitelist to
+True
+1
+years ago i had my own black and whitelist to
+True
+1
+years ago i had my own black and whitelist to
+True
+1
+years ago i had my own black and whitelist to
+True
+1
+years ago i had my own black and whitelist to
+True
+1
+years ago i had my own black and whitelist to
+Restarting game in: 175 Minutes
+55Minutes to next relobby
+Civ is running but failed pulling into focus
+Will Post again in: 60seconds
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+True
+1
+# FFACIV.com
+Civ not in focus, will pull civ in focus in 5 sec
+Civ is running but failed pulling into focus
+--- Log started at 2026-01-07 17:07:07 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+Display frontend initialized.
+✓ Updated bot info: Viklaptop-Stockholm (EU-Stockholm)
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+✓ OCR successful
+Starting Main bot loop
+2026-01-07 17:07:10
+Restarting game in: 180 Minutes
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Navigating to Goalarg From: startscreen
+Credit Screen OCR text: '34'
+Not in staging room, navigating to SetupMulti...
+Credit Screen OCR text: '34'
+Navigating to Goalarg From: startscreen
+Cant identify current screen
+Credit Screen OCR text: '34'
+Navigating to Goalarg From: startscreen
+Cant identify current screen
+Credit Screen OCR text: '34'
+Navigating to Goalarg From: startscreen
+Cant identify current screen
+failed three times to match screen. Attempting backtrack
+Credit Screen OCR text: '34'
+Civ not in focus, will pull civ in focus in 5 sec
+Civ not in focus, will pull civ in focus in 5 sec
+Civ not in focus, will pull civ in focus in 5 sec
+Civ not in focus, will pull civ in focus in 5 sec
+--- Log started at 2026-01-07 17:10:19 ---
+Initilizebot...
+Testing Firebase connection...
+Using existing bot ID: bot-b9dd3ef4fbe7
+Display frontend initialized.
+✓ Updated bot info: Viklaptop-Stockholm (EU-Stockholm)
+✓ Bot ID: bot-b9dd3ef4fbe7
+✓ Bot Name: Viklaptop-Stockholm
+✓ Bot Region: EU-Stockholm
+⚠ Firebase config not found (will use settings.txt)
+✓ Firebase ping successful
+✓ Firebase tests passed
+Testing Tesseract OCR...
+Screenshot error: A generic error occurred in GDI+.
+✓ OCR successful
+Starting Main bot loop
+2026-01-07 17:10:22
+Restarting game in: 180 Minutes
+Identified currentscreen Main menu
+Identified currentscreen Main menu
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Already at Goal
+Identified currentscreen Main menu
+Not in staging room, navigating to SetupMulti...
+Identified currentscreen Main menu
+Navigating to Goalarg From: startscreen
+Identified currentscreen Main menu
+Identified currentscreen Hot Or standard
+Identified currentscreen Internet menu
+Identified currentscreen Internet Lobbies
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Erasingtext
+Loading game with template lobby
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Load game screen
+Identified currentscreen Load game screen
+Identified currentscreen Lobbysetup screen
+Identified currentscreen Lobbysetup screen
+Lobby SetupComplete, can now start advertising
+[STATS] Total Relobbies: 1
+Restarting game in: 180 Minutes
+Relobby logged to Firebase
+60Minutes to next relobby
+Will Post again in: 60seconds
+True
+1
+Connected
+Connected Recognized, will post in:10 seconds
+[STATS] Total Connections: 1
+Player connection logged: | Vik
+Posting 3 messages from Firebase/settings...
+Finished posting messages after connection
+Restarting game in: 179 Minutes
+59Minutes to next relobby
+Will Post again in: 60seconds
+True
+1
+W FFACIV.com W
+True
+1
+W FFACIV.com W
+True
+1
+W FFACIV.com W
+True
+1
+Connected
+Connected Recognized, will post in:10 seconds
+[STATS] Total Connections: 2
+Player connection logged: | Democraciv
+Posting 3 messages from Firebase/settings...
+Finished posting messages after connection
+Restarting game in: 179 Minutes
+59Minutes to next relobby
+Will Post again in: 60seconds
+True
+1
+W FFACIV.com W
+True
+1
+W FFACIV.com W
+True
+1
+W FFACIV.com W
+True
+1
+W FFACIV.com W
+True
+1
+W FFACIV.com W
+True
+1
+W FFACIV.com W
+Civ is running but failed pulling into focus

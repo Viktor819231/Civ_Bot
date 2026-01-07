@@ -114,3 +114,142 @@ Restarts: 0
 Relobbies: 1
 === End of Session ===
 
+[2026-01-07 14:58:32] === Session started: 2026-01-07 14:58:32 ===
+[2026-01-07 15:01:29] New lobby created
+Session ended: 2026-01-07 15:01:43
+Session length: 0h 3m 10s
+Connected recognized: 0
+Restarts: 0
+Relobbies: 1
+=== End of Session ===
+
+[2026-01-07 15:04:08] === Session started: 2026-01-07 15:04:08 ===
+Session ended: 2026-01-07 15:04:33
+Session length: 0h 0m 24s
+Connected recognized: 0
+Restarts: 0
+Relobbies: 0
+=== End of Session ===
+
+[2026-01-07 15:06:45] === Session started: 2026-01-07 15:06:45 ===
+Session ended: 2026-01-07 15:07:04
+Session length: 0h 0m 18s
+Connected recognized: 0
+Restarts: 0
+Relobbies: 0
+=== End of Session ===
+
+[2026-01-07 15:08:21] === Session started: 2026-01-07 15:08:21 ===
+Session ended: 2026-01-07 15:09:21
+Session length: 0h 1m 0s
+Connected recognized: 0
+Restarts: 0
+Relobbies: 0
+=== End of Session ===
+
+[2026-01-07 15:33:27] === Session started: 2026-01-07 15:33:27 ===
+[2026-01-07 15:35:14] New lobby created
+[2026-01-07 15:35:16] Player connection detected: JEWRIS
+Session ended: 2026-01-07 15:36:33
+Session length: 0h 3m 5s
+Connected recognized: 1
+Restarts: 0
+Relobbies: 1
+=== End of Session ===
+
+[2026-01-07 15:59:15] === Session started: 2026-01-07 15:59:15 ===
+[2026-01-07 16:00:17] New lobby created
+Session ended: 2026-01-07 16:00:41
+Session length: 0h 1m 25s
+Connected recognized: 0
+Restarts: 0
+Relobbies: 1
+=== End of Session ===
+
+[2026-01-07 16:01:15] === Session started: 2026-01-07 16:01:15 ===
+[2026-01-07 16:02:13] New lobby created
+Session ended: 2026-01-07 16:02:42
+Session length: 0h 1m 26s
+Connected recognized: 0
+Restarts: 0
+Relobbies: 1
+=== End of Session ===
+
+[2026-01-07 16:03:36] === Session started: 2026-01-07 16:03:36 ===
+[2026-01-07 16:04:35] New lobby created
+Session ended: 2026-01-07 16:06:43
+Session length: 0h 3m 7s
+Connected recognized: 0
+Restarts: 0
+Relobbies: 1
+=== End of Session ===
+
+[2026-01-07 16:31:55] === Session started: 2026-01-07 16:31:55 ===
+[2026-01-07 16:32:53] New lobby created
+Session ended: 2026-01-07 16:35:06
+Session length: 0h 3m 11s
+Connected recognized: 0
+Restarts: 0
+Relobbies: 1
+=== End of Session ===
+
+[2026-01-07 16:38:43] === Session started: 2026-01-07 16:38:43 ===
+[2026-01-07 16:40:16] New lobby created
+Session ended: 2026-01-07 16:40:48
+Session length: 0h 2m 5s
+Connected recognized: 0
+Restarts: 0
+Relobbies: 1
+=== End of Session ===
+
+[2026-01-07 16:44:25] === Session started: 2026-01-07 16:44:25 ===
+[2026-01-07 16:45:30] New lobby created
+[2026-01-07 16:46:19] Player connection detected: Kasht
+Session ended: 2026-01-07 16:48:07
+Session length: 0h 3m 42s
+Connected recognized: 1
+Restarts: 0
+Relobbies: 1
+=== End of Session ===
+
+[2026-01-07 16:49:49] === Session started: 2026-01-07 16:49:49 ===
+[2026-01-07 16:52:09] New lobby created
+[2026-01-07 16:52:26] Player connection detected: aggressor
+Session ended: 2026-01-07 16:54:17
+Session length: 0h 4m 27s
+Connected recognized: 1
+Restarts: 0
+Relobbies: 1
+=== End of Session ===
+
+[2026-01-07 16:56:39] === Session started: 2026-01-07 16:56:39 ===
+[2026-01-07 16:57:37] New lobby created
+[2026-01-07 16:58:15] Player connection detected: FlipMo
+[2026-01-07 16:59:10] Player connection detected: Venator
+[2026-01-07 17:00:00] Player connection detected: atzennacken
+Session ended: 2026-01-07 17:02:47
+Session length: 0h 6m 8s
+Connected recognized: 3
+Restarts: 0
+Relobbies: 1
+=== End of Session ===
+
+[2026-01-07 17:07:07] === Session started: 2026-01-07 17:07:07 ===
+Session ended: 2026-01-07 17:07:54
+Session length: 0h 0m 46s
+Connected recognized: 0
+Restarts: 0
+Relobbies: 0
+=== End of Session ===
+
+[2026-01-07 17:10:19] === Session started: 2026-01-07 17:10:19 ===
+[2026-01-07 17:11:14] New lobby created
+[2026-01-07 17:11:34] Player connection detected: | Vik
+[2026-01-07 17:11:57] Player connection detected: | Democraciv
+Session ended: 2026-01-07 17:12:24
+Session length: 0h 2m 5s
+Connected recognized: 2
+Restarts: 0
+Relobbies: 1
+=== End of Session ===
+

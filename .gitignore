@@ -1,0 +1,28 @@
+# Bot-specific files (unique per machine)
+bot-id.txt
+
+# Build outputs
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# User settings
+settings.txt
+
+# Logs
+bot_log.txt
+bot_stats.txt
+*.log
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Temporary files
+*.tmp
+*.temp

@@ -64,7 +64,7 @@ namespace Gamebot
                 }
                 if (postmsgs)
                 {
-                justloopthrubasicadds(sleepbetweenmsgs: 1500);
+                justloopthrubasicadds(sleepbetweenmsgs: 250);
                 }
 
 
@@ -93,9 +93,15 @@ namespace Gamebot
             try
             {
                 UpdateMsgAndUser();
+                
+                // Check if we have any messages
+                if (current_msgs.Count == 0)
+                {
+                    return false;
+                }
+                
                 if (Verify_NewMsg())
                 {
-
                     string lastMsg = current_msgs.Last().msg;
 
                     (bool conditional, string response) = GetResponseIfConditional(lastMsg);
@@ -108,32 +114,34 @@ namespace Gamebot
                         UpdateMsgAndUser();
                         return true;
                     }
-                    else
-                    {
-
-                    }
                 }
-
-                if (Program.settings.AdverTiseOnConnected && current_msgs.Last().msg == "Connected")
+                // Check for player connection (always check, not just in else)
+                if (Program.settings.AdverTiseOnConnected && current_msgs.Count > 0 && current_msgs.Last().msg == "Connected")
                 {
+                    string playerName = current_msgs.Last().player;
                     System.Console.WriteLine("Connected Recognized, will post in:" + Program.settings.timeWaitAfterConnected / 1000 + " seconds");
-                    Logger.LogStat($"Player connection detected: {current_msgs.Last().player}");
+                    Logger.LogStat($"Player connection detected: {playerName}");
                     BotStats.IncrementConnections();
+                    
+                    // Log player connection to Firebase (non-blocking)
+                    Task.Run(async () => await Databasecommuncation.LogPlayerConnection(playerName));
+                    
                     CivBot.Sleep(Program.settings.timeWaitAfterConnected);
 
-                    justloopthrubasicadds(sleepbetweenmsgs: 1500);
+                    System.Console.WriteLine($"Posting {Program.settings.Messages.Count} messages from Firebase/settings...");
+                    justloopthrubasicadds(sleepbetweenmsgs: 250);
+                    System.Console.WriteLine("Finished posting messages after connection");
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
+                
+                return false;
             }
             catch (Exception e)
             {
+                Console.WriteLine($"Error in ScanChat_AndRespond: {e.Message}");
+                Console.WriteLine($"Stack trace: {e.StackTrace}");
                 return false;
             }
-            return false;
         }
 
         public static (bool containcheck, string response) GetResponseIfConditional(string usermsg)

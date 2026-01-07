@@ -8,6 +8,8 @@ namespace Gamebot
 
         public List<(string, string)> ConditionalAndResponse = new List<(string, string)>();
         public string Civfilepath;
+        public string BotName;
+        public string BotRegion;
         public int Botspeed;
         public bool AlwaysConfirmLocationBeforeInput;
         public int WaittimeafterLaunch;     
@@ -42,7 +44,7 @@ namespace Gamebot
         public static string filepath_settings = SettingsPath();
         public Settings()
         {
-
+            // Load from settings.txt first
             string[] settings_rows = File.ReadAllLines(filepath_settings);
             for (int i = 0; i < settings_rows.Length; i++)
             {
@@ -50,6 +52,14 @@ namespace Gamebot
                 if (name == "path")
                 {
                     Civfilepath = param;
+                }
+                else if (name == "BotName")
+                {
+                    BotName = param;
+                }
+                else if (name == "Bot-Region")
+                {
+                    BotRegion = param;
                 }
                 else if (name == "Botspeed")
                 {
@@ -140,7 +150,68 @@ namespace Gamebot
 
                 }
             }
+            
+            // Try to override with Firebase config (async call)
+            Task.Run(async () => await LoadFromFirebase()).Wait();
 
+        }
+        
+        private async Task LoadFromFirebase()
+        {
+            try
+            {
+                string lobbyNameJson = await Databasecommuncation.GetData("bot-config/lobbyName");
+              
+                if (lobbyNameJson != null && lobbyNameJson != "null")
+                {
+                    string? firebaseLobbyName = System.Text.Json.JsonSerializer.Deserialize<string>(lobbyNameJson);
+                    if (!string.IsNullOrWhiteSpace(firebaseLobbyName))
+                    {
+                        LobbyName = firebaseLobbyName;
+                    }
+                }
+                
+                // Get advertising texts
+                string adsJson = await Databasecommuncation.GetData("bot-config/advertisingTexts");
+                if (adsJson != null && adsJson != "null")
+                {
+                    try
+                    {
+                        // Try to parse as array first
+                        var firebaseMessages = System.Text.Json.JsonSerializer.Deserialize<List<string>>(adsJson);
+                        if (firebaseMessages != null && firebaseMessages.Count > 0)
+                        {
+                            Messages = firebaseMessages;
+                        }
+                    }
+                    catch
+                    {
+                        // If array parsing fails, try parsing as object with keys
+                        try
+                        {
+                            var firebaseMessagesObj = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(adsJson);
+                            if (firebaseMessagesObj != null && firebaseMessagesObj.Count > 0)
+                            {
+                                Messages = firebaseMessagesObj.Values.ToList();
+                            }
+                        }
+                        catch
+                        {
+                            // Silently keep existing settings if parse fails
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // Silently keep existing settings if Firebase fails
+            }
+        }
+        
+        // Public method to refresh settings from Firebase (called periodically)
+        public async Task RefreshFromFirebase()
+        {
+            await LoadFromFirebase();
         }
 
         public static (string settingname, string param) ParseIntoNameAndParameter(string line)
@@ -159,9 +230,20 @@ namespace Gamebot
         public void Validatesettings()
         {
             var errors = new List<string>();
+            
+            if (string.IsNullOrWhiteSpace(BotName))
+            {
+                errors.Add("BotName not set in settings.txt - Add line: BotName:::\"YourBotName\"");
+            }
+            
+            if (string.IsNullOrWhiteSpace(BotRegion))
+            {
+                errors.Add("Bot-Region not set in settings.txt - Add line: Bot-Region:::\"EU-West\" (or your region)");
+            }
+            
             if (string.IsNullOrWhiteSpace(LobbyName))
             {
-                errors.Add("LobbyName not set in settings txt");
+                errors.Add("LobbyName not set in settings.txt");
             }
             if (string.IsNullOrWhiteSpace(Civfilepath))
             {
@@ -179,18 +261,29 @@ namespace Gamebot
 
             if (Messages == null || Messages.Count == 0)
             {
-                errors.Add("Advertising messages loaded from settings.txt");
+                errors.Add("No advertising messages found in settings.txt");
             }
+            
             if (errors.Count > 0)
             {
-                Console.WriteLine("Settings validation failed:");
+                Console.WriteLine("\n========================================");
+                Console.WriteLine("SETTINGS VALIDATION FAILED:");
+                Console.WriteLine("========================================");
                 foreach (var error in errors)
-                Console.WriteLine(" - " + error);
-                throw new Exception("Settings validation failed. See errors above.");
+                {
+                    Console.WriteLine(" ✗ " + error);
+                }
+                Console.WriteLine("\nPlease fix the errors in settings.txt and restart the bot.");
+                Console.WriteLine("========================================\n");
+                
+                Console.WriteLine("Press any key to exit...");
+                Console.ReadKey();
+                
+                Environment.Exit(1);
             }
             else
             {
-                Console.WriteLine("Settings successfully loaded from settings.txt.");
+                Console.WriteLine("✓ Settings successfully loaded and validated from settings.txt");
             }
 
         }

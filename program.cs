@@ -45,6 +45,9 @@ namespace Gamebot
             Logger.Initialize();
             Console.WriteLine("Initilizebot...");
             
+            // Initialize and test Firebase
+            TestFirebase();
+            
             if (!IsCivGameRunning())
             {
                 startCivdx9();
@@ -138,15 +141,19 @@ namespace Gamebot
                     CivBot.MoveAndClick(CivButton.HostLobby);
                     CivBot.Sleep(1000);
                     if (!(BotLocaliztation.ConfirmLocation(location: ScreenLocation.StagingRoom))) { break; }
-                    ChooseLeaderInLobbyEtc();
+
                     //To get the text in right place we print some msgs to make bottom row be the one that shows on connect
-                    CivBotChatter.justloopthrubasicadds(sleepbetweenmsgs: 1000);
+                    CivBotChatter.justloopthrubasicadds(sleepbetweenmsgs: 250);
                     if ((BotLocaliztation.ConfirmLocation(location: ScreenLocation.StagingRoom)))
                     {
                         setupcomplete = true;
                         System.Console.WriteLine("Lobby SetupComplete, can now start advertising");
                         Logger.LogStat("New lobby created");
                         BotStats.IncrementRelobbies();
+                        
+                        // Log relobby to Firebase (non-blocking)
+                        Task.Run(async () => await Databasecommuncation.LogRelobby());
+                        
                         break;
                     }
 
@@ -207,7 +214,6 @@ namespace Gamebot
                         if (!process.HasExited)
                         {
                             CivWindowHandle = process.MainWindowHandle;
-                            // Wait until the process is responding
                             int maxwait = 0;
                             while (!process.Responding)
                             {
@@ -226,7 +232,6 @@ namespace Gamebot
                                     return false;
                                 }
                             }
-                            // Process is running and responding
                             return true;
                         }
                     }
@@ -249,6 +254,8 @@ namespace Gamebot
             {
                 Timekeeping.ResetGameRestartTimer();
                 Timekeeping.ResetLobbyTimer();
+                Task.Run(async () => await Databasecommuncation.LogGameRestart());
+                
                 if (!File.Exists(settings.Civfilepath))
                 {
                     Console.WriteLine($"Error: File not found at {settings.Civfilepath}");
@@ -349,6 +356,36 @@ namespace Gamebot
 
 
 
+        public static void TestFirebase()
+        {
+            Console.WriteLine("Testing Firebase connection...");
+            try
+            {
+
+                string botId = Task.Run(async () => await Databasecommuncation.GetOrCreateBotId(settings.BotRegion, settings.BotName)).Result;
+                Console.WriteLine($"✓ Bot ID: {botId}");
+                Console.WriteLine($"✓ Bot Name: {settings.BotName}");
+                Console.WriteLine($"✓ Bot Region: {settings.BotRegion}");
+                string lobbyNameJson = Task.Run(async () => await Databasecommuncation.GetData("bot-config/bot-config/lobbyName")).Result;
+                if (lobbyNameJson != null && lobbyNameJson != "null")
+                {
+                    Console.WriteLine($"✓ Firebase config accessible");
+                }
+                else
+                {
+                    Console.WriteLine("⚠ Firebase config not found (will use settings.txt)");
+                }
+                Task.Run(async () => await Databasecommuncation.PingBot()).Wait();
+                Console.WriteLine("✓ Firebase ping successful");
+                Console.WriteLine("✓ Firebase tests passed");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"✗ Firebase test failed: {e.Message}");
+                Console.WriteLine("⚠ Bot will continue with settings.txt only");
+            }
+        }
+
         public static void TestOCR()
         {
             SetForegroundWindow(CivWindowHandle);
@@ -356,7 +393,7 @@ namespace Gamebot
             try
             {
                 string testText = ImgToText.TextAt(CivTextBox.MenuText.GetRectanglePictureBox(), CivTextBox.MenuText.filename);
-                Console.WriteLine($"OCR successful");
+                Console.WriteLine($"✓ OCR successful");
             }
             catch (Exception e)
             {
