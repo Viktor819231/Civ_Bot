@@ -52,10 +52,22 @@ namespace Gamebot
                 bool postmsgs = true;
                 int Scantimes = defaultsleep / Howlongbetweenscans;
                 CivBot.MoveAndClick(CivButton.Chatinput);
-                System.Console.WriteLine("Will Post again in: " + defaultsleep/1000 + "seconds");
+                System.Console.WriteLine("Will Post again in: " + defaultsleep / 1000 + "seconds");
                 for (int j = 0; j < Scantimes; j++)
                 {
-                    if (ScanChat_AndRespond())
+                    if (Timekeeping.ShouldRehostLobby)
+                    {
+                        CivBot.HitEscapeKey();
+                        CivBot.HitEscapeKey();
+                        postmsgs = false;
+                        break;
+                    }
+                    else if (ScanChat_AndRespond())
+                    {
+                        postmsgs = false;
+                        break;
+                    }
+                    else if (!BotLocaliztation.ConfirmLocation(ScreenLocation.StagingRoom))
                     {
                         postmsgs = false;
                         break;
@@ -64,15 +76,26 @@ namespace Gamebot
                 }
                 if (postmsgs)
                 {
-                justloopthrubasicadds(sleepbetweenmsgs: 250);
+                    justloopthrubasicadds(sleepbetweenmsgs: 250);
                 }
 
 
             }
             else
             {
-                ScanChat_AndRespond();
-                CivBot.Sleep(Howlongbetweenscans);
+                if (Timekeeping.ShouldRehostLobby)
+                {
+                    CivBot.HitEscapeKey();
+                    CivBot.HitEscapeKey();
+
+                }
+                else
+                {
+                    ScanChat_AndRespond();
+                    CivBot.Sleep(Howlongbetweenscans);
+                }
+
+
 
             }
         }
@@ -93,13 +116,13 @@ namespace Gamebot
             try
             {
                 UpdateMsgAndUser();
-                
+
                 // Check if we have any messages
                 if (current_msgs.Count == 0)
                 {
                     return false;
                 }
-                
+
                 if (Verify_NewMsg())
                 {
                     string lastMsg = current_msgs.Last().msg;
@@ -122,10 +145,10 @@ namespace Gamebot
                     System.Console.WriteLine("Connected Recognized, will post in:" + Program.settings.timeWaitAfterConnected / 1000 + " seconds");
                     Logger.LogStat($"Player connection detected: {playerName}");
                     BotStats.IncrementConnections();
-                    
+
                     // Log player connection to Firebase (non-blocking)
                     Task.Run(async () => await Databasecommuncation.LogPlayerConnection(playerName));
-                    
+
                     CivBot.Sleep(Program.settings.timeWaitAfterConnected);
 
                     System.Console.WriteLine($"Posting {Program.settings.Messages.Count} messages from Firebase/settings...");
@@ -133,7 +156,7 @@ namespace Gamebot
                     System.Console.WriteLine("Finished posting messages after connection");
                     return true;
                 }
-                
+
                 return false;
             }
             catch (Exception e)

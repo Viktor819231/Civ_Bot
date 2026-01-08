@@ -83,7 +83,6 @@ namespace Gamebot
                 }
                 if (!BotLocaliztation.ConfirmLocation(ScreenLocation.StagingRoom) || Timekeeping.ShouldRehostLobby)
                 {
-                    CivBotNavigation.NavigateTo(ScreenLocation.Menu_Main);
                     SetupNewLobby();
                 }
 

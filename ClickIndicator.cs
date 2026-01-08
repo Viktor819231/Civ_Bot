@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
+//Just some vibecode for the Debug help when mouse clicks screen so i can see where it tried to click
 namespace Gamebot
 {
     /// <summary>

@@ -100,8 +100,8 @@ namespace Gamebot
                         Console.WriteLine($"Firebase sync error: {ex.Message}");
                     }
                     
-                    // Wait 45 seconds before next sync
-                    Thread.Sleep(45000);
+                    // Wait 30 seconds before next sync
+                    Thread.Sleep(30000);
                 }
             });
             
